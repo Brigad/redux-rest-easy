@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`generateResourceAction happy path 1`] = `
+Object {
+  "resourceId": 2,
+  "resourceName": "fruits",
+  "type": "@@rest-easy/fruits/eat/REQUEST",
+}
+`;
+
+exports[`generateResourceAction no args 1`] = `
+Object {
+  "resourceId": undefined,
+  "resourceName": undefined,
+  "type": undefined,
+}
+`;
+
+exports[`generateResourceAction no resourceId 1`] = `
+Object {
+  "resourceId": undefined,
+  "resourceName": "fruits",
+  "type": "@@rest-easy/fruits/eat/REQUEST",
+}
+`;
+
+exports[`generateResourceAction no resourceName, resourceId 1`] = `
+Object {
+  "resourceId": undefined,
+  "resourceName": undefined,
+  "type": "@@rest-easy/fruits/eat/REQUEST",
+}
+`;

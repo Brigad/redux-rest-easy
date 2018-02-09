@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mergeResources merge empty in filled 1`] = `
+Object {
+  "fruits": Object {
+    "apple": Object {
+      "juicy": true,
+      "red": true,
+    },
+    "cherry": Object {
+      "juicy": false,
+    },
+  },
+  "vegetables": Object {
+    "carrot": Object {
+      "orange": true,
+    },
+  },
+}
+`;
+
+exports[`mergeResources merge filled in empty 1`] = `
+Object {
+  "fruits": Object {
+    "apple": Object {
+      "juicy": true,
+      "red": true,
+    },
+    "cherry": Object {
+      "juicy": false,
+    },
+  },
+  "vegetables": Object {
+    "carrot": Object {
+      "orange": true,
+    },
+  },
+}
+`;
+
+exports[`mergeResources merge filled2 in filled 1`] = `
+Object {
+  "fruits": Object {
+    "apple": Object {
+      "juicy": false,
+    },
+    "banana": Object {
+      "yellow": true,
+    },
+    "cherry": Object {
+      "juicy": false,
+    },
+  },
+  "vegetables": Object {
+    "carrot": Object {
+      "orange": true,
+    },
+  },
+}
+`;

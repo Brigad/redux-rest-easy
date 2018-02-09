@@ -1,0 +1,56 @@
+{
+  "presets": [
+    [
+      "env",
+      {
+        "targets": {
+          "browsers": [
+            "ie >= 11"
+          ]
+        },
+        "exclude": [
+          "transform-async-to-generator",
+          "transform-regenerator"
+        ],
+        "modules": false,
+        "loose": true,
+        "useBuiltIns": "usage"
+      }
+    ],
+    "react",
+    "stage-0"
+  ],
+  "env": {
+    "commonjs": {
+      "presets": [
+        [
+          "env",
+          {
+            "loose": true
+          }
+        ],
+        "react",
+        "stage-0"
+      ]
+    },
+    "rollup": {
+      "plugins": [
+        "external-helpers"
+      ]
+    },
+    "test": {
+      "presets": [
+        [
+          "env",
+          {
+            "targets": {
+              "node": "8.9.3"
+            }
+          }
+        ],
+        "react",
+        "stage-0"
+      ]
+    }
+  }
+}

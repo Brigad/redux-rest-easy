@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`generateThunkActions only path 1`] = `
+Object {
+  "eat": Object {
+    "invalidate": [Function],
+    "perform": [Function],
+  },
+}
+`;

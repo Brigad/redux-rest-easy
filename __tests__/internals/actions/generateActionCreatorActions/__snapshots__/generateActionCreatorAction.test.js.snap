@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`generateActionCreatorAction empty payload 1`] = `
+Object {
+  "payload": undefined,
+  "principalResourceIds": undefined,
+  "resourceId": "2",
+  "type": "@@rest-easy/fruits/eat/REQUEST",
+  "url": "eat:https://api.co/fruits",
+}
+`;
+
+exports[`generateActionCreatorAction filled payload without principalResourceIds 1`] = `
+Object {
+  "payload": Object {
+    "fruits": Object {
+      "1": "cherry",
+    },
+  },
+  "principalResourceIds": undefined,
+  "resourceId": "2",
+  "type": "@@rest-easy/fruits/eat/REQUEST",
+  "url": "eat:https://api.co/fruits",
+}
+`;
+
+exports[`generateActionCreatorAction filled payload, array principalResourceIds 1`] = `
+Object {
+  "payload": Object {
+    "fruits": Object {
+      "1": "cherry",
+    },
+  },
+  "principalResourceIds": Array [
+    "2",
+  ],
+  "resourceId": "2",
+  "type": "@@rest-easy/fruits/eat/REQUEST",
+  "url": "eat:https://api.co/fruits",
+}
+`;
+
+exports[`generateActionCreatorAction filled payload, string principalResourceIds 1`] = `
+Object {
+  "payload": Object {
+    "fruits": Object {
+      "1": "cherry",
+    },
+  },
+  "principalResourceIds": Array [
+    "2",
+  ],
+  "resourceId": "2",
+  "type": "@@rest-easy/fruits/eat/REQUEST",
+  "url": "eat:https://api.co/fruits",
+}
+`;
+
+exports[`generateActionCreatorAction no args 1`] = `
+Object {
+  "payload": undefined,
+  "principalResourceIds": undefined,
+  "resourceId": undefined,
+  "type": undefined,
+  "url": undefined,
+}
+`;
+
+exports[`generateActionCreatorAction no id, payload 1`] = `
+Object {
+  "payload": undefined,
+  "principalResourceIds": undefined,
+  "resourceId": undefined,
+  "type": "@@rest-easy/fruits/eat/REQUEST",
+  "url": "eat:https://api.co/fruits",
+}
+`;
+
+exports[`generateActionCreatorAction no payload 1`] = `
+Object {
+  "payload": undefined,
+  "principalResourceIds": undefined,
+  "resourceId": "2",
+  "type": "@@rest-easy/fruits/eat/REQUEST",
+  "url": "eat:https://api.co/fruits",
+}
+`;
+
+exports[`generateActionCreatorAction no url, id, payload 1`] = `
+Object {
+  "payload": undefined,
+  "principalResourceIds": undefined,
+  "resourceId": undefined,
+  "type": "@@rest-easy/fruits/eat/REQUEST",
+  "url": undefined,
+}
+`;

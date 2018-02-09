@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`generateThunkAction happy path 1`] = `
+Object {
+  "resourceName": "fruits",
+  "type": "@@rest-easy/fruits/eat/REQUEST",
+  "url": undefined,
+}
+`;
+
+exports[`generateThunkAction no args 1`] = `
+Object {
+  "resourceName": undefined,
+  "type": undefined,
+  "url": undefined,
+}
+`;
+
+exports[`generateThunkAction no resourceName 1`] = `
+Object {
+  "resourceName": undefined,
+  "type": "@@rest-easy/fruits/eat/REQUEST",
+  "url": undefined,
+}
+`;

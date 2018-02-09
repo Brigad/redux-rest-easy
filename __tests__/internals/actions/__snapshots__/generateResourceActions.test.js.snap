@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`generateResourceActions only path 1`] = `
+Object {
+  "resource": Object {
+    "invalidate": [Function],
+    "invalidateId": [Function],
+    "reset": [Function],
+  },
+}
+`;

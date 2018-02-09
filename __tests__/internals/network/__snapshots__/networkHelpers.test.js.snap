@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getNetworkHelpers without setting them 1`] = `
+Object {
+  "handleError": [Function],
+  "handleStatusCode": [Function],
+  "requestDELETE": [Function],
+  "requestGET": [Function],
+  "requestPATCH": [Function],
+  "requestPOST": [Function],
+  "requestPUT": [Function],
+}
+`;

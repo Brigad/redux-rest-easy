@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`generateGlobalAction happy path 1`] = `
+Object {
+  "type": "@@rest-easy/@global/@reset/RESET_ALL",
+}
+`;
+
+exports[`generateGlobalAction no args 1`] = `
+Object {
+  "type": undefined,
+}
+`;

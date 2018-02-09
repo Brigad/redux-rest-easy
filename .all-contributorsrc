@@ -1,0 +1,56 @@
+{
+  "projectName": "@brigad/redux-rest-easy",
+  "projectOwner": "Brigad",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "contributors": [
+    {
+      "login": "Zephir77167",
+      "name": "Adrien HARNAY",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/15089053?v=4",
+      "profile": "https://adrien.harnay.me",
+      "contributions": [
+        "blog",
+        "code",
+        "doc",
+        "ideas",
+        "infra",
+        "review",
+        "test"
+      ]
+    },
+    {
+      "login": "Titozzz",
+      "name": "Thibault Malbranche",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/6181446?v=4",
+      "profile": "https://github.com/Titozzz",
+      "contributions": [
+        "bug",
+        "code",
+        "ideas",
+        "review"
+      ]
+    },
+    {
+      "login": "eole1712",
+      "name": "Grisha Ghukasyan",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/11462388?v=4",
+      "profile": "https://github.com/eole1712",
+      "contributions": [
+        "ideas"
+      ]
+    },
+    {
+      "login": "aymericbeaumet",
+      "name": "Aymeric Beaumet",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/569243?v=4",
+      "profile": "https://aymericbeaumet.com",
+      "contributions": [
+        "ideas"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`generateActionCreatorActions only path 1`] = `
+Object {
+  "FAIL": [Function],
+  "RECEIVE": [Function],
+  "RECEIVE_FROM_CACHE": [Function],
+  "REQUEST": [Function],
+}
+`;

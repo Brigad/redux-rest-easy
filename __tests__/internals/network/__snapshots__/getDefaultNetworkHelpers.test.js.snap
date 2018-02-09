@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getDefaultNetworkHelpers only path 1`] = `
+Object {
+  "handleError": [Function],
+  "handleStatusCode": [Function],
+  "requestDELETE": [Function],
+  "requestGET": [Function],
+  "requestPATCH": [Function],
+  "requestPOST": [Function],
+  "requestPUT": [Function],
+}
+`;
+
+exports[`requestDELETE only path 1`] = `
+Object {
+  "headers": Object {
+    "Accept": "application/json",
+  },
+  "method": "DELETE",
+}
+`;
+
+exports[`requestGET only path 1`] = `
+Object {
+  "headers": Object {
+    "Accept": "application/json",
+  },
+  "method": "GET",
+}
+`;
+
+exports[`requestPATCH only path 1`] = `
+Object {
+  "body": undefined,
+  "headers": Object {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+  },
+  "method": "PATCH",
+}
+`;
+
+exports[`requestPOST only path 1`] = `
+Object {
+  "body": undefined,
+  "headers": Object {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+  },
+  "method": "POST",
+}
+`;
+
+exports[`requestPUT only path 1`] = `
+Object {
+  "body": undefined,
+  "headers": Object {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+  },
+  "method": "PUT",
+}
+`;

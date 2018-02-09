@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`generateActionCreatorActionTypes only path 1`] = `
+Object {
+  "FAIL": "@@rest-easy/fruits/eat/FAIL",
+  "RECEIVE": "@@rest-easy/fruits/eat/RECEIVE",
+  "RECEIVE_FROM_CACHE": "@@rest-easy/fruits/eat/RECEIVE_FROM_CACHE",
+  "REQUEST": "@@rest-easy/fruits/eat/REQUEST",
+}
+`;

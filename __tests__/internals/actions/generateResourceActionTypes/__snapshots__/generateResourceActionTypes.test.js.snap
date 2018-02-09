@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`generateResourceActionTypes only path 1`] = `
+Object {
+  "INVALIDATE_ID": "@@rest-easy/fruits/@invalidate/INVALIDATE_ID",
+  "INVALIDATE_RESOURCE": "@@rest-easy/fruits/@invalidate/INVALIDATE_RESOURCE",
+  "RESET_RESOURCE": "@@rest-easy/fruits/@reset/RESET_RESOURCE",
+}
+`;

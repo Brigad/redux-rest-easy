@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getRequestMethods only path 1`] = `
+Object {
+  "DELETE": [Function],
+  "GET": [Function],
+  "PATCH": [Function],
+  "POST": [Function],
+  "PUT": [Function],
+}
+`;

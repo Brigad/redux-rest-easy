@@ -1,0 +1,14 @@
+# Dependency directories
+node_modules/
+
+# Coverage directories used by tools like istanbul
+coverage/
+junit/
+
+# Build directories
+dist/
+lib/
+es/
+
+# MacOS
+.DS_Store

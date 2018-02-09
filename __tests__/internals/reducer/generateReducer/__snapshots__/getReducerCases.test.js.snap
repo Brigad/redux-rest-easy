@@ -1,0 +1,321 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getReducerCases FAIL 1`] = `
+Object {
+  "requests": Object {
+    "eat:https://api.co/fruits": Object {
+      "endedAt": "2017-01-01T00:00:00.000Z",
+      "hasFailed": true,
+      "hasSucceeded": false,
+    },
+  },
+}
+`;
+
+exports[`getReducerCases INVALIDATE_ID 1`] = `
+Object {
+  "requests": Object {
+    "anotherURL": Object {
+      "didInvalidate": true,
+      "payloadIds": Object {
+        "fruits": Array [
+          1,
+          2,
+          3,
+        ],
+        "vegetables": Array [
+          2,
+        ],
+      },
+    },
+    "eat:https://api.co/fruits": Object {
+      "didInvalidate": true,
+      "resourceName": "fruits",
+    },
+    "someOtherURL": Object {
+      "didInvalidate": false,
+      "payloadIds": Object {
+        "fruits": Array [
+          1,
+        ],
+      },
+    },
+    "someURL": Object {
+      "didInvalidate": false,
+      "resourceId": 2,
+      "resourceName": "fruits",
+    },
+    "yetAnotherURL": Object {
+      "didInvalidate": false,
+      "payloadIds": Object {
+        "seeds": Array [
+          2,
+        ],
+        "vegetables": Array [
+          1,
+        ],
+      },
+    },
+  },
+  "resources": Object {
+    "fruits": Object {
+      "1": "banana",
+      "2": "cherry",
+      "3": "apple",
+    },
+    "seeds": Object {
+      "2": "pumpkin",
+    },
+    "vegetables": Object {
+      "1": "potato",
+      "2": "leek",
+    },
+  },
+}
+`;
+
+exports[`getReducerCases INVALIDATE_REQUEST 1`] = `
+Object {
+  "requests": Object {
+    "anotherURL": Object {
+      "didInvalidate": false,
+      "payloadIds": Object {
+        "fruits": Array [
+          1,
+          2,
+          3,
+        ],
+        "vegetables": Array [
+          2,
+        ],
+      },
+    },
+    "eat:https://api.co/fruits": Object {
+      "didInvalidate": true,
+      "resourceName": "fruits",
+    },
+    "someOtherURL": Object {
+      "didInvalidate": false,
+      "payloadIds": Object {
+        "fruits": Array [
+          1,
+        ],
+      },
+    },
+    "someURL": Object {
+      "didInvalidate": false,
+      "resourceId": 2,
+      "resourceName": "fruits",
+    },
+    "yetAnotherURL": Object {
+      "didInvalidate": false,
+      "payloadIds": Object {
+        "seeds": Array [
+          2,
+        ],
+        "vegetables": Array [
+          1,
+        ],
+      },
+    },
+  },
+  "resources": Object {
+    "fruits": Object {
+      "1": "banana",
+      "2": "cherry",
+      "3": "apple",
+    },
+    "seeds": Object {
+      "2": "pumpkin",
+    },
+    "vegetables": Object {
+      "1": "potato",
+      "2": "leek",
+    },
+  },
+}
+`;
+
+exports[`getReducerCases INVALIDATE_RESOURCE 1`] = `
+Object {
+  "requests": Object {
+    "anotherURL": Object {
+      "didInvalidate": true,
+      "payloadIds": Object {
+        "fruits": Array [
+          1,
+          2,
+          3,
+        ],
+        "vegetables": Array [
+          2,
+        ],
+      },
+    },
+    "eat:https://api.co/fruits": Object {
+      "didInvalidate": true,
+      "resourceName": "fruits",
+    },
+    "someOtherURL": Object {
+      "didInvalidate": true,
+      "payloadIds": Object {
+        "fruits": Array [
+          1,
+        ],
+      },
+    },
+    "someURL": Object {
+      "didInvalidate": true,
+      "resourceId": 2,
+      "resourceName": "fruits",
+    },
+    "yetAnotherURL": Object {
+      "didInvalidate": false,
+      "payloadIds": Object {
+        "seeds": Array [
+          2,
+        ],
+        "vegetables": Array [
+          1,
+        ],
+      },
+    },
+  },
+  "resources": Object {
+    "fruits": Object {
+      "1": "banana",
+      "2": "cherry",
+      "3": "apple",
+    },
+    "seeds": Object {
+      "2": "pumpkin",
+    },
+    "vegetables": Object {
+      "1": "potato",
+      "2": "leek",
+    },
+  },
+}
+`;
+
+exports[`getReducerCases RECEIVE 1`] = `
+Object {
+  "requests": Object {
+    "eat:https://api.co/fruits": Object {
+      "didInvalidate": false,
+      "endedAt": "2017-01-01T00:00:00.000Z",
+      "fromCache": false,
+      "hasFailed": false,
+      "hasSucceeded": true,
+      "payloadIds": Object {
+        "animals": Array [
+          "1",
+        ],
+        "fruits": Array [
+          "2",
+          "1",
+          "3",
+        ],
+      },
+    },
+  },
+  "resources": Object {
+    "animals": Object {
+      "1": "worm",
+    },
+    "fruits": Object {
+      "1": "banana",
+      "2": "cherry",
+      "3": "apple",
+    },
+  },
+}
+`;
+
+exports[`getReducerCases RECEIVE_FROM_CACHE 1`] = `
+Object {
+  "requests": Object {
+    "eat:https://api.co/fruits": Object {
+      "didInvalidate": false,
+      "endedAt": "2017-01-01T00:00:00.000Z",
+      "fromCache": true,
+      "hasFailed": false,
+      "hasSucceeded": true,
+      "payloadIds": Object {
+        "fruits": Array [
+          "1",
+        ],
+      },
+      "resourceId": 2,
+      "resourceName": "fruits",
+      "startedAt": "2017-01-01T00:00:00.000Z",
+    },
+  },
+  "resources": Object {
+    "fruits": Object {
+      "1": null,
+    },
+  },
+}
+`;
+
+exports[`getReducerCases REQUEST 1`] = `
+Object {
+  "requests": Object {
+    "eat:https://api.co/fruits": Object {
+      "didInvalidate": false,
+      "endedAt": null,
+      "fromCache": false,
+      "hasFailed": false,
+      "hasSucceeded": false,
+      "resourceId": 2,
+      "resourceName": "fruits",
+      "startedAt": "2017-01-01T00:00:00.000Z",
+    },
+  },
+}
+`;
+
+exports[`getReducerCases RESET_ALL 1`] = `Object {}`;
+
+exports[`getReducerCases RESET_RESOURCE 1`] = `
+Object {
+  "requests": Object {
+    "yetAnotherURL": Object {
+      "didInvalidate": false,
+      "payloadIds": Object {
+        "seeds": Array [
+          2,
+        ],
+        "vegetables": Array [
+          1,
+        ],
+      },
+    },
+  },
+  "resources": Object {
+    "fruits": undefined,
+    "seeds": Object {
+      "2": "pumpkin",
+    },
+    "vegetables": Object {
+      "1": "potato",
+      "2": "leek",
+    },
+  },
+}
+`;
+
+exports[`getReducerCases reducer cases keys 1`] = `
+Object {
+  "FAIL": [Function],
+  "INVALIDATE_ID": [Function],
+  "INVALIDATE_REQUEST": [Function],
+  "INVALIDATE_RESOURCE": [Function],
+  "RECEIVE": [Function],
+  "RECEIVE_FROM_CACHE": [Function],
+  "REQUEST": [Function],
+  "RESET_ALL": [Function],
+  "RESET_RESOURCE": [Function],
+}
+`;

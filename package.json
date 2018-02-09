@@ -1,0 +1,111 @@
+{
+  "name": "@brigad/redux-rest-easy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "module": "es/indexjs",
+  "jsnext:main": "es/index.js",
+  "files": [
+    "dist",
+    "lib",
+    "es",
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Brigad/redux-rest-easy.git"
+  },
+  "keywords": [
+    "react",
+    "reactjs",
+    "redux",
+    "reducer",
+    "state",
+    "selector",
+    "boilerplate",
+    "rest",
+    "network"
+  ],
+  "author": "Adrien HARNAY <adrien@brigad.co> (https://github.com/Zephir77167)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Brigad/redux-rest-easy/issues"
+  },
+  "npmName": "@brigad/redux-rest-easy",
+  "npmFileMap": [
+    {
+      "basePath": "/dist/",
+      "files": [
+        "*.js"
+      ]
+    }
+  ],
+  "scripts": {
+    "modules:clean": "rimraf node_modules",
+    "build": "yarn build:commonjs && yarn build:es && yarn build:umd && yarn build:umd:min",
+    "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib",
+    "build:es": "cross-env BABEL_ENV=es babel src --out-dir es",
+    "build:umd": "cross-env BABEL_ENV=rollup NODE_ENV=development rollup -c -o dist/react-redux.js",
+    "build:umd:min": "cross-env BABEL_ENV=rollup NODE_ENV=production rollup -c -o dist/react-redux.min.js",
+    "build:clean": "rimraf lib dist es coverage",
+    "prepare": "yarn build:clean && yarn build",
+    "lint": "eslint src",
+    "test": "jest",
+    "test:clean": "yarn test --no-cache",
+    "test:watch": "yarn test --watch",
+    "test:cov": "yarn test --coverage",
+    "ci": "yarn ci:eslint && yarn ci:jest && yarn ci:codecov",
+    "ci:eslint": "yarn lint",
+    "ci:jest": "cross-env CI=true JEST_JUNIT_OUTPUT='junit/jest.xml' yarn test --ci --coverage --expand --forceExit",
+    "ci:codecov": "codecov -f coverage/coverage-final.json",
+    "prettify": "prettier-eslint --write \"./src/**/*.js\"",
+    "contributors:add": "all-contributors add",
+    "contributors:generate": "all-contributors generate"
+  },
+  "dependencies": {
+    "json-stable-stringify": "1.0.1",
+    "lodash.isplainobject": "4.0.6",
+    "lodash.mergewith": "4.6.1",
+    "murmur-hash": "^1.0.0",
+    "qs": "6.5.1",
+    "re-reselect": "1.0.1",
+    "reselect": "3.0.1"
+  },
+  "devDependencies": {
+    "all-contributors-cli": "4.10.1",
+    "babel-cli": "6.26.0",
+    "babel-core": "6.26.0",
+    "babel-eslint": "8.2.1",
+    "babel-jest": "22.2.0",
+    "babel-plugin-external-helpers": "6.22.0",
+    "babel-plugin-transform-object-rest-spread": "6.26.0",
+    "babel-preset-env": "1.6.1",
+    "babel-preset-react": "6.24.1",
+    "babel-preset-stage-0": "6.24.1",
+    "cross-env": "5.1.3",
+    "eslint": "4.17.0",
+    "eslint-config-airbnb": "16.1.0",
+    "eslint-config-prettier": "2.9.0",
+    "eslint-plugin-import": "2.8.0",
+    "eslint-plugin-jsx-a11y": "6.0.3",
+    "eslint-plugin-react": "7.6.1",
+    "jest-cli": "22.2.1",
+    "jest-junit": "3.5.0",
+    "mockdate": "2.0.2",
+    "moment": "^2.20.1",
+    "prettier-eslint-cli": "4.7.0",
+    "rimraf": "2.6.2",
+    "rollup": "0.55.3",
+    "rollup-plugin-babel": "3.0.3",
+    "rollup-plugin-commonjs": "8.3.0",
+    "rollup-plugin-node-builtins": "2.1.2",
+    "rollup-plugin-node-resolve": "3.0.2",
+    "rollup-plugin-replace": "2.0.0",
+    "rollup-plugin-uglify": "3.0.0"
+  },
+  "peerDependencies": {
+    "react": "^0.14.0 || ^15.0.0-0 || ^16.0.0-0",
+    "react-redux": "^5.0.0",
+    "redux-thunk": "^2.0.0"
+  }
+}
