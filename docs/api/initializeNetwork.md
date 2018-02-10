@@ -6,6 +6,7 @@ Overrides the built-in defaults for network handling.
 
 1. (_networkHelpers_): An object with the following properties:
 
+* getToken
 * requestGET
 * requestPATCH
 * requestPUT
@@ -20,47 +21,58 @@ Overrides the built-in defaults for network handling.
 import { initializeNetwork } from '@brigad/redux-rest-easy';
 
 const networkHelpers = {
-  requestGET: () => ({
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      Authorization: `Bearer token`,
-    },
-  }),
-  requestPATCH: body => ({
-    method: 'PATCH',
-    headers: {
-      Accept: 'application/json',
-      Authorization: `Bearer token`,
-      'Content-Type': 'application/json',
-    },
-    body,
-  }),
-  requestPUT: body => ({
-    method: 'PUT',
-    headers: {
-      Accept: 'application/json',
-      Authorization: `Bearer token`,
-      'Content-Type': 'application/json',
-    },
-    body,
-  }),
-  requestPOST: body => ({
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      Authorization: `Bearer token`,
-      'Content-Type': 'application/json',
-    },
-    body,
-  }),
-  requestDELETE: () => ({
-    method: 'DELETE',
-    headers: {
-      Accept: 'application/json',
-      Authorization: `Bearer token`,
-    },
-  }),
+  getToken: () => localStorage.getItem('token'),
+  requestGET() {
+    return {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        Authorization: `Bearer ${this.getToken()}`,
+      },
+    };
+  },
+  requestPATCH(body) {
+    return {
+      method: 'PATCH',
+      headers: {
+        Accept: 'application/json',
+        Authorization: `Bearer ${this.getToken()}`,
+        'Content-Type': 'application/json',
+      },
+      body,
+    };
+  },
+  requestPUT(body) {
+    return {
+      method: 'PUT',
+      headers: {
+        Accept: 'application/json',
+        Authorization: `Bearer ${this.getToken()}`,
+        'Content-Type': 'application/json',
+      },
+      body,
+    };
+  },
+  requestPOST(body) {
+    return {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        Authorization: `Bearer ${this.getToken()}`,
+        'Content-Type': 'application/json',
+      },
+      body,
+    };
+  },
+  requestDELETE() {
+    return {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        Authorization: `Bearer ${this.getToken()}`,
+      },
+    };
+  },
   handleStatusCode: response => {
     if (response) {
       if (response.status >= 200 && response.status < 300) {
@@ -74,20 +86,22 @@ const networkHelpers = {
 
     return null;
   },
-  handleError: () => async (err, dispatch) => {
+  // eslint-disable-next-line no-unused-vars
+  handleError: async (err, dispatch) => {
     try {
       if (err && err.response) {
         const error = await err.response.json();
 
-        if (dispatch) {
-          dispatch(showAPIError());
-        } else {
-          alert(error.message);
-        }
+        // dispatch some action to warn the user about the error
+
+        // eslint-disable-next-line no-console
+        console.error(error);
       } else {
+        // eslint-disable-next-line no-console
         console.error(err);
       }
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.error(e);
     }
   },
@@ -99,3 +113,4 @@ initializeNetwork(networkHelpers);
 #### Tips
 
 * You should do this before any network request performs (usually at the entry point of your app)
+* Only specifying `getToken` is often enough to make your app work. Use the other options if you needs custom headers or handlers!

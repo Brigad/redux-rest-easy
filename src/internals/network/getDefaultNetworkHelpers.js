@@ -69,7 +69,6 @@ const DEFAULT_NETWORK_HELPERS = {
     try {
       if (err && err.response) {
         const error = await err.response.json();
-        console.log(error);
 
         // dispatch some action to warn the user about the error
 
@@ -80,7 +79,6 @@ const DEFAULT_NETWORK_HELPERS = {
         console.error(err);
       }
     } catch (e) {
-      console.log(':(');
       // eslint-disable-next-line no-console
       console.error(e);
     }
