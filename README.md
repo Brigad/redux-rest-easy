@@ -1,6 +1,6 @@
 # ⛳ @brigad/redux-rest-easy
 
-React/Redux framework generating actions, reducers and selectors to perform network requests
+Redux/React/React Native framework generating actions, reducers and selectors to perform network requests
 
 [![version][version-badge]][package]
 [![MIT License][license-badge]][license]
@@ -118,7 +118,6 @@ import {
 
 class UsersList extends Component {
   state = {
-    success: false,
     error: false,
   };
 
@@ -127,11 +126,11 @@ class UsersList extends Component {
   }
 
   onSuccess = () => {
-    this.setState({ success: true, error: false });
+    this.setState({ error: false });
   };
 
   onError = () => {
-    this.setState({ success: false, error: true });
+    this.setState({ error: true });
   };
 
   render() {
@@ -145,11 +144,7 @@ class UsersList extends Component {
       );
     }
 
-    return (
-      <div>
-        <Users items={this.props.users} />
-      </div>
-    );
+    return <Users items={this.props.users} />;
   }
 }
 
@@ -168,9 +163,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(ConnectedComponent);
 
 ## Peer dependencies
 
-Redux-rest-easy assumes you are using [react](https://github.com/facebook/react) and [react-redux](https://github.com/reactjs/react-redux).
+Redux-rest-easy assumes you are using [react][react] (or [react-native][react-native]) and [react-redux][react-redux].
 
-Redux-rest-easy also uses [redux-thunk](https://github.com/gaearon/redux-thunk) to handle async actions, and therefore requires you to use redux-thunk's middleware in your store. If you are already using redux-thunk, then you have nothing more to do. Else, follow [redux-thunk's docs](https://github.com/gaearon/redux-thunk#installation) for a quick setup.
+Redux-rest-easy also uses [redux-thunk][redux-thunk] to handle async actions, and therefore requires you to use redux-thunk's middleware in your store. If you are already using redux-thunk, then you have nothing more to do. Else, follow [redux-thunk's docs][redux-thunk-installation] for a quick setup.
 
 ## Contributors
 
@@ -197,5 +192,10 @@ Contributions of any kind welcome!
 [coc]: https://github.com/Brigad/redux-rest-easy/blob/master/other/CODE_OF_CONDUCT.md
 [github-star-badge]: https://img.shields.io/github/stars/Brigad/redux-rest-easy.svg?style=social
 [github-star]: https://github.com/Brigad/redux-rest-easy/stargazers
+[react]: https://github.com/facebook/react
+[react-native]: https://github.com/facebook/react-native
+[react-redux]: https://github.com/reactjs/react-redux
+[redux-thunk]: https://github.com/gaearon/redux-thunk
+[redux-thunk-installation]: https://github.com/gaearon/redux-thunk#installation
 [emojis]: https://github.com/kentcdodds/all-contributors#emoji-key
 [all-contributors]: https://github.com/kentcdodds/all-contributors

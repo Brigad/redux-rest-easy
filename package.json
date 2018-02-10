@@ -1,7 +1,7 @@
 {
   "name": "@brigad/redux-rest-easy",
   "version": "1.0.0",
-  "description": "",
+  "description": "Redux/React/React Native framework generating actions, reducers and selectors to perform network requests",
   "main": "lib/index.js",
   "module": "es/indexjs",
   "jsnext:main": "es/index.js",
@@ -24,7 +24,8 @@
     "selector",
     "boilerplate",
     "rest",
-    "network"
+    "network",
+    "http"
   ],
   "author": "Adrien HARNAY <adrien@brigad.co> (https://github.com/Zephir77167)",
   "license": "MIT",
