@@ -9,8 +9,12 @@ describe('getNetworkHelpers', () => {
   });
 
   test('after setting them', () => {
-    setNetworkHelpers({});
+    const tokenName = 'customToken';
 
-    expect(Object.keys(getNetworkHelpers()).length).toBe(0);
+    setNetworkHelpers({
+      getToken: () => tokenName,
+    });
+
+    expect(getNetworkHelpers().getToken()).toBe(tokenName);
   });
 });

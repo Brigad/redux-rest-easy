@@ -1,10 +1,13 @@
-import defaultNetworkHelpers from './getDefaultNetworkHelpers';
+import getDefaultNetworkHelpers from './getDefaultNetworkHelpers';
 
-let networkHelpers;
+const DEFAULT_NETWORK_HELPERS = getDefaultNetworkHelpers();
+
+let networkHelpers = DEFAULT_NETWORK_HELPERS;
 
 export const setNetworkHelpers = (helpers) => {
-  networkHelpers = helpers;
+  networkHelpers = helpers
+    ? { ...DEFAULT_NETWORK_HELPERS, ...helpers }
+    : DEFAULT_NETWORK_HELPERS;
 };
 
-export const getNetworkHelpers = () =>
-  networkHelpers || defaultNetworkHelpers();
+export const getNetworkHelpers = () => networkHelpers;

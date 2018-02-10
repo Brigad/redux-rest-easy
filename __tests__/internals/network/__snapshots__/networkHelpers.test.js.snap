@@ -2,6 +2,7 @@
 
 exports[`getNetworkHelpers without setting them 1`] = `
 Object {
+  "getToken": [Function],
   "handleError": [Function],
   "handleStatusCode": [Function],
   "requestDELETE": [Function],
