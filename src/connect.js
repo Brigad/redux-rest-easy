@@ -1,5 +1,7 @@
+/* eslint-disable import/no-unresolved, import/extensions */
 import React from 'react';
 import { connect } from 'react-redux';
+/* eslint-enable import/no-unresolved, import/extensions */
 
 /* eslint-disable no-underscore-dangle */
 
