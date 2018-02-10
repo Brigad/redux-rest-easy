@@ -191,7 +191,7 @@ Contributions of any kind welcome!
 [prs]: http://makeapullrequest.com
 [coc-badge]: https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square
 [coc]: https://github.com/Brigad/redux-rest-easy/blob/master/other/CODE_OF_CONDUCT.md
-[prettier-bade]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square
+[prettier-badge]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square
 [prettier]: https://github.com/prettier/prettier
 [github-star-badge]: https://img.shields.io/github/stars/Brigad/redux-rest-easy.svg?style=social
 [github-star]: https://github.com/Brigad/redux-rest-easy/stargazers
