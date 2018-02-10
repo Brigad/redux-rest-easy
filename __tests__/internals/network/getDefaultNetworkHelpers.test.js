@@ -53,3 +53,28 @@ describe('handleStatusCode', () => {
     expect(() => NETWORK_HELPERS.handleStatusCode(response)).toThrow();
   });
 });
+
+describe('handleError', () => {
+  // eslint-disable-next-line no-console
+  const INITIAL_CONSOLE_ERROR = console.error;
+  let consoleErrorMock;
+
+  beforeEach(() => {
+    consoleErrorMock = jest.fn();
+    // eslint-disable-next-line no-console
+    console.error = consoleErrorMock;
+  });
+
+  afterEach(() => {
+    // eslint-disable-next-line no-console
+    console.error = INITIAL_CONSOLE_ERROR;
+  });
+
+  test('wrongly formatted error', async () => {
+    const error = 'oh no';
+
+    await NETWORK_HELPERS.handleError(error);
+
+    expect(consoleErrorMock).toHaveBeenCalledTimes(1);
+  });
+});
