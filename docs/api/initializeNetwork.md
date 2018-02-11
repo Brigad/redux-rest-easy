@@ -4,7 +4,7 @@ Overrides the built-in defaults for network handling.
 
 #### Arguments
 
-1. (_networkHelpers_): An object with the following properties:
+1. (_networkHelpers_): An object with the following properties, all optional:
 
 * getToken
 * requestGET
@@ -21,7 +21,10 @@ Overrides the built-in defaults for network handling.
 import { initializeNetwork } from '@brigad/redux-rest-easy';
 
 const networkHelpers = {
+  // Mandatory if you don't override the others
   getToken: () => localStorage.getItem('token'),
+
+  // Override to add custom headers
   requestGET() {
     return {
       method: 'GET',
@@ -73,6 +76,8 @@ const networkHelpers = {
       },
     };
   },
+
+  // Override to change status code / error handling
   handleStatusCode: response => {
     if (response) {
       if (response.status >= 200 && response.status < 300) {
