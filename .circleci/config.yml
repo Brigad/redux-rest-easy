@@ -1,0 +1,74 @@
+defaults: &defaults
+  working_directory: ~/code
+  docker:
+    - image: circleci/node:8.9.3
+
+version: 2
+jobs:
+  setup:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore node modules
+          keys:
+              - node_modules-{{ arch }}-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
+
+      - run:
+          name: Install dependencies
+          command: yarn --pure-lockfile
+
+      - save_cache:
+          name: Save node modules
+          key: node_modules-{{ arch }}-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
+          paths:
+              - node_modules
+
+  tests:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore node modules
+          keys:
+              - node_modules-{{ arch }}-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
+
+      - run:
+          name: Run Eslint, Jest & Codecov
+          command: yarn ci:test
+      - store_artifacts:
+          path: ~/code/coverage/lcov-report
+          destination: Coverage
+      - store_test_results:
+          path: ~/code/junit
+
+  publish:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore node modules
+          keys:
+              - node_modules-{{ arch }}-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
+
+      - run:
+          name: Build
+          command: yarn build
+      - run:
+          name: Publish to NPM
+          command: yarn ci:publish
+
+workflows:
+  version: 2
+  ci:
+    jobs:
+    - setup
+    - tests:
+        requires:
+          - setup
+    - publish:
+        requires:
+          - tests
+        filters:
+          branches:
+            only: master
