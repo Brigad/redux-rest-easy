@@ -1,4 +1,4 @@
-# `initializeNetwork(networkHelpers)`
+# `initializeNetworkHelpers(networkHelpers)`
 
 Overrides the built-in defaults for network handling.
 
@@ -18,7 +18,7 @@ Overrides the built-in defaults for network handling.
 #### Example
 
 ```js
-import { initializeNetwork } from '@brigad/redux-rest-easy';
+import { initializeNetworkHelpers } from '@brigad/redux-rest-easy';
 
 const networkHelpers = {
   // Mandatory if you don't override the others
@@ -77,7 +77,7 @@ const networkHelpers = {
     };
   },
 
-  // Override to change status code / error handling
+  // Override to change status code handling / error handling
   handleStatusCode: response => {
     if (response) {
       if (response.status >= 200 && response.status < 300) {
@@ -112,7 +112,7 @@ const networkHelpers = {
   },
 };
 
-initializeNetwork(networkHelpers);
+initializeNetworkHelpers(networkHelpers);
 ```
 
 #### Tips

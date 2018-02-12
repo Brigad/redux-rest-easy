@@ -1,7 +1,7 @@
 import { setNetworkHelpers } from './internals/network/networkHelpers';
 
-const initializeNetwork = (helpers) => {
+const initializeNetworkHelpers = (helpers) => {
   setNetworkHelpers(helpers);
 };
 
-export default initializeNetwork;
+export default initializeNetworkHelpers;
