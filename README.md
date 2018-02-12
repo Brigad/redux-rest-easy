@@ -2,6 +2,8 @@
 
 Redux/React/React Native framework generating actions, reducers and selectors to perform network requests
 
+[![CircleCI][circle-ci-badge]][circle-ci]
+[![Codecov][codecov-badge]][codecov]
 [![version][version-badge]][package]
 [![MIT License][license-badge]][license]
 [![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors)
@@ -183,6 +185,10 @@ Thanks goes to these people ([emoji key][emojis]):
 This project follows the [all-contributors][all-contributors] specification.
 Contributions of any kind welcome!
 
+[circle-ci-badge]: https://img.shields.io/circleci/token/75524c993d9de495223af8fa371cf086aa69793d/project/github/Brigad/redux-rest-easy/master.svg?style=flat-square&label=build
+[circle-ci]: https://circleci.com/gh/Brigad/redux-rest-easy
+[codecov-badge]: https://img.shields.io/codecov/c/github/Brigad/redux-rest-easy.svg
+[codecov]: https://codecov.io/gh/Brigad/redux-rest-easy
 [version-badge]: https://img.shields.io/npm/v/@brigad/redux-rest-easy.svg?style=flat-square
 [package]: https://www.npmjs.com/package/@brigad/redux-rest-easy
 [license-badge]: https://img.shields.io/npm/l/@brigad/redux-rest-easy.svg?style=flat-square
