@@ -52,9 +52,6 @@ jobs:
               - node_modules-{{ arch }}-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
 
       - run:
-          name: Build
-          command: yarn build
-      - run:
           name: Publish to NPM
           command: yarn ci:publish
 

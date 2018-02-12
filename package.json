@@ -42,6 +42,7 @@
     }
   ],
   "scripts": {
+    "prepublish": "yarn build:clean && yarn build",
     "modules:clean": "rimraf node_modules",
     "build": "yarn build:commonjs && yarn build:es && yarn build:umd && yarn build:umd:min",
     "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib",
@@ -49,7 +50,6 @@
     "build:umd": "cross-env BABEL_ENV=rollup NODE_ENV=development rollup -c -o dist/react-redux.js",
     "build:umd:min": "cross-env BABEL_ENV=rollup NODE_ENV=production rollup -c -o dist/react-redux.min.js",
     "build:clean": "rimraf lib dist es coverage",
-    "prepare": "yarn build:clean && yarn build",
     "lint": "eslint src",
     "test": "jest",
     "test:clean": "yarn test --no-cache",
