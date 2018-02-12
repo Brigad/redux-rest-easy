@@ -42,7 +42,7 @@
     }
   ],
   "scripts": {
-    "prepublish": "yarn build:clean && yarn build",
+    "prepublishOnly": "yarn build:clean && yarn build",
     "modules:clean": "rimraf node_modules",
     "build": "yarn build:commonjs && yarn build:es && yarn build:umd && yarn build:umd:min",
     "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib",
