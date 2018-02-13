@@ -72,6 +72,9 @@ export default (...args) => (WrappedComponent) => {
       );
     };
 
+    getWrappedInstance = () =>
+      this.innerRef ? this.innerRef.getWrappedInstance() : null;
+
     render() {
       const { ConnectedComponent } = this;
       const passedProps = {
@@ -79,7 +82,14 @@ export default (...args) => (WrappedComponent) => {
         ...this.state,
       };
 
-      return <ConnectedComponent {...passedProps} />;
+      return (
+        <ConnectedComponent
+          ref={(ref) => {
+            this.innerRef = ref;
+          }}
+          {...passedProps}
+        />
+      );
     }
   }
 
