@@ -192,11 +192,11 @@ Contributions of any kind welcome!
 [version-badge]: https://img.shields.io/npm/v/@brigad/redux-rest-easy.svg?style=flat-square
 [package]: https://www.npmjs.com/package/@brigad/redux-rest-easy
 [license-badge]: https://img.shields.io/npm/l/@brigad/redux-rest-easy.svg?style=flat-square
-[license]: https://github.com/Brigad/redux-rest-easy/blob/master/LICENSE
+[license]: https://github.com/Brigad/redux-rest-easy/blob/master/LICENSE.md
 [prs-badge]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
 [prs]: http://makeapullrequest.com
 [coc-badge]: https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square
-[coc]: https://github.com/Brigad/redux-rest-easy/blob/master/other/CODE_OF_CONDUCT.md
+[coc]: https://github.com/Brigad/redux-rest-easy/blob/master/CODE_OF_CONDUCT.md
 [prettier-badge]: https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square
 [prettier]: https://github.com/prettier/prettier
 [github-star-badge]: https://img.shields.io/github/stars/Brigad/redux-rest-easy.svg?style=social
