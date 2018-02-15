@@ -36,7 +36,7 @@ const easyConnect = injectProps => (
             {},
           );
         }
-      : {};
+      : mapDispatchToProps;
 
   return connect(mapStateToProps, modifiedMapDispatchToProps, ...otherArgs);
 };
@@ -73,7 +73,9 @@ export default (...args) => (WrappedComponent) => {
     };
 
     getWrappedInstance = () =>
-      this.innerRef ? this.innerRef.getWrappedInstance() : null;
+      this.innerRef && this.innerRef.getWrappedInstance
+        ? this.innerRef.getWrappedInstance()
+        : null;
 
     render() {
       const { ConnectedComponent } = this;
