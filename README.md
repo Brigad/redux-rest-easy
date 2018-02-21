@@ -5,6 +5,7 @@ Redux/React/React Native framework generating actions, reducers and selectors to
 [![CircleCI][circle-ci-badge]][circle-ci]
 [![Codecov][codecov-badge]][codecov]
 [![version][version-badge]][package]
+[![downloads][downloads-badge]][package]
 [![MIT License][license-badge]][license]
 [![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors)
 [![PRs Welcome][prs-badge]][prs]
@@ -190,6 +191,7 @@ Contributions of any kind welcome!
 [codecov-badge]: https://img.shields.io/codecov/c/github/Brigad/redux-rest-easy.svg
 [codecov]: https://codecov.io/gh/Brigad/redux-rest-easy
 [version-badge]: https://img.shields.io/npm/v/@brigad/redux-rest-easy.svg?style=flat-square
+[downloads-badge]: https://img.shields.io/npm/dt/@brigad/redux-rest-easy.svg?style=flat-square
 [package]: https://www.npmjs.com/package/@brigad/redux-rest-easy
 [license-badge]: https://img.shields.io/npm/l/@brigad/redux-rest-easy.svg?style=flat-square
 [license]: https://github.com/Brigad/redux-rest-easy/blob/master/LICENSE.md
