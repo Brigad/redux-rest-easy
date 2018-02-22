@@ -2,6 +2,8 @@
 
 Redux/React/React Native framework generating actions, reducers and selectors to perform network requests
 
+[Release article][release-article]
+
 [![CircleCI][circle-ci-badge]][circle-ci]
 [![Codecov][codecov-badge]][codecov]
 [![version][version-badge]][package]
@@ -40,7 +42,7 @@ To solve the problems listed above, `redux-rest-easy` **generates actions, reduc
 
 It also provides **sensible defaults**, allowing you to use it with **almost no configuration**, but also to **customize** anything you would like.
 
-[Scroll down](#minimal-example) for a small example, or [browse the documentation](#api) to get started!
+[Scroll down](#minimal-example) for a small example, or [browse the documentation](#api) to get started! To learn more about the problem and solution, you can also read the [release article][release-article].
 
 ## API
 
@@ -186,6 +188,7 @@ Thanks goes to these people ([emoji key][emojis]):
 This project follows the [all-contributors][all-contributors] specification.
 Contributions of any kind welcome!
 
+[release-article]: https://engineering.brigad.co/introducing-redux-rest-easy-6e9a91af4f59
 [circle-ci-badge]: https://img.shields.io/circleci/token/75524c993d9de495223af8fa371cf086aa69793d/project/github/Brigad/redux-rest-easy/master.svg?style=flat-square&label=build
 [circle-ci]: https://circleci.com/gh/Brigad/redux-rest-easy
 [codecov-badge]: https://img.shields.io/codecov/c/github/Brigad/redux-rest-easy.svg
