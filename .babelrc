@@ -8,10 +8,6 @@
             "ie >= 11"
           ]
         },
-        "exclude": [
-          "transform-async-to-generator",
-          "transform-regenerator"
-        ],
         "modules": false,
         "loose": true,
         "useBuiltIns": "usage"
@@ -21,18 +17,6 @@
     "stage-2"
   ],
   "env": {
-    "commonjs": {
-      "presets": [
-        [
-          "env",
-          {
-            "loose": true
-          }
-        ],
-        "react",
-        "stage-2"
-      ]
-    },
     "rollup": {
       "plugins": [
         "external-helpers"

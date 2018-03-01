@@ -1,3 +1,5 @@
+import 'regenerator-runtime/runtime';
+
 export { default as connect } from './connect';
 export { default as createResource } from './createResource';
 export { default as reducer } from './reducer';

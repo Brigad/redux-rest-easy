@@ -18,6 +18,7 @@ const config = {
       'react-redux': 'ReactRedux',
     },
   },
+  context: 'window',
   plugins: [
     nodeResolve({
       preferBuiltins: true,
