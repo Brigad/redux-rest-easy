@@ -17,9 +17,14 @@ const generateThunk = (
   actionsConfig,
   actionName,
 ) => {
-  const { method, url, beforeHook, normalizer, afterHook } = actionsConfig[
-    actionName
-  ];
+  const {
+    method,
+    url,
+    beforeHook,
+    normalizer,
+    afterHook,
+    networkHelpers,
+  } = actionsConfig[actionName];
   const actionCreatorActions = generateActionCreatorActions(
     resourceName,
     actionName,
@@ -31,6 +36,7 @@ const generateThunk = (
     beforeHook,
     normalizer,
     afterHook,
+    networkHelpers,
   );
 
   return args => (dispatch, getState) => {

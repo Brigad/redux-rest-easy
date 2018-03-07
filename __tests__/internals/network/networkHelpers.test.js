@@ -16,5 +16,8 @@ describe('getNetworkHelpers', () => {
     });
 
     expect(getNetworkHelpers().getToken()).toBe(tokenName);
+    expect(getNetworkHelpers().requestGET().headers.Authorization).toBe(
+      `Bearer ${tokenName}`,
+    );
   });
 });

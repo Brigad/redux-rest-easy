@@ -1,4 +1,3 @@
-import getRequestMethods from '../../utils/getRequestMethods';
 import getRestEasyState from '../../utils/getState';
 import safeCall from '../../utils/safeCall';
 
@@ -11,6 +10,7 @@ const generateActionCreator = (
   beforeHook,
   normalizer,
   afterHook,
+  networkHelpers,
 ) => (formattedURL, normalizedURL, resourceId) => ({
   query = {},
   body = {},
@@ -19,7 +19,15 @@ const generateActionCreator = (
   onError,
   ...otherArgs
 } = {}) => async (dispatch, getState) => {
-  const { handleError, handleStatusCode } = getNetworkHelpers();
+  const combinedNetworkHelpers = {
+    ...getNetworkHelpers(),
+    ...(networkHelpers || {}),
+  };
+  const {
+    [`request${method}`]: requestMethod,
+    handleError,
+    handleStatusCode,
+  } = combinedNetworkHelpers;
 
   dispatch(actionCreatorActions.REQUEST(normalizedURL, resourceId));
 
@@ -34,10 +42,7 @@ const generateActionCreator = (
     );
     const finalBody = beforeHookReturn || body;
 
-    const res = await fetch(
-      formattedURL,
-      getRequestMethods()[method](finalBody),
-    );
+    const res = await fetch(formattedURL, requestMethod(finalBody));
     handleStatusCode(res);
     const data = res.status !== 204 ? await res.json() : {};
     const {
