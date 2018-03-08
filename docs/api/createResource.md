@@ -4,14 +4,14 @@ Creates a resource and associated actions and selectors to interact with it
 
 #### Arguments
 
-1. (_resourceName_): (`string`) The name under which the resource will be stored in the state
-2. (_options_): (`object`) An object containing additional, optional options for the resource:
+1.  (_resourceName_): (`string`) The name under which the resource will be stored in the state
+2.  (_options_): (`object`) An object containing additional, optional options for the resource:
 
-   A. (_cacheLifetime_): (`number`, **default: 0**) The duration _(in seconds)_ for which the resource will be considered valid (from `0` - no cache - to `Infinity` - cached permanently)
+    A. (_cacheLifetime_): (`number`, **default: 0**) The duration _(in seconds)_ for which the resource will be considered valid (from `0` - no cache - to `Infinity` - cached permanently)
 
-   B. (_denormalizer_): (`(resourceIds, resources) : array<resources>`, **default null**) A function useful to denormalize nested objects which have been normalized by `actionName.normalizer` (e.g. via [normalizr](https://github.com/paularmstrong/normalizr/blob/master/docs/api.md#denormalizeinput-schema-entities))
+    B. (_denormalizer_): (`(resourceIds, resources) : array<resources>`, **default null**) A function useful to denormalize nested objects which have been normalized by `actionName.normalizer` (e.g. via [normalizr](https://github.com/paularmstrong/normalizr/blob/master/docs/api.md#denormalizeinput-schema-entities))
 
-3. (_actions_): (`map<actionName:config>`) An object of configs with the following attributes:
+3.  (_actions_): (`map<actionName:config>`) An object of configs with the following attributes:
 
 ```js
 const resource = {
@@ -23,6 +23,18 @@ const resource = {
     beforeHook: func,
     normalizer: func,
     afterHook: func,
+    // Also optional. Override the built-in network helpers
+    // and the ones you may have provided using initializeNetworkHelpers
+    networkHelpers: {
+      getToken: func,
+      requestGET: func,
+      requestPATCH: func,
+      requestPUT: func,
+      requestPOST: func,
+      requestDELETE: func,
+      handleStatusCode: func,
+      handleError: func,
+    },
   },
   ...
 };
