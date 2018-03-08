@@ -59,12 +59,16 @@ const generateActionCreator = (
         )
       : { entities: data };
 
+    const principalResourceIdsArray = Array.isArray(principalResourceIds)
+      ? principalResourceIds
+      : [principalResourceIds];
+
     dispatch(
       actionCreatorActions.RECEIVE(
         normalizedURL,
         resourceId,
         normalizedPayload,
-        principalResourceIds,
+        principalResourceIdsArray,
       ),
     );
 
