@@ -23,11 +23,6 @@ const generateActionCreator = (
     ...getNetworkHelpers(),
     ...(networkHelpers || {}),
   };
-  const {
-    [`request${method}`]: requestMethod,
-    handleError,
-    handleStatusCode,
-  } = combinedNetworkHelpers;
 
   dispatch(actionCreatorActions.REQUEST(normalizedURL, resourceId));
 
@@ -42,8 +37,11 @@ const generateActionCreator = (
     );
     const finalBody = beforeHookReturn || body;
 
-    const res = await fetch(formattedURL, requestMethod(finalBody));
-    handleStatusCode(res);
+    const res = await fetch(
+      formattedURL,
+      combinedNetworkHelpers[`request${method}`](finalBody),
+    );
+    combinedNetworkHelpers.handleStatusCode(res);
     const data = res.status !== 204 ? await res.json() : {};
     const {
       entities: normalizedPayload,
@@ -86,7 +84,7 @@ const generateActionCreator = (
   } catch (error) {
     dispatch(actionCreatorActions.FAIL(normalizedURL, resourceId));
 
-    handleError(error, dispatch);
+    combinedNetworkHelpers.handleError(error, dispatch);
     safeCall(onError, error);
     return { error };
   }
