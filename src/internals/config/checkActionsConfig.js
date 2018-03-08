@@ -52,6 +52,11 @@ const invalidFunctionError = (func, value) =>
 
 For more information, browse the related documentation: https://github.com/Brigad/redux-rest-easy/blob/master/docs/api/createResource/actionsConfig.md#actionsconfig`;
 
+const invalidObjectError = (func, value) =>
+  `${func} "${value}" is invalid. Expected a valid object.
+
+For more information, browse the related documentation: https://github.com/Brigad/redux-rest-easy/blob/master/docs/api/createResource/actionsConfig.md#actionsconfig`;
+
 const invalidNetworkHelperError = (func, value) =>
   `${func} "networkHelpers.${value}" is invalid. Expected a valid function.
 
@@ -114,6 +119,9 @@ const checkActionsConfig = (resourceName, actionsConfig) => {
     }
     if (isDefined(afterHook) && !isFunction(afterHook)) {
       throwError(invalidFunctionError('afterHook', afterHook));
+    }
+    if (isDefined(networkHelpers) && !isPlainObject(networkHelpers)) {
+      throwError(invalidObjectError('networkHelpers', networkHelpers));
     }
 
     Object.keys(networkHelpers || {}).forEach((networkHelper) => {
