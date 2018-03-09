@@ -16,7 +16,7 @@ This example demonstrates how to use `reset` to reset the store when the user lo
 
 ```js
 import React from 'react';
-import { reset } from '@brigad/redux-rest-easy';
+import { reset, connect } from '@brigad/redux-rest-easy';
 
 const LogoutButton = ({ logout }) => (
   <button onClick={logout}>{'Logout'}</button>
