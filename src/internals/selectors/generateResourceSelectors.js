@@ -6,7 +6,7 @@ import {
   getEmptyResourceHash,
   getResourceHash,
   getResourcesHash,
-} from '../utils/hashesForSelectorsResolvers';
+} from '../utils/resolversHashes';
 
 const EMPTY_RESOURCE = [];
 const EMPTY_RESOURCE_ID = null;
@@ -17,6 +17,8 @@ const resourceSelector = (state, resourceName) =>
   state.resources && state.resources[resourceName]
     ? state.resources[resourceName]
     : null;
+
+const resolversHashesSelector = state => state.resolversHashes;
 
 const applyDenormalizerSelector = (state, resourceName, applyDenormalizer) =>
   applyDenormalizer;
@@ -50,11 +52,12 @@ const getResourceResolver = (
   denormalizer,
 ) => {
   const resource = resourceSelector(state, resourceName);
+  const resolversHashes = resolversHashesSelector(state);
 
   if (resource) {
     return !applyDenormalizer || !denormalizer
-      ? `${applyDenormalizer}-${getResourceHash(resourceName)}`
-      : `${applyDenormalizer}-${getResourcesHash()}`;
+      ? `${applyDenormalizer}-${getResourceHash(resolversHashes, resourceName)}`
+      : `${applyDenormalizer}-${getResourcesHash(resolversHashes)}`;
   }
 
   return getEmptyResourceHash();

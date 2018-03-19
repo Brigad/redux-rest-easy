@@ -8,7 +8,7 @@ import {
   getEmptyResourceHash,
   getPayloadIdsHash,
   getResourceHash,
-} from '../utils/hashesForSelectorsResolvers';
+} from '../utils/resolversHashes';
 
 /* eslint-disable no-underscore-dangle */
 
@@ -92,6 +92,8 @@ const payloadIdsSelector = (state, resourceName, normalizedURL) =>
     ? state.requests[normalizedURL].payloadIds[resourceName]
     : null;
 
+const resolversHashesSelector = state => state.resolversHashes;
+
 const applyDenormalizerSelector = (
   state,
   resourceName,
@@ -132,22 +134,25 @@ const getRequestResourceResolver = (
 ) => {
   const resource = resourceSelector(state, resourceName);
   const payloadIds = payloadIdsSelector(state, resourceName, normalizedURL);
+  const resolversHashes = resolversHashesSelector(state);
 
   if (resource && payloadIds) {
     return !applyDenormalizer || !denormalizer
       ? `${applyDenormalizer}-${getPayloadIdsHash(
+          resolversHashes,
           normalizedURL,
           resourceName,
-        )}-${getResourceHash(resourceName)}`
+        )}-${getResourceHash(resolversHashes, resourceName)}`
       : `${applyDenormalizer}-${Object.keys(
           state.requests[normalizedURL].payloadIds,
         )
           .map(
             resourceKey =>
               `${getPayloadIdsHash(
+                resolversHashes,
                 normalizedURL,
                 resourceKey,
-              )}-${getResourceHash(resourceKey)}`,
+              )}-${getResourceHash(resolversHashes, resourceKey)}`,
           )
           .join('--')}`;
   }

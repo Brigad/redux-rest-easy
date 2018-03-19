@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getEmptyResourceHash only path 1`] = `"cf252fdcd0c577918a558e3d5869780d"`;
+
+exports[`getPayloadIdsHash after computing 1`] = `"f00555c74464ef36bbc004bcf654aca1"`;
+
+exports[`getResourceHash after computing 1`] = `"2d64c2982ff64c3288c39158728ba72c"`;
+
+exports[`getResourcesHash after computing 1`] = `"529477faa63b29b600bab57fb91ba873"`;
