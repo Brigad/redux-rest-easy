@@ -5,7 +5,9 @@ const DEFAULT_NETWORK_HELPERS = {
       method: 'GET',
       headers: {
         Accept: 'application/json',
-        Authorization: `Bearer ${this.getToken()}`,
+        ...(this.getToken && this.getToken()
+          ? { Authorization: `Bearer ${this.getToken()}` }
+          : {}),
       },
     };
   },
@@ -14,8 +16,10 @@ const DEFAULT_NETWORK_HELPERS = {
       method: 'PATCH',
       headers: {
         Accept: 'application/json',
-        Authorization: `Bearer ${this.getToken()}`,
         'Content-Type': 'application/json',
+        ...(this.getToken && this.getToken()
+          ? { Authorization: `Bearer ${this.getToken()}` }
+          : {}),
       },
       body,
     };
@@ -25,8 +29,10 @@ const DEFAULT_NETWORK_HELPERS = {
       method: 'PUT',
       headers: {
         Accept: 'application/json',
-        Authorization: `Bearer ${this.getToken()}`,
         'Content-Type': 'application/json',
+        ...(this.getToken && this.getToken()
+          ? { Authorization: `Bearer ${this.getToken()}` }
+          : {}),
       },
       body,
     };
@@ -36,8 +42,10 @@ const DEFAULT_NETWORK_HELPERS = {
       method: 'POST',
       headers: {
         Accept: 'application/json',
-        Authorization: `Bearer ${this.getToken()}`,
         'Content-Type': 'application/json',
+        ...(this.getToken && this.getToken()
+          ? { Authorization: `Bearer ${this.getToken()}` }
+          : {}),
       },
       body,
     };
@@ -47,7 +55,9 @@ const DEFAULT_NETWORK_HELPERS = {
       method: 'DELETE',
       headers: {
         Accept: 'application/json',
-        Authorization: `Bearer ${this.getToken()}`,
+        ...(this.getToken && this.getToken()
+          ? { Authorization: `Bearer ${this.getToken()}` }
+          : {}),
       },
     };
   },
