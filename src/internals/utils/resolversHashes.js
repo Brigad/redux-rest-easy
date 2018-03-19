@@ -5,7 +5,7 @@ const EMPTY_RESOURCE = [];
 const EMPTY_HASH = hash(EMPTY_RESOURCE);
 
 export const computeNewResolversHashes = (
-  { requests, resources, resolversHashes = {} },
+  { requests = {}, resources = {}, resolversHashes = {} },
   resourceName,
   normalizedURL,
   normalizedPayload,
@@ -46,7 +46,7 @@ export const computeNewResolversHashes = (
 };
 
 export const resetResourceResolversHashes = (
-  { requests, resolversHashes = {} },
+  { requests = {}, resolversHashes = {} },
   resourceName,
 ) => ({
   ...resolversHashes,
@@ -77,6 +77,7 @@ export const getPayloadIdsHash = (
   resolversHashes
   && resolversHashes.requests
   && resolversHashes.requests[normalizedURL]
+  && resolversHashes.requests[normalizedURL][resourceName]
     ? resolversHashes.requests[normalizedURL][resourceName]
     : EMPTY_HASH;
 

@@ -219,6 +219,18 @@ Object {
       },
     },
   },
+  "resolversHashes": Object {
+    "requests": Object {
+      "eat:https://api.co/fruits": Object {
+        "animals": "7054a0150530f9b3dd67e1123b18684e",
+        "fruits": "7c9540c48d3b4c3b7c9867b5e00315ef",
+      },
+    },
+    "resources": Object {
+      "_getResourcesHash": [Function],
+      "fruits": "29978190b54cefaef1578d2192d02a52",
+    },
+  },
   "resources": Object {
     "animals": Object {
       "1": "worm",
@@ -249,6 +261,17 @@ Object {
       "resourceId": 2,
       "resourceName": "fruits",
       "startedAt": "2017-01-01T00:00:00.000Z",
+    },
+  },
+  "resolversHashes": Object {
+    "requests": Object {
+      "eat:https://api.co/fruits": Object {
+        "fruits": "7054a0150530f9b3dd67e1123b18684e",
+      },
+    },
+    "resources": Object {
+      "_getResourcesHash": [Function],
+      "fruits": "761b5b7bf83a5eba0ae3f64c9ec28651",
     },
   },
   "resources": Object {
@@ -291,6 +314,12 @@ Object {
           1,
         ],
       },
+    },
+  },
+  "resolversHashes": Object {
+    "requests": Object {},
+    "resources": Object {
+      "fruits": "cf252fdcd0c577918a558e3d5869780d",
     },
   },
   "resources": Object {
