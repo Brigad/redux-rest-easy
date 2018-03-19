@@ -1,12 +1,12 @@
 import {
-  computeHashesForSelectorsResolvers,
+  computeNewResolversHashes,
   getEmptyResourceHash,
   getPayloadIdsHash,
   getResourceHash,
   getResourcesHash,
   resetAllResourcesHashForSelectorsResolvers,
-  resetResourceHashForSelectorsResolvers,
-} from '../../../src/internals/utils/hashesForSelectorsResolvers';
+  resetResourceResolversHashes,
+} from '../../../src/internals/utils/resolversHashes';
 
 const RESOURCE_NAME = 'fruits';
 const NORMALIZED_URL = 'eat:https://api.co/fruits';
@@ -40,7 +40,7 @@ const STATE = {
 };
 
 const computeHashesEmptyState = () => {
-  computeHashesForSelectorsResolvers(
+  computeNewResolversHashes(
     EMPTY_STATE,
     RESOURCE_NAME,
     NORMALIZED_URL,
@@ -50,7 +50,7 @@ const computeHashesEmptyState = () => {
 };
 
 const computeHashes = () => {
-  computeHashesForSelectorsResolvers(
+  computeNewResolversHashes(
     STATE,
     RESOURCE_NAME,
     NORMALIZED_URL,
@@ -59,7 +59,7 @@ const computeHashes = () => {
   );
 };
 
-describe('computeHashesForSelectorsResolvers', () => {
+describe('computeNewResolversHashes', () => {
   afterEach(resetAllResourcesHashForSelectorsResolvers);
 
   test('empty state', () => {
@@ -83,7 +83,7 @@ describe('computeHashesForSelectorsResolvers', () => {
   });
 });
 
-describe('resetResourceHashForSelectorsResolvers', () => {
+describe('resetResourceResolversHashes', () => {
   afterEach(resetAllResourcesHashForSelectorsResolvers);
 
   test('only path', () => {
@@ -93,7 +93,7 @@ describe('resetResourceHashForSelectorsResolvers', () => {
 
     const hashAfterComputing = getResourceHash(RESOURCE_NAME);
 
-    resetResourceHashForSelectorsResolvers(STATE, RESOURCE_NAME);
+    resetResourceResolversHashes(STATE, RESOURCE_NAME);
 
     const hashAfterResetting = getResourceHash(RESOURCE_NAME);
 

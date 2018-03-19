@@ -1,10 +1,9 @@
 import getInfosFromActionType from '../../utils/getInfosFromActionType';
 import getResourceIdsByResourceNameFromNormalizedPayload from '../../utils/getResourceIdsByResourceNameFromNormalizedPayload';
 import {
-  computeHashesForSelectorsResolvers,
-  resetAllResourcesHashForSelectorsResolvers,
-  resetResourceHashForSelectorsResolvers,
-} from '../../utils/hashesForSelectorsResolvers';
+  computeNewResolversHashes,
+  resetResourceResolversHashes,
+} from '../../utils/resolversHashes';
 import shallowMergeResources from '../../utils/shallowMergeResources';
 
 const REDUCER_CASES = {
@@ -49,7 +48,7 @@ const REDUCER_CASES = {
     },
   ) => {
     const { resourceName } = getInfosFromActionType(type);
-    const newState = {
+    const newStateOldHashes = {
       ...state,
       requests: {
         ...(state.requests || {}),
@@ -72,13 +71,16 @@ const REDUCER_CASES = {
       resources: shallowMergeResources(state, normalizedPayload),
     };
 
-    computeHashesForSelectorsResolvers(
-      newState,
-      resourceName,
-      normalizedURL,
-      normalizedPayload,
-      principalResourceIds,
-    );
+    const newState = {
+      ...newStateOldHashes,
+      resolversHashes: computeNewResolversHashes(
+        newStateOldHashes,
+        resourceName,
+        normalizedURL,
+        normalizedPayload,
+        principalResourceIds,
+      ),
+    };
 
     return newState;
   },
@@ -107,7 +109,7 @@ const REDUCER_CASES = {
     },
   ) => {
     const { resourceName } = getInfosFromActionType(type);
-    const newState = {
+    const newStateOldHashes = {
       ...state,
       requests: {
         ...(state.requests || {}),
@@ -133,13 +135,16 @@ const REDUCER_CASES = {
       resources: shallowMergeResources(state, normalizedPayload),
     };
 
-    computeHashesForSelectorsResolvers(
-      newState,
-      resourceName,
-      normalizedURL,
-      normalizedPayload,
-      principalResourceIds,
-    );
+    const newState = {
+      ...newStateOldHashes,
+      resolversHashes: computeNewResolversHashes(
+        newStateOldHashes,
+        resourceName,
+        normalizedURL,
+        normalizedPayload,
+        principalResourceIds,
+      ),
+    };
 
     return newState;
   },
@@ -201,7 +206,7 @@ const REDUCER_CASES = {
     },
   }),
   RESET_RESOURCE: (state, { resourceName }) => {
-    const newState = {
+    const newStateOldHashes = {
       ...state,
       requests: {
         ...Object.entries(state.requests || {})
@@ -224,14 +229,18 @@ const REDUCER_CASES = {
       },
     };
 
-    resetResourceHashForSelectorsResolvers(newState);
+    const newState = {
+      ...newStateOldHashes,
+      resolversHashes: resetResourceResolversHashes(
+        newStateOldHashes,
+        resourceName,
+      ),
+    };
 
     return newState;
   },
   RESET_ALL: () => {
     const newState = {};
-
-    resetAllResourcesHashForSelectorsResolvers();
 
     return newState;
   },
