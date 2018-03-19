@@ -21,7 +21,7 @@ const DEFAULT_NETWORK_HELPERS = {
           ? { Authorization: `Bearer ${this.getToken()}` }
           : {}),
       },
-      body,
+      body: JSON.stringify(body),
     };
   },
   requestPUT(body) {
@@ -34,7 +34,7 @@ const DEFAULT_NETWORK_HELPERS = {
           ? { Authorization: `Bearer ${this.getToken()}` }
           : {}),
       },
-      body,
+      body: JSON.stringify(body),
     };
   },
   requestPOST(body) {
@@ -47,7 +47,7 @@ const DEFAULT_NETWORK_HELPERS = {
           ? { Authorization: `Bearer ${this.getToken()}` }
           : {}),
       },
-      body,
+      body: JSON.stringify(body),
     };
   },
   requestDELETE() {
