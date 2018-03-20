@@ -12,7 +12,6 @@ const RESOURCE_NAME_2 = 'vegetables';
 const RESOURCE_NAME_3 = 'sauces';
 
 const MOMENT_NOW = moment(Date.UTC(2017, 0, 1));
-const EXPIRE_AT_NOW = new Date(Date.UTC(2017, 0, 1)).toISOString();
 const EXPIRE_AT_ONE_SEC = new Date(
   Date.UTC(2017, 0, 1) + 1 * 1000,
 ).toISOString();
@@ -276,8 +275,9 @@ describe('getPrunedForPersistenceState', () => {
   test('requests: expiredAt never', () => {
     mockdate.set(MOMENT_NOW);
     expect(
-      getPrunedForPersistenceState(STATE_REQUESTS).requests[URL_4].expireAt,
-    ).toBe(EXPIRE_AT_NOW);
+      getPrunedForPersistenceState(STATE_REQUESTS).requests[URL_4]
+        .didInvalidate,
+    ).toBe(true);
   });
 
   test('resources first order', () => {
@@ -322,9 +322,6 @@ describe('getPrunedForPersistenceState', () => {
     const prunedStateResolversHashes = getPrunedForPersistenceState(
       STATE_RESOLVERS_HASHES,
     ).resolversHashes;
-
-    console.log(STATE_RESOLVERS_HASHES);
-    console.log(getPrunedForPersistenceState(STATE_RESOLVERS_HASHES));
 
     expect(prunedStateResolversHashes.requests[URL_1]).toBeUndefined();
     expect(

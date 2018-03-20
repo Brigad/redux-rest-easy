@@ -14,7 +14,7 @@ const getPrunedForPersistenceState = (state) => {
         ? {
             [key]:
               request.expireAt === 'never'
-                ? { ...request, expireAt: new Date().toISOString() }
+                ? { ...request, didInvalidate: true }
                 : request,
           }
         : {}),
