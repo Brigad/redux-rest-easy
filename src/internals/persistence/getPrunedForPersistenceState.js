@@ -1,5 +1,5 @@
 const getPrunedForPersistenceState = (state) => {
-  if (!state) {
+  if (!state || !Object.keys(state).length) {
     return {};
   }
 
