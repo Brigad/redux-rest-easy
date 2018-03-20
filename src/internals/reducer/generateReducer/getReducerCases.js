@@ -19,6 +19,7 @@ const REDUCER_CASES = {
         resourceId,
         startedAt: new Date().toISOString(),
         endedAt: null,
+        expireAt: null,
         hasSucceeded:
           state.requests && state.requests[normalizedURL]
             ? state.requests[normalizedURL].hasSucceeded
@@ -45,6 +46,7 @@ const REDUCER_CASES = {
       url: normalizedURL,
       payload: normalizedPayload,
       principalResourceIds,
+      cacheLifetime,
     },
   ) => {
     const { resourceName } = getInfosFromActionType(type);
@@ -57,6 +59,12 @@ const REDUCER_CASES = {
             ? state.requests[normalizedURL]
             : {}),
           endedAt: new Date().toISOString(),
+          expireAt:
+            cacheLifetime !== Infinity
+              ? new Date(
+                  new Date().getTime() + cacheLifetime * 1000,
+                ).toISOString()
+              : 'never',
           hasSucceeded: true,
           hasFailed: false,
           didInvalidate: false,
@@ -106,6 +114,7 @@ const REDUCER_CASES = {
       resourceId,
       payload: normalizedPayload,
       principalResourceIds,
+      cacheLifetime,
     },
   ) => {
     const { resourceName } = getInfosFromActionType(type);
@@ -121,6 +130,12 @@ const REDUCER_CASES = {
           resourceId,
           startedAt: new Date().toISOString(),
           endedAt: new Date().toISOString(),
+          expireAt:
+            cacheLifetime !== Infinity
+              ? new Date(
+                  new Date().getTime() + cacheLifetime * 1000,
+                ).toISOString()
+              : 'never',
           hasSucceeded: true,
           hasFailed: false,
           didInvalidate: false,

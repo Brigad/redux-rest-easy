@@ -28,6 +28,7 @@ const generateThunk = (
   const actionCreatorActions = generateActionCreatorActions(
     resourceName,
     actionName,
+    cacheLifetime,
   );
   const actionCreator = generateActionCreator(
     actionName,
@@ -54,16 +55,8 @@ const generateThunk = (
     let action;
 
     if (shouldPerform(state, normalizedURL)) {
-      if (isCacheExpired(state, method, normalizedURL, cacheLifetime)) {
-        if (
-          isSmartCacheAvailable(
-            state,
-            method,
-            resourceName,
-            resourceId,
-            cacheLifetime,
-          )
-        ) {
+      if (isCacheExpired(state, method, normalizedURL)) {
+        if (isSmartCacheAvailable(state, method, resourceName, resourceId)) {
           action = () =>
             dispatch(
               actionCreatorActions.RECEIVE_FROM_CACHE(

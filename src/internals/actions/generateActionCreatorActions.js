@@ -1,7 +1,11 @@
 import generateActionCreatorAction from './generateActionCreatorActions/generateActionCreatorAction';
 import generateActionCreatorActionTypes from './generateActionCreatorActions/generateActionCreatorActionTypes';
 
-const generateActionCreatorActions = (resourceName, actionName) => {
+const generateActionCreatorActions = (
+  resourceName,
+  actionName,
+  cacheLifetime,
+) => {
   const {
     REQUEST,
     RECEIVE,
@@ -10,10 +14,13 @@ const generateActionCreatorActions = (resourceName, actionName) => {
   } = generateActionCreatorActionTypes(resourceName, actionName);
 
   return {
-    REQUEST: generateActionCreatorAction(REQUEST),
-    RECEIVE: generateActionCreatorAction(RECEIVE),
-    FAIL: generateActionCreatorAction(FAIL),
-    RECEIVE_FROM_CACHE: generateActionCreatorAction(RECEIVE_FROM_CACHE),
+    REQUEST: generateActionCreatorAction(cacheLifetime, REQUEST),
+    RECEIVE: generateActionCreatorAction(cacheLifetime, RECEIVE),
+    FAIL: generateActionCreatorAction(cacheLifetime, FAIL),
+    RECEIVE_FROM_CACHE: generateActionCreatorAction(
+      cacheLifetime,
+      RECEIVE_FROM_CACHE,
+    ),
   };
 };
 

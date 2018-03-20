@@ -1,12 +1,6 @@
 import hasCacheExpired from '../../utils/hasCacheExpired';
 
-const isSmartCacheAvailable = (
-  state,
-  method,
-  resourceName,
-  resourceId,
-  cacheLifetime,
-) => {
+const isSmartCacheAvailable = (state, method, resourceName, resourceId) => {
   if (
     method !== 'GET'
     || !state
@@ -21,7 +15,7 @@ const isSmartCacheAvailable = (
     ({
       hasSucceeded,
       didInvalidate,
-      endedAt,
+      expireAt,
       resourceName: name,
       resourceId: id,
       payloadIds,
@@ -32,7 +26,7 @@ const isSmartCacheAvailable = (
         || (payloadIds
           && payloadIds[resourceName]
           && payloadIds[resourceName].includes(resourceId)))
-      && !hasCacheExpired(endedAt, cacheLifetime),
+      && !hasCacheExpired(expireAt),
   );
 };
 
