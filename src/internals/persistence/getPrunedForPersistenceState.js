@@ -87,8 +87,9 @@ const getPrunedForPersistenceState = (state) => {
       (resourcesHashes, [key, hash]) => ({
         ...resourcesHashes,
         ...(newResourcesCleaned[key]
-        && Object.length((state.resources || {})[key])
-          === Object.keys(newResourcesCleaned.key).length
+        && Object.keys(
+          state.resources && state.resources[key] ? state.resources[key] : {},
+        ).length === Object.keys(newResourcesCleaned[key] || {}).length
           ? { [key]: hash }
           : {}),
       }),
