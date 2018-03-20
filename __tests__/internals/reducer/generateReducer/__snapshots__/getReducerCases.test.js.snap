@@ -204,6 +204,7 @@ Object {
     "eat:https://api.co/fruits": Object {
       "didInvalidate": false,
       "endedAt": "2017-01-01T00:00:00.000Z",
+      "expireAt": "2017-01-01T00:00:00.000Z",
       "fromCache": false,
       "hasFailed": false,
       "hasSucceeded": true,
@@ -250,6 +251,7 @@ Object {
     "eat:https://api.co/fruits": Object {
       "didInvalidate": false,
       "endedAt": "2017-01-01T00:00:00.000Z",
+      "expireAt": "2017-01-01T00:00:00.000Z",
       "fromCache": true,
       "hasFailed": false,
       "hasSucceeded": true,
@@ -288,6 +290,7 @@ Object {
     "eat:https://api.co/fruits": Object {
       "didInvalidate": false,
       "endedAt": null,
+      "expireAt": null,
       "fromCache": false,
       "hasFailed": false,
       "hasSucceeded": false,

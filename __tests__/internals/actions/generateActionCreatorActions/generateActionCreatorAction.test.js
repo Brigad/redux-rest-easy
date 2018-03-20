@@ -1,5 +1,6 @@
 import generateActionCreatorAction from '../../../../src/internals/actions/generateActionCreatorActions/generateActionCreatorAction';
 
+const CACHE_LIFETIME = 0;
 const ACTION_TYPE = '@@rest-easy/fruits/eat/REQUEST';
 const NORMALIZED_URL = 'eat:https://api.co/fruits';
 const ID = '2';
@@ -10,25 +11,38 @@ describe('generateActionCreatorAction', () => {
     expect(generateActionCreatorAction()()).toMatchSnapshot();
   });
 
+  test('no action type', () => {
+    expect(generateActionCreatorAction(CACHE_LIFETIME)()).toMatchSnapshot();
+  });
+
   test('no url, id, payload', () => {
-    expect(generateActionCreatorAction(ACTION_TYPE)()).toMatchSnapshot();
+    expect(
+      generateActionCreatorAction(CACHE_LIFETIME, ACTION_TYPE)(),
+    ).toMatchSnapshot();
   });
 
   test('no id, payload', () => {
     expect(
-      generateActionCreatorAction(ACTION_TYPE)(NORMALIZED_URL),
+      generateActionCreatorAction(CACHE_LIFETIME, ACTION_TYPE)(NORMALIZED_URL),
     ).toMatchSnapshot();
   });
 
   test('no payload', () => {
     expect(
-      generateActionCreatorAction(ACTION_TYPE)(NORMALIZED_URL, ID),
+      generateActionCreatorAction(CACHE_LIFETIME, ACTION_TYPE)(
+        NORMALIZED_URL,
+        ID,
+      ),
     ).toMatchSnapshot();
   });
 
   test('empty payload', () => {
     expect(
-      generateActionCreatorAction(ACTION_TYPE)(NORMALIZED_URL, ID, {}),
+      generateActionCreatorAction(CACHE_LIFETIME, ACTION_TYPE)(
+        NORMALIZED_URL,
+        ID,
+        {},
+      ),
     ).toMatchSnapshot();
   });
 
@@ -40,7 +54,11 @@ describe('generateActionCreatorAction', () => {
     };
 
     expect(
-      generateActionCreatorAction(ACTION_TYPE)(NORMALIZED_URL, ID, payload),
+      generateActionCreatorAction(CACHE_LIFETIME, ACTION_TYPE)(
+        NORMALIZED_URL,
+        ID,
+        payload,
+      ),
     ).toMatchSnapshot();
   });
 
@@ -52,7 +70,12 @@ describe('generateActionCreatorAction', () => {
     };
 
     expect(
-      generateActionCreatorAction(ACTION_TYPE)(NORMALIZED_URL, ID, payload, ID),
+      generateActionCreatorAction(CACHE_LIFETIME, ACTION_TYPE)(
+        NORMALIZED_URL,
+        ID,
+        payload,
+        ID,
+      ),
     ).toMatchSnapshot();
   });
 
@@ -64,7 +87,7 @@ describe('generateActionCreatorAction', () => {
     };
 
     expect(
-      generateActionCreatorAction(ACTION_TYPE)(
+      generateActionCreatorAction(CACHE_LIFETIME, ACTION_TYPE)(
         NORMALIZED_URL,
         ID,
         payload,

@@ -3,6 +3,7 @@ import moment from 'moment';
 
 import getReducerCases from '../../../../src/internals/reducer/generateReducer/getReducerCases';
 
+const CACHE_LIFETIME = 0;
 const RESOURCE_NAME = 'fruits';
 const RESOURCE_ID = 2;
 const ACTION_NAME = 'eat';
@@ -105,6 +106,7 @@ describe('getReducerCases', () => {
         },
       },
       principalResourceIds: ['2', '1', '3'],
+      cacheLifetime: CACHE_LIFETIME,
     };
 
     expect(
@@ -135,6 +137,7 @@ describe('getReducerCases', () => {
         },
       },
       principalResourceIds: ['1'],
+      cacheLifetime: CACHE_LIFETIME,
     };
 
     expect(

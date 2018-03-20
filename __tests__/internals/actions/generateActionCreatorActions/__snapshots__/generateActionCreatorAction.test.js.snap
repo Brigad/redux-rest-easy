@@ -2,6 +2,7 @@
 
 exports[`generateActionCreatorAction empty payload 1`] = `
 Object {
+  "cacheLifetime": 0,
   "payload": undefined,
   "principalResourceIds": undefined,
   "resourceId": "2",
@@ -12,6 +13,7 @@ Object {
 
 exports[`generateActionCreatorAction filled payload without principalResourceIds 1`] = `
 Object {
+  "cacheLifetime": 0,
   "payload": Object {
     "fruits": Object {
       "1": "cherry",
@@ -26,6 +28,7 @@ Object {
 
 exports[`generateActionCreatorAction filled payload, array principalResourceIds 1`] = `
 Object {
+  "cacheLifetime": 0,
   "payload": Object {
     "fruits": Object {
       "1": "cherry",
@@ -42,6 +45,7 @@ Object {
 
 exports[`generateActionCreatorAction filled payload, string principalResourceIds 1`] = `
 Object {
+  "cacheLifetime": 0,
   "payload": Object {
     "fruits": Object {
       "1": "cherry",
@@ -56,8 +60,20 @@ Object {
 }
 `;
 
+exports[`generateActionCreatorAction no action type 1`] = `
+Object {
+  "cacheLifetime": 0,
+  "payload": undefined,
+  "principalResourceIds": undefined,
+  "resourceId": undefined,
+  "type": undefined,
+  "url": undefined,
+}
+`;
+
 exports[`generateActionCreatorAction no args 1`] = `
 Object {
+  "cacheLifetime": undefined,
   "payload": undefined,
   "principalResourceIds": undefined,
   "resourceId": undefined,
@@ -68,6 +84,7 @@ Object {
 
 exports[`generateActionCreatorAction no id, payload 1`] = `
 Object {
+  "cacheLifetime": 0,
   "payload": undefined,
   "principalResourceIds": undefined,
   "resourceId": undefined,
@@ -78,6 +95,7 @@ Object {
 
 exports[`generateActionCreatorAction no payload 1`] = `
 Object {
+  "cacheLifetime": 0,
   "payload": undefined,
   "principalResourceIds": undefined,
   "resourceId": "2",
@@ -88,6 +106,7 @@ Object {
 
 exports[`generateActionCreatorAction no url, id, payload 1`] = `
 Object {
+  "cacheLifetime": 0,
   "payload": undefined,
   "principalResourceIds": undefined,
   "resourceId": undefined,
