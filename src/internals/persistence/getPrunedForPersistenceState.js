@@ -1,3 +1,5 @@
+import hasCacheExpired from '../utils/hasCacheExpired';
+
 const getPrunedForPersistenceState = (state) => {
   if (!state || !Object.keys(state).length) {
     return {};
@@ -7,6 +9,8 @@ const getPrunedForPersistenceState = (state) => {
     (allRequests, [key, request]) => ({
       ...allRequests,
       ...(request.endedAt
+      && !request.didInvalidate
+      && !hasCacheExpired(request.expireAt)
         ? {
             [key]:
               request.expireAt === 'never'

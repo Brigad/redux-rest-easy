@@ -7,12 +7,7 @@ const URL = 'https://api.co/fruits';
 const OTHER_URL = 'https://api.co/fruits?page1';
 const RESOURCE_NAME = 'fruits';
 
-const MOMENT_NOW = moment
-  .utc()
-  .year(2017)
-  .month(0)
-  .date(1)
-  .startOf('day');
+const MOMENT_NOW = moment(Date.UTC(2017, 0, 1));
 const EXPIRE_AT_NOW = new Date(Date.UTC(2017, 0, 1)).toISOString();
 const EXPIRE_AT_ONE_SEC = new Date(
   Date.UTC(2017, 0, 1) + 1 * 1000,
