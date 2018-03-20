@@ -42,7 +42,7 @@ To solve the problems listed above, `redux-rest-easy` **generates actions, reduc
 
 It also provides **sensible defaults**, allowing you to use it with **almost no configuration**, but also to **customize** anything you would like.
 
-And the cherry on the top: it works seemlessly with [redux-offline](https://github.com/redux-offline/redux-offline) and [redux-persist](https://github.com/rt2zz/redux-persist)!
+And the cherry on the top: it works seamlessly with [redux-offline](https://github.com/redux-offline/redux-offline) and [redux-persist](https://github.com/rt2zz/redux-persist)!
 
 [Scroll down](#minimal-example) for a small example, or [browse the documentation](#api) to get started! To learn more about the problem and solution, you can also read the [release article][release-article].
 
@@ -89,7 +89,7 @@ const users = createResource('users')({
   retrieve: {
     method: 'GET',
     url: 'https://my-api.com/users',
-    afterHook: () => console.log('Users retrieved successfuly'),
+    afterHook: () => console.log('Users retrieved successfully'),
   },
 });
 

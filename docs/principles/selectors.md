@@ -1,6 +1,6 @@
 # Selectors
 
-Selectors are functions which allow to access any relevant information stored in the state. They are helpful, especially because `redux-rest-easy` state is generated and managed by the library itself.
+Selectors are functions which allow accessing any relevant information stored in the state. They are helpful, especially because `redux-rest-easy` state is generated and managed by the library itself.
 
 There are 3 types of selectors :
 

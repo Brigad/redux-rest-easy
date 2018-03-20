@@ -1,6 +1,6 @@
 # Persistence
 
-Redux-rest-easy works out-of-the-box with libraries such as [redux-offline](https://github.com/redux-offline/redux-offline) and [redux-persist](https://github.com/rt2zz/redux-persist). However, the library will need to clean the state before persisting it, so that it never ends up in a inconsistent shape.
+Redux-rest-easy works out-of-the-box with libraries such as [redux-offline](https://github.com/redux-offline/redux-offline) and [redux-persist](https://github.com/rt2zz/redux-persist). However, the library will need to clean the state before persisting it, so that it never ends up in an inconsistent shape.
 
 Here is a list of actions performed when you call [getPersistableState](../api/getPersistableState.md):
 

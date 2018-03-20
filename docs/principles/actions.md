@@ -1,6 +1,6 @@
 # Action
 
-This processus defines the set of steps performed by `redux-reast-easy` actions, from the moment the request is performed to the moment we receive the payload.
+This process defines the set of steps performed by `redux-rest-easy` actions, from the moment the request is performed to the moment we receive the payload.
 
 See [createResource documentation](../api/createResource.md#arguments) for the list of action parameters.
 
@@ -10,7 +10,7 @@ Dispatching the **REQUEST** action will trigger the corresponding reducer, and c
 
 ### Execute the beforeHook
 
-Specifying an _optional_ function `action.beforeHook` when defining an action will allow to execute this function everytime the preflight checks are passed for this action. If it returns a non falsy value, the return value will be used as the body for the principal request. Useful to perform series of calls.
+Specifying an _optional_ function `action.beforeHook` when defining an action will allow executing this function everytime the preflight checks are passed for this action. If it returns a non-falsy value, the return value will be used as the body for the principal request. Useful to perform series of calls.
 
 ### Perform the request
 
@@ -32,7 +32,7 @@ Dispatching the **FAIL** action will trigger the corresponding reducer and updat
 
 ### Execute the afterHook
 
-Specifying an _optional_ function `action.afterHook` when defining an action will allow to execute this function every time a request has successfuly performed.
+Specifying an _optional_ function `action.afterHook` when defining an action will allow executing this function every time a request has successfully performed.
 
 ### Execute the onSuccess/onFailure
 

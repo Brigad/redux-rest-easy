@@ -153,5 +153,5 @@ export {
 #### Tips
 
 * The above example is very exhaustive, but you can export only what you really need
-* Naming is a mater of personal preference, use what works for you
+* Naming is a matter of personal preference, use what works for you
 * You can alternately just export `users`, and spare yourself the trouble of mapping the names. Then just use the selectors like so: `users.selectors.resource.getResource()`. Again, use what works for you
