@@ -7,3 +7,4 @@ export { default as reset } from './reset';
 export {
   default as initializeNetworkHelpers,
 } from './initializeNetworkHelpers';
+export { default as getPersistableState } from './getPersistableState';

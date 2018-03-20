@@ -1,4 +1,4 @@
-const hasCacheExpired = (endedAt, cacheLifetime) =>
-  new Date() - new Date(endedAt) > cacheLifetime * 1000;
+const hasCacheExpired = expireAt =>
+  expireAt !== 'never' && (!expireAt || new Date() > new Date(expireAt));
 
 export default hasCacheExpired;

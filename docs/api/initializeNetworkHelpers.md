@@ -118,5 +118,5 @@ initializeNetworkHelpers(networkHelpers);
 #### Tips
 
 * You should do this before any network request performs (usually at the entry point of your app)
-* Only specifying `getToken` is often enough to make your app work. Use the other options if you needs custom headers or handlers!
+* Only specifying `getToken` is often enough to make your app work. Use the other options if you need custom headers or handlers!
 * To provide helpers on a per-action basis, use [the actions configuration](./createResource/actionsConfig.md#properties)

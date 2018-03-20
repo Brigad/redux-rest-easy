@@ -1,4 +1,4 @@
-const generateActionCreatorAction = actionType => (
+const generateActionCreatorAction = (cacheLifetime, actionType) => (
   normalizedURL,
   resourceId,
   normalizedPayload,
@@ -15,6 +15,7 @@ const generateActionCreatorAction = actionType => (
     typeof principalResourceIds === 'string'
       ? [principalResourceIds]
       : principalResourceIds,
+  cacheLifetime,
 });
 
 export default generateActionCreatorAction;

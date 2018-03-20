@@ -77,7 +77,7 @@ const state = {
 
 ### RECEIVE_FROM_CACHE
 
-When requesting a couple of resource/id which is already in state and cache is still fresh, the request will be store din a success state with the property `fromCache` to **true**.
+When requesting a couple of resource/id which is already in state and cache is still fresh, the request will be stored in a success state with the property `fromCache` to **true**.
 
 ```js
 const state = {

@@ -4,7 +4,7 @@ Before performing a request, the library will check whether it should, based on 
 
 ### Should perform
 
-Here are the conditions that would immeditately cancel a request:
+Here are the conditions that would immediately cancel a request:
 
 | Request method | Condition                                                                    | Explanation                                                                                                                                                                                                                    |
 | -------------- | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |

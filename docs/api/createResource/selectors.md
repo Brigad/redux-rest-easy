@@ -39,11 +39,11 @@ _Available to any connected component._
 
 ### `getResource(state, applyDenormalizer = true)`: `array<object>`
 
-Will return the whole resource (or an empty array). Will be denormalized by default, but can be overriden.
+Will return the whole resource (or an empty array). Will be denormalized by default, but can be overridden.
 
 ### `getResourceById(state, id, applyDenormalizer = true)`: `object`
 
-Will return the object corresponding to the id passed as a parameter (or null). Will be denormalized by default, but can be overriden.
+Will return the object corresponding to the id passed as a parameter (or null). Will be denormalized by default, but can be overridden.
 
 ## Action.resource
 
@@ -75,7 +75,7 @@ _Only available to connected components which specifically requested a resource 
 
 ### `getResource(state, ownProps, applyDenormalizer = true)`: `array<object>`
 
-Will return the resource corresponding to the payload of the request (or an empty array). Will be denormalized by default, but can be overriden.
+Will return the resource corresponding to the payload of the request (or an empty array). Will be denormalized by default, but can be overridden.
 
 ### `couldPerform(state, ownProps)`: `bool`
 

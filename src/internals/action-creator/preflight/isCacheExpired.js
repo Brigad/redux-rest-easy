@@ -1,6 +1,6 @@
 import hasCacheExpired from '../../utils/hasCacheExpired';
 
-const isCacheExpired = (state, method, normalizedURL, cacheLifetime) => {
+const isCacheExpired = (state, method, normalizedURL) => {
   if (
     method !== 'GET'
     || !state
@@ -11,13 +11,11 @@ const isCacheExpired = (state, method, normalizedURL, cacheLifetime) => {
     return true;
   }
 
-  const { hasSucceeded, didInvalidate, endedAt } = state.requests[
+  const { hasSucceeded, didInvalidate, expireAt } = state.requests[
     normalizedURL
   ];
 
-  return (
-    !hasSucceeded || didInvalidate || hasCacheExpired(endedAt, cacheLifetime)
-  );
+  return !hasSucceeded || didInvalidate || hasCacheExpired(expireAt);
 };
 
 export default isCacheExpired;
