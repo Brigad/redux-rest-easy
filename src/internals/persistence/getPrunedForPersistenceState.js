@@ -28,10 +28,10 @@ const getPrunedForPersistenceState = (state) => {
       ...Object.entries(request.payloadIds || {}).reduce(
         (requestResources, [resourceName, resourceIds]) => ({
           ...requestResources,
-          [resourceName]: {
+          [resourceName]: [
             ...(requestResources[resourceName] || []),
-            ...resourceIds,
-          },
+            ...resourceIds.map(id => id.toString()),
+          ],
         }),
         {},
       ),
