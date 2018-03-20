@@ -6,7 +6,14 @@ const getPrunedForPersistenceState = (state) => {
   const newRequests = Object.entries(state.requests || {}).reduce(
     (allRequests, [key, request]) => ({
       ...allRequests,
-      ...(request.endedAt ? { [key]: request } : {}),
+      ...(request.endedAt
+        ? {
+            [key]:
+              request.expireAt === 'never'
+                ? { ...request, expireAt: new Date().toISOString() }
+                : request,
+          }
+        : {}),
     }),
     {},
   );
