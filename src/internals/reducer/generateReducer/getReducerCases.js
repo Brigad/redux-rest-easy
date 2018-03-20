@@ -46,7 +46,7 @@ const REDUCER_CASES = {
       url: normalizedURL,
       payload: normalizedPayload,
       principalResourceIds,
-      cacheLifetime,
+      cacheLifetime = 0,
     },
   ) => {
     const { resourceName } = getInfosFromActionType(type);
@@ -114,7 +114,7 @@ const REDUCER_CASES = {
       resourceId,
       payload: normalizedPayload,
       principalResourceIds,
-      cacheLifetime,
+      cacheLifetime = 0,
     },
   ) => {
     const { resourceName } = getInfosFromActionType(type);
