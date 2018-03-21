@@ -61,6 +61,15 @@
         "bug",
         "doc"
       ]
+    },
+    {
+      "login": "mlabrum",
+      "name": "Matt Labrum",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/296106?v=4",
+      "profile": "https://github.com/mlabrum",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }
