@@ -26,7 +26,7 @@ describe('getNetworkHelpers', () => {
     const tokenName = 'customToken';
 
     setNetworkHelpers({
-      getToken: () => Promise.resolve(tokenName),
+      getToken: async () => tokenName,
     });
 
     expect(await getNetworkHelpers().getToken()).toBe(tokenName);

@@ -1,7 +1,7 @@
 const DEFAULT_NETWORK_HELPERS = {
   getToken: () => 'token',
   async requestGET() {
-    const token = await Promise.resolve(this.getToken && this.getToken())
+    const token = this.getToken && await this.getToken()
 
     return {
       method: 'GET',
@@ -14,7 +14,7 @@ const DEFAULT_NETWORK_HELPERS = {
     };
   },
   async requestPATCH(body) {
-    const token = await Promise.resolve(this.getToken && this.getToken())
+    const token = this.getToken && await this.getToken()
 
     return {
       method: 'PATCH',
@@ -29,7 +29,7 @@ const DEFAULT_NETWORK_HELPERS = {
     };
   },
   async requestPUT(body) {
-    const token = await Promise.resolve(this.getToken && this.getToken())
+    const token = this.getToken && await this.getToken()
 
     return {
       method: 'PUT',
@@ -44,7 +44,7 @@ const DEFAULT_NETWORK_HELPERS = {
     };
   },
   async requestPOST(body) {
-    const token = await Promise.resolve(this.getToken && this.getToken())
+    const token = this.getToken && await this.getToken()
 
     return {
       method: 'POST',
@@ -59,7 +59,7 @@ const DEFAULT_NETWORK_HELPERS = {
     };
   },
   async requestDELETE() {
-    const token = await Promise.resolve(this.getToken && this.getToken())
+    const token = this.getToken && await this.getToken()
 
     return {
       method: 'DELETE',
