@@ -1,10 +1,14 @@
-# `getPersistableState(state)`
+# `getPersistableState(state, options)`
 
 Returns a state pruned from outdated data. [Read more](../principles/persistence.md) about what is removed from the state exactly.
 
 #### Arguments
 
-1.  (_state_): The current Redux state
+1.  (_state_): (`object`) The current Redux state
+2.  (_persistOptions_): (`object`) An object containing additional, optional options for the pruning:
+
+A. (_alwaysPersist_): (`string || array<string>`) String or array of strings containing resource name(s). Request performing on the resource(s) will **always** be persisted, expired or not
+B. (_neverPersist_): (`string || array<string>`) String or array of strings containing resource name(s). Request performing on the resource(s) will **never** be persisted, expired or not
 
 #### Returns
 
@@ -23,9 +27,16 @@ import thunkMiddleware from 'redux-thunk';
 // No need to manually install redux-persist if you already have installed redux-offline
 import { createTransform } from 'redux-persist';
 
-const restEasyTransform = createTransform(getPersistableState, null, {
-  whitelist: ['restEasy'],
-});
+const restEasyTransform = createTransform(
+  state =>
+    getPersistableState(state, {
+      persist: { alwaysPersist: ['tokens'], neverPersist: ['configuration'] },
+    }),
+  null,
+  {
+    whitelist: ['restEasy'],
+  },
+);
 
 const createPersistedStore = (persistCallback, initialStore = {}) => {
   const offlineCustomConfig = {
@@ -46,3 +57,8 @@ const createPersistedStore = (persistCallback, initialStore = {}) => {
 
 export default createPersistedStore;
 ```
+
+#### Tips
+
+* `persistOptions.alwaysPersist` is a great way to persist resources you would never want to expire
+* `persistOptions.neverPersist` is a great way to clear some resources each time your app starts

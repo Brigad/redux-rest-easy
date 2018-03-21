@@ -1,5 +1,6 @@
 import getPrunedForPersistenceState from './internals/persistence/getPrunedForPersistenceState';
 
-const getPersistableState = state => getPrunedForPersistenceState(state);
+const getPersistableState = (state, persistOptions) =>
+  getPrunedForPersistenceState(state, persistOptions);
 
 export default getPersistableState;
