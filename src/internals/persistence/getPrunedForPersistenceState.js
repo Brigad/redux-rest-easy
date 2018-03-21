@@ -1,23 +1,47 @@
+/* eslint-disable no-nested-ternary */
+
 import hasCacheExpired from '../utils/hasCacheExpired';
 
-const getPrunedForPersistenceState = (state) => {
+const getPrunedForPersistenceState = (
+  state,
+  { alwaysPersist, neverPersist } = {},
+) => {
   if (!state || !Object.keys(state).length) {
     return {};
   }
+
+  const alwaysPersistResources
+    = typeof alwaysPersist === 'string' ? [alwaysPersist] : alwaysPersist;
+  const neverPersistResources
+    = typeof neverPersist === 'string' ? [neverPersist] : neverPersist;
 
   const newRequests = Object.entries(state.requests || {}).reduce(
     (allRequests, [key, request]) => ({
       ...allRequests,
       ...(request.endedAt
-      && !request.didInvalidate
-      && !hasCacheExpired(request.expireAt)
-        ? {
-            [key]:
-              request.expireAt === 'never'
-                ? { ...request, didInvalidate: true }
-                : request,
-          }
-        : {}),
+      && alwaysPersistResources
+      && request.payloadIds
+      && Object.keys(request.payloadIds).some(resourceName =>
+        alwaysPersistResources.includes(resourceName),
+      )
+        ? { [key]: request }
+        : !(
+            neverPersistResources
+            && request.payloadIds
+            && Object.keys(request.payloadIds).some(resourceName =>
+              neverPersistResources.includes(resourceName),
+            )
+          )
+          && request.endedAt
+          && !request.didInvalidate
+          && !hasCacheExpired(request.expireAt)
+          ? {
+              [key]:
+                request.expireAt === 'never'
+                  ? { ...request, didInvalidate: true }
+                  : request,
+            }
+          : {}),
     }),
     {},
   );
