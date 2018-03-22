@@ -1,62 +1,72 @@
 const DEFAULT_NETWORK_HELPERS = {
   getToken: () => 'token',
-  requestGET() {
+  async requestGET() {
+    const token = this.getToken && await this.getToken()
+
     return {
       method: 'GET',
       headers: {
         Accept: 'application/json',
-        ...(this.getToken && this.getToken()
-          ? { Authorization: `Bearer ${this.getToken()}` }
+        ...(token
+          ? { Authorization: `Bearer ${token}` }
           : {}),
       },
     };
   },
-  requestPATCH(body) {
+  async requestPATCH(body) {
+    const token = this.getToken && await this.getToken()
+
     return {
       method: 'PATCH',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        ...(this.getToken && this.getToken()
-          ? { Authorization: `Bearer ${this.getToken()}` }
+        ...(token
+          ? { Authorization: `Bearer ${token}` }
           : {}),
       },
       body: JSON.stringify(body),
     };
   },
-  requestPUT(body) {
+  async requestPUT(body) {
+    const token = this.getToken && await this.getToken()
+
     return {
       method: 'PUT',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        ...(this.getToken && this.getToken()
-          ? { Authorization: `Bearer ${this.getToken()}` }
+        ...(token
+          ? { Authorization: `Bearer ${token}` }
           : {}),
       },
       body: JSON.stringify(body),
     };
   },
-  requestPOST(body) {
+  async requestPOST(body) {
+    const token = this.getToken && await this.getToken()
+
     return {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        ...(this.getToken && this.getToken()
-          ? { Authorization: `Bearer ${this.getToken()}` }
+        ...(token
+          ? { Authorization: `Bearer ${token}` }
           : {}),
       },
       body: JSON.stringify(body),
     };
   },
-  requestDELETE() {
+  async requestDELETE() {
+    const token = this.getToken && await this.getToken()
+
     return {
       method: 'DELETE',
       headers: {
         Accept: 'application/json',
         ...(this.getToken && this.getToken()
-          ? { Authorization: `Bearer ${this.getToken()}` }
+          ? { Authorization: `Bearer ${token}` }
           : {}),
       },
     };

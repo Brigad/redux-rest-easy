@@ -8,7 +8,7 @@ describe('getNetworkHelpers', () => {
     expect(getNetworkHelpers()).toMatchSnapshot();
   });
 
-  test('after setting them', () => {
+  test('after setting them', async () => {
     const tokenName = 'customToken';
 
     setNetworkHelpers({
@@ -16,8 +16,23 @@ describe('getNetworkHelpers', () => {
     });
 
     expect(getNetworkHelpers().getToken()).toBe(tokenName);
-    expect(getNetworkHelpers().requestGET().headers.Authorization).toBe(
+    expect((await getNetworkHelpers().requestGET()).headers.Authorization).toBe(
       `Bearer ${tokenName}`,
     );
   });
+
+
+  test('after setting them - promise token', async () => {
+    const tokenName = 'customToken';
+
+    setNetworkHelpers({
+      getToken: async () => tokenName,
+    });
+
+    expect(await getNetworkHelpers().getToken()).toBe(tokenName);
+    expect((await getNetworkHelpers().requestGET()).headers.Authorization).toBe(
+      `Bearer ${tokenName}`,
+    );
+  });
+
 });

@@ -9,32 +9,32 @@ describe('getDefaultNetworkHelpers', () => {
 });
 
 describe('requestGET', () => {
-  test('only path', () => {
-    expect(NETWORK_HELPERS.requestGET()).toMatchSnapshot();
+  test('only path', async () => {
+    expect(await NETWORK_HELPERS.requestGET()).toMatchSnapshot();
   });
 });
 
 describe('requestPATCH', () => {
-  test('only path', () => {
-    expect(NETWORK_HELPERS.requestPATCH()).toMatchSnapshot();
+  test('only path', async () => {
+    expect(await NETWORK_HELPERS.requestPATCH()).toMatchSnapshot();
   });
 });
 
 describe('requestPUT', () => {
-  test('only path', () => {
-    expect(NETWORK_HELPERS.requestPUT()).toMatchSnapshot();
+  test('only path', async () => {
+    expect(await NETWORK_HELPERS.requestPUT()).toMatchSnapshot();
   });
 });
 
 describe('requestPOST', () => {
-  test('only path', () => {
-    expect(NETWORK_HELPERS.requestPOST()).toMatchSnapshot();
+  test('only path', async () => {
+    expect(await NETWORK_HELPERS.requestPOST()).toMatchSnapshot();
   });
 });
 
 describe('requestDELETE', () => {
-  test('only path', () => {
-    expect(NETWORK_HELPERS.requestDELETE()).toMatchSnapshot();
+  test('only path', async () => {
+    expect(await NETWORK_HELPERS.requestDELETE()).toMatchSnapshot();
   });
 });
 

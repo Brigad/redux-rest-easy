@@ -39,7 +39,7 @@ const generateActionCreator = (
 
     const res = await fetch(
       formattedURL,
-      combinedNetworkHelpers[`request${method}`](finalBody),
+      (await combinedNetworkHelpers[`request${method}`](finalBody)),
     );
     combinedNetworkHelpers.handleStatusCode(res);
     const data = res.status !== 204 ? await res.json() : {};
