@@ -3,10 +3,10 @@ import moment from 'moment';
 
 import getPrunedForPersistenceState from '../../../src/internals/persistence/getPrunedForPersistenceState';
 
-const URL_1 = 'https://api.co/fruits?page1';
-const URL_2 = 'https://api.co/fruits?page2';
-const URL_3 = 'https://api.co/fruits?page3';
-const URL_4 = 'https://api.co/fruits?page4';
+const URL_PENDING = 'https://api.co/fruits?page1';
+const URL_INVALIDATED = 'https://api.co/fruits?page2';
+const URL_SOON_TO_EXPIRE = 'https://api.co/fruits?page3';
+const URL_NEVER_EXPIRE = 'https://api.co/fruits?page4';
 const RESOURCE_NAME = 'fruits';
 const RESOURCE_NAME_2 = 'vegetables';
 const RESOURCE_NAME_3 = 'sauces';
@@ -19,7 +19,7 @@ const EXPIRE_AT_NEVER = 'never';
 
 const STATE_REQUESTS = {
   requests: {
-    [URL_1]: {
+    [URL_PENDING]: {
       resourceName: RESOURCE_NAME,
       resourceId: null,
       startedAt: MOMENT_NOW,
@@ -30,7 +30,7 @@ const STATE_REQUESTS = {
       didInvalidate: false,
       fromCache: false,
     },
-    [URL_2]: {
+    [URL_INVALIDATED]: {
       resourceName: RESOURCE_NAME,
       resourceId: null,
       startedAt: MOMENT_NOW,
@@ -41,7 +41,7 @@ const STATE_REQUESTS = {
       didInvalidate: true,
       fromCache: false,
     },
-    [URL_3]: {
+    [URL_SOON_TO_EXPIRE]: {
       resourceName: RESOURCE_NAME,
       resourceId: null,
       startedAt: MOMENT_NOW,
@@ -52,7 +52,7 @@ const STATE_REQUESTS = {
       didInvalidate: false,
       fromCache: false,
     },
-    [URL_4]: {
+    [URL_NEVER_EXPIRE]: {
       resourceName: RESOURCE_NAME,
       resourceId: null,
       startedAt: MOMENT_NOW,
@@ -68,7 +68,7 @@ const STATE_REQUESTS = {
 
 const STATE_RESOURCES = {
   requests: {
-    [URL_1]: {
+    [URL_PENDING]: {
       resourceName: RESOURCE_NAME,
       resourceId: null,
       startedAt: MOMENT_NOW,
@@ -82,7 +82,21 @@ const STATE_RESOURCES = {
         [RESOURCE_NAME]: [1, 2, 3],
       },
     },
-    [URL_4]: {
+    [URL_INVALIDATED]: {
+      resourceName: RESOURCE_NAME,
+      resourceId: null,
+      startedAt: MOMENT_NOW,
+      endedAt: MOMENT_NOW,
+      expireAt: EXPIRE_AT_NEVER,
+      hasSucceeded: true,
+      hasFailed: false,
+      didInvalidate: true,
+      fromCache: false,
+      payloadIds: {
+        [RESOURCE_NAME]: [1, 2, 3],
+      },
+    },
+    [URL_NEVER_EXPIRE]: {
       resourceName: RESOURCE_NAME,
       resourceId: null,
       startedAt: MOMENT_NOW,
@@ -114,7 +128,7 @@ const STATE_RESOURCES = {
 
 const STATE_RESOURCES_OTHER_ORDER = {
   requests: {
-    [URL_4]: {
+    [URL_NEVER_EXPIRE]: {
       resourceName: RESOURCE_NAME,
       resourceId: null,
       startedAt: MOMENT_NOW,
@@ -128,7 +142,7 @@ const STATE_RESOURCES_OTHER_ORDER = {
         [RESOURCE_NAME]: [3, 4, 5],
       },
     },
-    [URL_1]: {
+    [URL_PENDING]: {
       resourceName: RESOURCE_NAME,
       resourceId: null,
       startedAt: MOMENT_NOW,
@@ -137,6 +151,20 @@ const STATE_RESOURCES_OTHER_ORDER = {
       hasSucceeded: true,
       hasFailed: false,
       didInvalidate: false,
+      fromCache: false,
+      payloadIds: {
+        [RESOURCE_NAME]: [1, 2, 3],
+      },
+    },
+    [URL_INVALIDATED]: {
+      resourceName: RESOURCE_NAME,
+      resourceId: null,
+      startedAt: MOMENT_NOW,
+      endedAt: MOMENT_NOW,
+      expireAt: EXPIRE_AT_NEVER,
+      hasSucceeded: true,
+      hasFailed: false,
+      didInvalidate: true,
       fromCache: false,
       payloadIds: {
         [RESOURCE_NAME]: [1, 2, 3],
@@ -160,7 +188,7 @@ const STATE_RESOURCES_OTHER_ORDER = {
 
 const STATE_RESOLVERS_HASHES = {
   requests: {
-    [URL_1]: {
+    [URL_PENDING]: {
       resourceName: RESOURCE_NAME,
       resourceId: null,
       startedAt: MOMENT_NOW,
@@ -174,7 +202,7 @@ const STATE_RESOLVERS_HASHES = {
         [RESOURCE_NAME]: [1, 2, 3],
       },
     },
-    [URL_4]: {
+    [URL_NEVER_EXPIRE]: {
       resourceName: RESOURCE_NAME,
       resourceId: null,
       startedAt: MOMENT_NOW,
@@ -209,11 +237,11 @@ const STATE_RESOLVERS_HASHES = {
   },
   resolversHashes: {
     requests: {
-      [URL_1]: {
-        [RESOURCE_NAME]: 'URL_1_HASH',
+      [URL_PENDING]: {
+        [RESOURCE_NAME]: 'URL_PENDING_HASH',
       },
-      [URL_4]: {
-        [RESOURCE_NAME]: 'URL_4_HASH',
+      [URL_NEVER_EXPIRE]: {
+        [RESOURCE_NAME]: 'URL_NEVER_EXPIRE_HASH',
       },
     },
     resources: {
@@ -240,44 +268,94 @@ describe('getPrunedForPersistenceState', () => {
 
   test('requests: no endedAt', () => {
     expect(
-      getPrunedForPersistenceState(STATE_REQUESTS).requests[URL_1],
+      getPrunedForPersistenceState(STATE_REQUESTS).requests[URL_PENDING],
     ).toBeUndefined();
   });
 
   test('requests: didInvalidate', () => {
     expect(
-      getPrunedForPersistenceState(STATE_REQUESTS).requests[URL_2],
+      getPrunedForPersistenceState(STATE_REQUESTS).requests[URL_INVALIDATED],
     ).toBeUndefined();
   });
 
   test('requests: cache expired', () => {
     mockdate.set(MOMENT_NOW);
     expect(
-      getPrunedForPersistenceState(STATE_REQUESTS).requests[URL_3],
+      getPrunedForPersistenceState(STATE_REQUESTS).requests[URL_SOON_TO_EXPIRE],
     ).not.toBeUndefined();
 
     mockdate.set(moment(MOMENT_NOW).add(999, 'milliseconds'));
     expect(
-      getPrunedForPersistenceState(STATE_REQUESTS).requests[URL_3],
+      getPrunedForPersistenceState(STATE_REQUESTS).requests[URL_SOON_TO_EXPIRE],
     ).not.toBeUndefined();
 
     mockdate.set(moment(MOMENT_NOW).add(1000, 'milliseconds'));
     expect(
-      getPrunedForPersistenceState(STATE_REQUESTS).requests[URL_3],
+      getPrunedForPersistenceState(STATE_REQUESTS).requests[URL_SOON_TO_EXPIRE],
     ).not.toBeUndefined();
 
     mockdate.set(moment(MOMENT_NOW).add(1001, 'milliseconds'));
     expect(
-      getPrunedForPersistenceState(STATE_REQUESTS).requests[URL_3],
+      getPrunedForPersistenceState(STATE_REQUESTS).requests[URL_SOON_TO_EXPIRE],
     ).toBeUndefined();
   });
 
   test('requests: expiredAt never', () => {
     mockdate.set(MOMENT_NOW);
     expect(
-      getPrunedForPersistenceState(STATE_REQUESTS).requests[URL_4]
+      getPrunedForPersistenceState(STATE_REQUESTS).requests[URL_NEVER_EXPIRE]
         .didInvalidate,
     ).toBe(true);
+  });
+
+  test('requests: always persist string', () => {
+    expect(
+      getPrunedForPersistenceState(STATE_RESOURCES, {
+        alwaysPersist: RESOURCE_NAME,
+      }).requests[URL_INVALIDATED],
+    ).not.toBeUndefined();
+  });
+
+  test('requests: always persist array', () => {
+    expect(
+      getPrunedForPersistenceState(STATE_RESOURCES, {
+        alwaysPersist: [RESOURCE_NAME],
+      }).requests[URL_INVALIDATED],
+    ).not.toBeUndefined();
+  });
+
+  test('requests: always persist no endedAt string', () => {
+    expect(
+      getPrunedForPersistenceState(STATE_RESOURCES, {
+        alwaysPersist: RESOURCE_NAME,
+      }).requests[URL_PENDING],
+    ).toBeUndefined();
+  });
+
+  test('requests: always persist no endedAt array', () => {
+    expect(
+      getPrunedForPersistenceState(STATE_RESOURCES, {
+        alwaysPersist: [RESOURCE_NAME],
+      }).requests[URL_PENDING],
+    ).toBeUndefined();
+  });
+
+  test('requests: never persist string', () => {
+    mockdate.set(MOMENT_NOW);
+    expect(
+      getPrunedForPersistenceState(STATE_RESOURCES, {
+        neverPersist: RESOURCE_NAME,
+      }).requests[URL_NEVER_EXPIRE],
+    ).toBeUndefined();
+  });
+
+  test('requests: never persist array', () => {
+    mockdate.set(MOMENT_NOW);
+    expect(
+      getPrunedForPersistenceState(STATE_RESOURCES, {
+        neverPersist: [RESOURCE_NAME],
+      }).requests[URL_NEVER_EXPIRE],
+    ).toBeUndefined();
   });
 
   test('resources first order', () => {
@@ -323,9 +401,9 @@ describe('getPrunedForPersistenceState', () => {
       STATE_RESOLVERS_HASHES,
     ).resolversHashes;
 
-    expect(prunedStateResolversHashes.requests[URL_1]).toBeUndefined();
+    expect(prunedStateResolversHashes.requests[URL_PENDING]).toBeUndefined();
     expect(
-      prunedStateResolversHashes.requests[URL_4][RESOURCE_NAME],
+      prunedStateResolversHashes.requests[URL_NEVER_EXPIRE][RESOURCE_NAME],
     ).not.toBeUndefined();
     expect(prunedStateResolversHashes.resources[RESOURCE_NAME]).toBeUndefined();
     expect(
