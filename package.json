@@ -45,7 +45,7 @@
     "prepare": "yarn build:clean && yarn build",
     "modules:clean": "rimraf node_modules",
     "build": "yarn build:commonjs && yarn build:es && yarn build:umd && yarn build:umd:min",
-    "build:commonjs": "cross-env BABEL_ENV= commonjs babel src --out-dir lib",
+    "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib",
     "build:es": "cross-env BABEL_ENV=es babel src --out-dir es",
     "build:umd": "cross-env BABEL_ENV=rollup NODE_ENV=development rollup -c -o dist/redux-rest-easy.js",
     "build:umd:min": "cross-env BABEL_ENV=rollup NODE_ENV=production rollup -c -o dist/redux-rest-easy.min.js",
