@@ -170,9 +170,11 @@ const getRequestResource = createCachedSelector(
 )(getRequestResourceResolver, getReReselectOptions());
 
 const getRequestMetadata = (state, normalizedURL) =>
-  state.requests && state.requests[normalizedURL]
+  state.requests
+  && state.requests[normalizedURL]
+  && state.requests[normalizedURL].metadata
     ? state.requests[normalizedURL].metadata
-    : null;
+    : {};
 
 const isPerformingRequest = (state, normalizedURL) =>
   !!(
