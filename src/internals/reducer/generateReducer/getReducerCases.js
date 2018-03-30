@@ -46,6 +46,7 @@ const REDUCER_CASES = {
       url: normalizedURL,
       payload: normalizedPayload,
       principalResourceIds,
+      metadata,
       cacheLifetime = 0,
     },
   ) => {
@@ -74,6 +75,7 @@ const REDUCER_CASES = {
             normalizedPayload,
             principalResourceIds,
           ),
+          metadata,
         },
       },
       resources: shallowMergeResources(state, normalizedPayload),
@@ -114,6 +116,7 @@ const REDUCER_CASES = {
       resourceId,
       payload: normalizedPayload,
       principalResourceIds,
+      metadata,
       cacheLifetime = 0,
     },
   ) => {
@@ -145,6 +148,7 @@ const REDUCER_CASES = {
             normalizedPayload,
             principalResourceIds,
           ),
+          metadata,
         },
       },
       resources: shallowMergeResources(state, normalizedPayload),

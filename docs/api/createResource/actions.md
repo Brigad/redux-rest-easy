@@ -40,7 +40,7 @@ These functions can be imported in components and directly dispatched.
 3.  (_body_): (`map<bodyParam:value>`) An object to specify the body of the request (e.g. POST)
 4.  (_onSuccess_): (`(normalizedPayload, otherArgs) : undefined`) A hook which will be invoked after the request has performed successfully. Useful to update the UI accordingly, at the component level
 5.  (_onFailure_): (`(error) : undefined`) A hook which will be invoked when the request fails. Useful to update the UI accordingly, at the component level
-6.  (_...otherArgs_): (`any`) You can also pass any other args you may need in `beforeHook`, `normalizer`, `afterHook`, and `onSuccess`. They will be forwarded to these functions, as an object
+6.  (_...otherArgs_): (`any`) You can also pass any other args you may need in `beforeHook`, `normalizer`, `metadataNormalizer`, `afterHook`, and `onSuccess`. They will be forwarded to these functions, as an object
 
 #### Example
 

@@ -22,6 +22,7 @@ const resource = {
     // Optional
     beforeHook: func,
     normalizer: func,
+    metadataNormalizer: func,
     afterHook: func,
     // Also optional. Override the built-in network helpers
     // and the ones you may have provided using initializeNetworkHelpers
@@ -112,6 +113,7 @@ const {
       },
       request: {
         getResource: getUsers,
+        getMetadata: getUsersMetadata,
         couldPerform: couldRetrieveUsers,
         isPerforming: isRetrievingUsers,
         hasSucceeded: hasRetrievedUsers,
@@ -130,8 +132,8 @@ export {
   invalidateUser,
   invalidateRetrieveUsers,
   invalidateRetrieveUser,
+  resetUsers,
   getAllUsers,
-  getAllUsersMap,
   getUserById,
   couldRetrieveAnyUsers,
   isRetrievingAnyUsers,
@@ -142,7 +144,7 @@ export {
   hasRetrievedUser,
   hasFailedUser,
   getUsers,
-  getUsersMap,
+  getUsersMetadata,
   couldRetrieveUsers,
   isRetrievingUsers,
   hasRetrievedUsers,

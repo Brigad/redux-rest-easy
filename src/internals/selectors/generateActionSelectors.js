@@ -169,6 +169,11 @@ const getRequestResource = createCachedSelector(
   getRequestResourceSelector,
 )(getRequestResourceResolver, getReReselectOptions());
 
+const getRequestMetadata = (state, normalizedURL) =>
+  state.requests && state.requests[normalizedURL]
+    ? state.requests[normalizedURL].metadata
+    : null;
+
 const isPerformingRequest = (state, normalizedURL) =>
   !!(
     state.requests
@@ -258,6 +263,11 @@ const generateActionSelectors = (resourceName, actionName, denormalizer) => ({
           getNormalizedURLFromOwnProps(resourceName, actionName, ownProps),
           applyDenormalizer,
           denormalizer,
+        ),
+      getMetadata: (state, ownProps) =>
+        getRequestMetadata(
+          getState(state),
+          getNormalizedURLFromOwnProps(resourceName, actionName, ownProps),
         ),
       couldPerform: (state, ownProps) =>
         !isPerformingRequest(
