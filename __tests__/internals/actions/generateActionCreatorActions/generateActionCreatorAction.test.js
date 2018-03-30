@@ -3,6 +3,7 @@ import generateActionCreatorAction from '../../../../src/internals/actions/gener
 const CACHE_LIFETIME = 0;
 const ACTION_TYPE = '@@rest-easy/fruits/eat/REQUEST';
 const NORMALIZED_URL = 'eat:https://api.co/fruits';
+const METADATA = { resultsCount: 1 };
 const ID = '2';
 const ARRAY_ID = [ID];
 
@@ -74,6 +75,7 @@ describe('generateActionCreatorAction', () => {
         NORMALIZED_URL,
         ID,
         payload,
+        METADATA,
         ID,
       ),
     ).toMatchSnapshot();
@@ -91,6 +93,7 @@ describe('generateActionCreatorAction', () => {
         NORMALIZED_URL,
         ID,
         payload,
+        METADATA,
         ARRAY_ID,
       ),
     ).toMatchSnapshot();

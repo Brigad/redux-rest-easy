@@ -16,6 +16,7 @@ const {
     },
     request: {
       getResource,
+      getMetadata,
       couldPerform: couldPerformRequest,
       isPerforming: isPerformingRequest,
       hasSucceeded: hasSuceededRequest,
@@ -80,6 +81,7 @@ const RECEIVED_FULL_RESOURCE_STATE = {
         payloadIds: {
           fruits: [1, 2, 3],
         },
+        metadata: { resultsCount: 3 },
       },
     },
     resources: {
@@ -811,6 +813,63 @@ describe('generateResourceSelectors', () => {
         const sameResult = getResource(state, ownProps);
 
         expect(result).toBe(sameResult);
+      };
+
+      test(
+        'empty state, empty ownprops',
+        emptyCase(EMPTY_STATE, EMPTY_OWNPROPS),
+      );
+      test(
+        'requested resource state, empty ownprops',
+        emptyCase(REQUESTED_RESOURCE_STATE, EMPTY_OWNPROPS),
+      );
+      test(
+        'received empty resource state, empty ownprops',
+        emptyCase(RECEIVED_EMPTY_RESOURCE_STATE, EMPTY_OWNPROPS),
+      );
+      test(
+        'received full resource state, empty ownprops',
+        emptyCase(RECEIVED_FULL_RESOURCE_STATE, EMPTY_OWNPROPS),
+      );
+      test(
+        'failed resource state, empty ownprops',
+        emptyCase(FAILED_RESOURCE_STATE, EMPTY_OWNPROPS),
+      );
+
+      test(
+        'empty state, filled ownprops',
+        emptyCase(EMPTY_STATE, FILLED_OWNPROPS),
+      );
+      test(
+        'requested resource state, filled ownprops',
+        emptyCase(REQUESTED_RESOURCE_STATE, FILLED_OWNPROPS),
+      );
+      test(
+        'received empty resource state, filled ownprops',
+        emptyCase(RECEIVED_EMPTY_RESOURCE_STATE, FILLED_OWNPROPS),
+      );
+      test(
+        'received full resource state, filled ownprops',
+        fullCase(RECEIVED_FULL_RESOURCE_STATE, FILLED_OWNPROPS),
+      );
+      test(
+        'failed resource state, filled ownprops',
+        emptyCase(FAILED_RESOURCE_STATE, FILLED_OWNPROPS),
+      );
+    });
+
+    describe('getMetadata', () => {
+      const emptyCase = (state, ownProps) => () => {
+        const result = getMetadata(state, ownProps);
+
+        expect(Object.keys(result).length).toBe(0);
+      };
+
+      const fullCase = (state, ownProps) => () => {
+        const result = getMetadata(state, ownProps);
+
+        expect(Object.keys(result).length).toBe(1);
+        expect(result.resultsCount).toBe(3);
       };
 
       test(
