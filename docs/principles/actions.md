@@ -24,6 +24,8 @@ The status code of the answer will be handled, then the payload will be processe
 
 The payload will be normalized using _optional_ function `action.normalizer` if there is one (and if the request succeeded). The payload will otherwise be stored as-is.
 
+The payload metadata will be extracted using _optional_ function `action.metadataNormalizer` if there is one (and if the request succeeded).
+
 ### Dispatch the RECEIVE / FAIL action
 
 Dispatching the **RECEIVE** action will trigger the corresponding reducer and store the normalized data in the state. See [reducers documentation](./reducers.md#receive).

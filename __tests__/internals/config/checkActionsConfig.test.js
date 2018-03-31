@@ -154,6 +154,26 @@ describe('checkActionsConfig', () => {
     expect(() => checkActionsConfig(RESOURCE_NAME, validConfig)).not.toThrow();
   });
 
+  test('invalid normalizer', () => {
+    const invalidConfig = {
+      eat: {
+        ...VALID_ACTION_CONFIG_BASE,
+        metadataNormalizer: '',
+      },
+    };
+
+    expect(() => checkActionsConfig(RESOURCE_NAME, invalidConfig)).toThrow();
+
+    const validConfig = {
+      eat: {
+        ...VALID_ACTION_CONFIG_BASE,
+        metadataNormalizer: () => ({ meta: true }),
+      },
+    };
+
+    expect(() => checkActionsConfig(RESOURCE_NAME, validConfig)).not.toThrow();
+  });
+
   test('invalid afterHook', () => {
     const invalidConfig = {
       eat: {

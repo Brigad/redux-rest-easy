@@ -9,6 +9,7 @@ const generateActionCreator = (
   method,
   beforeHook,
   normalizer,
+  metadataNormalizer,
   afterHook,
   networkHelpers,
 ) => (formattedURL, normalizedURL, resourceId) => ({
@@ -39,7 +40,7 @@ const generateActionCreator = (
 
     const res = await fetch(
       formattedURL,
-      (await combinedNetworkHelpers[`request${method}`](finalBody)),
+      await combinedNetworkHelpers[`request${method}`](finalBody),
     );
     combinedNetworkHelpers.handleStatusCode(res);
     const data = res.status !== 204 ? await res.json() : {};
@@ -56,6 +57,16 @@ const generateActionCreator = (
           otherArgs,
         )
       : { entities: data };
+    const metadata = metadataNormalizer
+      ? metadataNormalizer(
+          data,
+          getRestEasyState(getState()).resources,
+          urlParams,
+          query,
+          finalBody,
+          otherArgs,
+        )
+      : null;
 
     const principalResourceIdsArray = Array.isArray(principalResourceIds)
       ? principalResourceIds
@@ -66,6 +77,7 @@ const generateActionCreator = (
         normalizedURL,
         resourceId,
         normalizedPayload,
+        metadata,
         principalResourceIdsArray,
       ),
     );

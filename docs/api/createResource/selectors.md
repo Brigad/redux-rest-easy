@@ -77,6 +77,10 @@ _Only available to connected components which specifically requested a resource 
 
 Will return the resource corresponding to the payload of the request (or an empty array). Will be denormalized by default, but can be overridden.
 
+### `getMetadata(state, ownProps)`: `object`
+
+Will return the metadata corresponding to the payload of the request (or an empty object).
+
 ### `couldPerform(state, ownProps)`: `bool`
 
 ### `isPerforming(state, ownProps)`: `bool`

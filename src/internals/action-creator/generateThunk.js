@@ -22,6 +22,7 @@ const generateThunk = (
     url,
     beforeHook,
     normalizer,
+    metadataNormalizer,
     afterHook,
     networkHelpers,
   } = actionsConfig[actionName];
@@ -36,6 +37,7 @@ const generateThunk = (
     method,
     beforeHook,
     normalizer,
+    metadataNormalizer,
     afterHook,
     networkHelpers,
   );
@@ -65,6 +67,7 @@ const generateThunk = (
                 {
                   [resourceName]: { [resourceId]: null },
                 },
+                null,
                 [resourceId],
               ),
             );

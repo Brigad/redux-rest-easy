@@ -14,6 +14,7 @@ const MANDATORY_KEYS = ['method', 'url'];
 const OPTIONAL_KEYS = [
   'beforeHook',
   'normalizer',
+  'metadataNormalizer',
   'afterHook',
   'networkHelpers',
 ];
@@ -101,6 +102,7 @@ const checkActionsConfig = (resourceName, actionsConfig) => {
       url,
       beforeHook,
       normalizer,
+      metadataNormalizer,
       afterHook,
       networkHelpers,
     } = action;
@@ -116,6 +118,11 @@ const checkActionsConfig = (resourceName, actionsConfig) => {
     }
     if (isDefined(normalizer) && !isFunction(normalizer)) {
       throwError(invalidFunctionError('normalizer', normalizer));
+    }
+    if (isDefined(metadataNormalizer) && !isFunction(metadataNormalizer)) {
+      throwError(
+        invalidFunctionError('metadataNormalizer', metadataNormalizer),
+      );
     }
     if (isDefined(afterHook) && !isFunction(afterHook)) {
       throwError(invalidFunctionError('afterHook', afterHook));

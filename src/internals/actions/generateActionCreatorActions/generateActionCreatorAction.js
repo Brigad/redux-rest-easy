@@ -2,6 +2,7 @@ const generateActionCreatorAction = (cacheLifetime, actionType) => (
   normalizedURL,
   resourceId,
   normalizedPayload,
+  metadata,
   principalResourceIds,
 ) => ({
   type: actionType,
@@ -11,6 +12,7 @@ const generateActionCreatorAction = (cacheLifetime, actionType) => (
     normalizedPayload && Object.keys(normalizedPayload).length
       ? normalizedPayload
       : undefined,
+  metadata,
   principalResourceIds:
     typeof principalResourceIds === 'string'
       ? [principalResourceIds]

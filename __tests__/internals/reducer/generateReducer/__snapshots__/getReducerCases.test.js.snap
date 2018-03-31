@@ -208,6 +208,7 @@ Object {
       "fromCache": false,
       "hasFailed": false,
       "hasSucceeded": true,
+      "metadata": undefined,
       "payloadIds": Object {
         "animals": Array [
           "1",
@@ -255,6 +256,7 @@ Object {
       "fromCache": true,
       "hasFailed": false,
       "hasSucceeded": true,
+      "metadata": undefined,
       "payloadIds": Object {
         "fruits": Array [
           "1",
