@@ -55,6 +55,7 @@ import {
   connect,
   reset,
   initializeNetworkHelpers,
+  getPersistableState,
 } from '@brigad/redux-rest-easy';
 ```
 
