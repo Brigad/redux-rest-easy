@@ -27,7 +27,7 @@
     "network",
     "http"
   ],
-  "author": "Adrien HARNAY <adrien@brigad.co> (https://github.com/Zephir77167)",
+  "author": "Adrien HARNAY <adrien@brigad.co> (https://github.com/adrienharnay)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Brigad/redux-rest-easy/issues"
