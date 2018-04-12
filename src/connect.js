@@ -1,6 +1,7 @@
 /* eslint-disable import/no-unresolved, import/extensions */
 import React from 'react';
 import { connect } from 'react-redux';
+import hoistStatics from 'hoist-non-react-statics';
 /* eslint-enable import/no-unresolved, import/extensions */
 
 /* eslint-disable no-underscore-dangle */
@@ -97,5 +98,5 @@ export default (...args) => (WrappedComponent) => {
 
   EasyConnect.displayName = getDisplayName(wrappedComponentName);
 
-  return EasyConnect;
+  return hoistStatics(EasyConnect, WrappedComponent);
 };

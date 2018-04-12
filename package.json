@@ -1,6 +1,6 @@
 {
   "name": "@brigad/redux-rest-easy",
-  "version": "1.0.0",
+  "version": "2.7.0",
   "description": "Redux/React/React Native framework generating actions, reducers and selectors to perform network requests",
   "main": "lib/index.js",
   "module": "es/indexjs",
@@ -65,6 +65,7 @@
     "contributors:generate": "all-contributors generate"
   },
   "dependencies": {
+    "hoist-non-react-statics": "2.5.0",
     "json-stable-stringify": "1.0.1",
     "lodash.isplainobject": "4.0.6",
     "lodash.mergewith": "4.6.1",
@@ -97,6 +98,9 @@
     "mockdate": "2.0.2",
     "moment": "2.21.0",
     "prettier-eslint-cli": "4.7.1",
+    "react": "16.3.1",
+    "react-redux": "5.0.7",
+    "redux": "3.7.2",
     "rimraf": "2.6.2",
     "rollup": "0.57.1",
     "rollup-plugin-babel": "3.0.3",
