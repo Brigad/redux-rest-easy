@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import connect  from '../src/connect';
 
-it('should hoist non-react statics from wrapped component', () => {
+test('should hoist non-react statics from wrapped component', () => {
   class Container extends Component {
     static howIsRestEasy = () => 'Awesome!';
     static foo = '<3';
