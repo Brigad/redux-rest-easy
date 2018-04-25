@@ -20,6 +20,7 @@ const generateThunk = (
   const {
     method,
     url,
+    cacheHint,
     beforeHook,
     normalizer,
     metadataNormalizer,
@@ -44,11 +45,18 @@ const generateThunk = (
 
   return args => (dispatch, getState) => {
     const state = getRestEasyState(getState());
-    const { urlParams, query } = args || {};
+    const { urlParams, query, body, otherArgs } = args || {};
 
     const idSplitIndex = getIdSplitIndexFromURL(url);
     const formattedURL = formatURL(url, urlParams, query);
-    const normalizedURL = normalizeURL(actionName, formattedURL);
+    const cacheHintObject = cacheHint
+      ? cacheHint(urlParams, query, body, otherArgs)
+      : null;
+    const normalizedURL = normalizeURL(
+      actionName,
+      formattedURL,
+      cacheHintObject,
+    );
     const resourceId = getResourceIdFromNormalizedURL(
       normalizedURL,
       idSplitIndex,

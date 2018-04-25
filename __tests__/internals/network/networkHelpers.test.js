@@ -8,7 +8,13 @@ describe('getNetworkHelpers', () => {
     expect(getNetworkHelpers()).toMatchSnapshot();
   });
 
-  test('after setting them', async () => {
+  test('after setting them to default', async () => {
+    setNetworkHelpers();
+
+    expect(getNetworkHelpers()).toMatchSnapshot();
+  });
+
+  test('after setting them - sync getToken', async () => {
     const tokenName = 'customToken';
 
     setNetworkHelpers({
@@ -21,8 +27,7 @@ describe('getNetworkHelpers', () => {
     );
   });
 
-
-  test('after setting them - promise token', async () => {
+  test('after setting them - async getToken', async () => {
     const tokenName = 'customToken';
 
     setNetworkHelpers({
@@ -34,5 +39,4 @@ describe('getNetworkHelpers', () => {
       `Bearer ${tokenName}`,
     );
   });
-
 });

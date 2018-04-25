@@ -100,6 +100,7 @@ const checkActionsConfig = (resourceName, actionsConfig) => {
     const {
       method,
       url,
+      cacheHint,
       beforeHook,
       normalizer,
       metadataNormalizer,
@@ -112,6 +113,9 @@ const checkActionsConfig = (resourceName, actionsConfig) => {
     }
     if (!url || (!isString(url) && !isFunction(url))) {
       throwError(invalidURLError(url));
+    }
+    if (isDefined(cacheHint) && !isFunction(cacheHint)) {
+      throwError(invalidFunctionError('cacheHint', cacheHint));
     }
     if (isDefined(beforeHook) && !isFunction(beforeHook)) {
       throwError(invalidFunctionError('beforeHook', beforeHook));
