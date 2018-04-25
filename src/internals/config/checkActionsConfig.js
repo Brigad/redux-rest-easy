@@ -12,6 +12,7 @@ const isDefined = value => value !== undefined;
 
 const MANDATORY_KEYS = ['method', 'url'];
 const OPTIONAL_KEYS = [
+  'cacheHint',
   'beforeHook',
   'normalizer',
   'metadataNormalizer',
@@ -35,7 +36,7 @@ const missingMandatoryKeyError = mandatoryKEY =>
 
 For more information, browse the related documentation: https://github.com/Brigad/redux-rest-easy/blob/master/docs/api/createResource/actionsConfig.md#actionsconfig`;
 
-const unknownKeyError = actionKey => `Unknown key "${actionKey}.
+const unknownKeyError = actionKey => `Unknown key "${actionKey}".
 
 For more information, browse the related documentation: https://github.com/Brigad/redux-rest-easy/blob/master/docs/api/createResource/actionsConfig.md#actionsconfig`;
 
