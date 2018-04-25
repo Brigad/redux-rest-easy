@@ -114,6 +114,26 @@ describe('checkActionsConfig', () => {
     expect(() => checkActionsConfig(RESOURCE_NAME, validConfig2)).not.toThrow();
   });
 
+  test('invalid cacheHint', () => {
+    const invalidConfig = {
+      eat: {
+        ...VALID_ACTION_CONFIG_BASE,
+        cacheHint: '',
+      },
+    };
+
+    expect(() => checkActionsConfig(RESOURCE_NAME, invalidConfig)).toThrow();
+
+    const validConfig = {
+      eat: {
+        ...VALID_ACTION_CONFIG_BASE,
+        cacheHint: () => ({ cache: 'hint' }),
+      },
+    };
+
+    expect(() => checkActionsConfig(RESOURCE_NAME, validConfig)).not.toThrow();
+  });
+
   test('invalid beforeHook', () => {
     const invalidConfig = {
       eat: {
@@ -188,6 +208,39 @@ describe('checkActionsConfig', () => {
       eat: {
         ...VALID_ACTION_CONFIG_BASE,
         afterHook: () => true,
+      },
+    };
+
+    expect(() => checkActionsConfig(RESOURCE_NAME, validConfig)).not.toThrow();
+  });
+
+  test('invalid networkHelpers', () => {
+    const invalidConfig1 = {
+      eat: {
+        ...VALID_ACTION_CONFIG_BASE,
+        networkHelpers: '',
+      },
+    };
+
+    expect(() => checkActionsConfig(RESOURCE_NAME, invalidConfig1)).toThrow();
+
+    const invalidConfig2 = {
+      eat: {
+        ...VALID_ACTION_CONFIG_BASE,
+        networkHelpers: {
+          getToken: 'customToken',
+        },
+      },
+    };
+
+    expect(() => checkActionsConfig(RESOURCE_NAME, invalidConfig2)).toThrow();
+
+    const validConfig = {
+      eat: {
+        ...VALID_ACTION_CONFIG_BASE,
+        networkHelpers: {
+          getToken: () => 'customToken',
+        },
       },
     };
 
