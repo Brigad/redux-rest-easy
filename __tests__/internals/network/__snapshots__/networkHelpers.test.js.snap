@@ -1,5 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`getNetworkHelpers after setting them to default 1`] = `
+Object {
+  "getToken": [Function],
+  "handleError": [Function],
+  "handleStatusCode": [Function],
+  "requestDELETE": [Function],
+  "requestGET": [Function],
+  "requestPATCH": [Function],
+  "requestPOST": [Function],
+  "requestPUT": [Function],
+}
+`;
+
 exports[`getNetworkHelpers without setting them 1`] = `
 Object {
   "getToken": [Function],

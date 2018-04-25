@@ -1,5 +1,6 @@
 # Dependency directories
 node_modules/
+yarn-error.log
 
 # Coverage directories used by tools like istanbul
 coverage/
