@@ -289,6 +289,38 @@ describe('getPrunedForPersistenceState', () => {
     expect(Object.keys(prunedState3.resolversHashes.resources).length).toBe(0);
   });
 
+  test('half empty state 2', () => {
+    const prunedState1 = getPrunedForPersistenceState({
+      requests: {},
+      resources: {},
+    });
+    expect(Object.keys(prunedState1).length).toBe(3);
+    expect(Object.keys(prunedState1.requests).length).toBe(0);
+    expect(Object.keys(prunedState1.resources).length).toBe(0);
+    expect(Object.keys(prunedState1.resolversHashes.requests).length).toBe(0);
+    expect(Object.keys(prunedState1.resolversHashes.resources).length).toBe(0);
+
+    const prunedState2 = getPrunedForPersistenceState({
+      requests: {},
+      resolversHashes: {},
+    });
+    expect(Object.keys(prunedState2).length).toBe(3);
+    expect(Object.keys(prunedState2.requests).length).toBe(0);
+    expect(Object.keys(prunedState2.resources).length).toBe(0);
+    expect(Object.keys(prunedState2.resolversHashes.requests).length).toBe(0);
+    expect(Object.keys(prunedState2.resolversHashes.resources).length).toBe(0);
+
+    const prunedState3 = getPrunedForPersistenceState({
+      resources: {},
+      resolversHashes: {},
+    });
+    expect(Object.keys(prunedState3).length).toBe(3);
+    expect(Object.keys(prunedState3.requests).length).toBe(0);
+    expect(Object.keys(prunedState3.resources).length).toBe(0);
+    expect(Object.keys(prunedState3.resolversHashes.requests).length).toBe(0);
+    expect(Object.keys(prunedState3.resolversHashes.resources).length).toBe(0);
+  });
+
   test('half empty state deep', () => {
     const prunedState1 = getPrunedForPersistenceState({
       requests: { [URL_PENDING]: null },
@@ -309,6 +341,44 @@ describe('getPrunedForPersistenceState', () => {
     expect(Object.keys(prunedState2.resolversHashes.resources).length).toBe(0);
 
     const prunedState3 = getPrunedForPersistenceState({
+      resolversHashes: {
+        requests: { [URL_PENDING]: null },
+        resources: { [RESOURCE_NAME]: null },
+      },
+    });
+    expect(Object.keys(prunedState3).length).toBe(3);
+    expect(Object.keys(prunedState3.requests).length).toBe(0);
+    expect(Object.keys(prunedState3.resources).length).toBe(0);
+    expect(Object.keys(prunedState3.resolversHashes.requests).length).toBe(0);
+    expect(Object.keys(prunedState3.resolversHashes.resources).length).toBe(0);
+  });
+
+  test('half empty state deep 2', () => {
+    const prunedState1 = getPrunedForPersistenceState({
+      requests: { [URL_PENDING]: null },
+      resources: { [RESOURCE_NAME]: null },
+    });
+    expect(Object.keys(prunedState1).length).toBe(3);
+    expect(Object.keys(prunedState1.requests).length).toBe(0);
+    expect(Object.keys(prunedState1.resources).length).toBe(0);
+    expect(Object.keys(prunedState1.resolversHashes.requests).length).toBe(0);
+    expect(Object.keys(prunedState1.resolversHashes.resources).length).toBe(0);
+
+    const prunedState2 = getPrunedForPersistenceState({
+      requests: { [URL_PENDING]: null },
+      resolversHashes: {
+        requests: { [URL_PENDING]: null },
+        resources: { [RESOURCE_NAME]: null },
+      },
+    });
+    expect(Object.keys(prunedState2).length).toBe(3);
+    expect(Object.keys(prunedState2.requests).length).toBe(0);
+    expect(Object.keys(prunedState2.resources).length).toBe(0);
+    expect(Object.keys(prunedState2.resolversHashes.requests).length).toBe(0);
+    expect(Object.keys(prunedState2.resolversHashes.resources).length).toBe(0);
+
+    const prunedState3 = getPrunedForPersistenceState({
+      resources: { [RESOURCE_NAME]: null },
       resolversHashes: {
         requests: { [URL_PENDING]: null },
         resources: { [RESOURCE_NAME]: null },
