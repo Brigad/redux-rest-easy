@@ -24,7 +24,8 @@ const actionsConfig = {
     method: 'GET',
     url: 'https://api.co/users/:userType/::userId/infos',
     // Optional
-    beforeHook: (body, query, otherArgs, dispatch) =>
+    cacheHint: (urlParams, query, body, otherArgs) => otherArgs.language,
+    beforeHook: (urlParams, query, body, otherArgs, dispatch) =>
       console.log(
         'User infos retrieved with query: ',
         query,

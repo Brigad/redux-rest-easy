@@ -60,11 +60,17 @@ const FILLED_STATE_COMPUTED_HASHES = {
 };
 const EMPTY_STATE_RESET_HASHES = {
   ...EMPTY_STATE,
-  resolversHashes: resetResourceResolversHashes(EMPTY_STATE, RESOURCE_NAME),
+  resolversHashes: resetResourceResolversHashes(
+    EMPTY_STATE_COMPUTED_HASHES,
+    RESOURCE_NAME,
+  ),
 };
 const FILLED_STATE_RESET_HASHES = {
   ...FILLED_STATE,
-  resolversHashes: resetResourceResolversHashes(FILLED_STATE, RESOURCE_NAME),
+  resolversHashes: resetResourceResolversHashes(
+    FILLED_STATE_COMPUTED_HASHES,
+    RESOURCE_NAME,
+  ),
 };
 
 describe('computeNewResolversHashes', () => {
