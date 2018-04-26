@@ -5,10 +5,10 @@ const configBase = {
   coverageDirectory: path.join(__dirname, 'coverage'),
   coverageThreshold: {
     global: {
-      statements: 80,
-      branches: 80,
-      functions: 85,
-      lines: 80,
+      statements: 82,
+      branches: 85,
+      functions: 88,
+      lines: 82,
     },
   },
   moduleDirectories: ['node_modules'],
