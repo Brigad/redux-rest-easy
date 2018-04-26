@@ -70,29 +70,24 @@ export const resetResourceResolversHashes = (
 export const getEmptyResourceHash = () => EMPTY_HASH;
 
 export const getPayloadIdsHash = (
-  resolversHashes,
+  { resolversHashes = {} } = {},
   normalizedURL,
   resourceName,
 ) =>
-  resolversHashes
-  && resolversHashes.requests
+  resolversHashes.requests
   && resolversHashes.requests[normalizedURL]
   && resolversHashes.requests[normalizedURL][resourceName]
     ? resolversHashes.requests[normalizedURL][resourceName]
     : EMPTY_HASH;
 
 /* eslint-disable no-underscore-dangle */
-export const getResourcesHash = resolversHashes =>
-  resolversHashes
-  && resolversHashes.resources
-  && resolversHashes.resources._getResourcesHash
+export const getResourcesHash = ({ resolversHashes = {} } = {}) =>
+  resolversHashes.resources && resolversHashes.resources._getResourcesHash
     ? resolversHashes.resources._getResourcesHash()
     : EMPTY_HASH;
 /* eslint-enable no-underscore-dangle */
 
-export const getResourceHash = (resolversHashes, resourceName) =>
-  resolversHashes
-  && resolversHashes.resources
-  && resolversHashes.resources[resourceName]
+export const getResourceHash = ({ resolversHashes = {} } = {}, resourceName) =>
+  resolversHashes.resources && resolversHashes.resources[resourceName]
     ? resolversHashes.resources[resourceName]
     : EMPTY_HASH;

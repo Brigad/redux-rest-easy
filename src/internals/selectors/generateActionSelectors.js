@@ -92,8 +92,6 @@ const payloadIdsSelector = (state, resourceName, normalizedURL) =>
     ? state.requests[normalizedURL].payloadIds[resourceName]
     : null;
 
-const resolversHashesSelector = state => state.resolversHashes;
-
 const applyDenormalizerSelector = (
   state,
   resourceName,
@@ -134,25 +132,24 @@ const getRequestResourceResolver = (
 ) => {
   const resource = resourceSelector(state, resourceName);
   const payloadIds = payloadIdsSelector(state, resourceName, normalizedURL);
-  const resolversHashes = resolversHashesSelector(state);
 
   if (resource && payloadIds) {
     return !applyDenormalizer || !denormalizer
       ? `${applyDenormalizer}-${getPayloadIdsHash(
-          resolversHashes,
+          state,
           normalizedURL,
           resourceName,
-        )}-${getResourceHash(resolversHashes, resourceName)}`
+        )}-${getResourceHash(state, resourceName)}`
       : `${applyDenormalizer}-${Object.keys(
           state.requests[normalizedURL].payloadIds,
         )
           .map(
             resourceKey =>
               `${getPayloadIdsHash(
-                resolversHashes,
+                state,
                 normalizedURL,
                 resourceKey,
-              )}-${getResourceHash(resolversHashes, resourceKey)}`,
+              )}-${getResourceHash(state, resourceKey)}`,
           )
           .join('--')}`;
   }

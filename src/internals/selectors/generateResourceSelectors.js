@@ -18,8 +18,6 @@ const resourceSelector = (state, resourceName) =>
     ? state.resources[resourceName]
     : null;
 
-const resolversHashesSelector = state => state.resolversHashes;
-
 const applyDenormalizerSelector = (state, resourceName, applyDenormalizer) =>
   applyDenormalizer;
 
@@ -52,12 +50,11 @@ const getResourceResolver = (
   denormalizer,
 ) => {
   const resource = resourceSelector(state, resourceName);
-  const resolversHashes = resolversHashesSelector(state);
 
   if (resource) {
     return !applyDenormalizer || !denormalizer
-      ? `${applyDenormalizer}-${getResourceHash(resolversHashes, resourceName)}`
-      : `${applyDenormalizer}-${getResourcesHash(resolversHashes)}`;
+      ? `${applyDenormalizer}-${getResourceHash(state, resourceName)}`
+      : `${applyDenormalizer}-${getResourcesHash(state)}`;
   }
 
   return getEmptyResourceHash();
