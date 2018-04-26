@@ -134,13 +134,13 @@ const getRequestResourceResolver = (
   const payloadIds = payloadIdsSelector(state, resourceName, normalizedURL);
 
   if (resource && payloadIds) {
-    return !applyDenormalizer || !denormalizer
-      ? `${applyDenormalizer && !!denormalizer}-${getPayloadIdsHash(
+    return !(applyDenormalizer && denormalizer)
+      ? `${!!(applyDenormalizer && denormalizer)}-${getPayloadIdsHash(
           state,
           normalizedURL,
           resourceName,
         )}-${getResourceHash(state, resourceName)}`
-      : `${applyDenormalizer && !!denormalizer}-${Object.keys(
+      : `${!!(applyDenormalizer && denormalizer)}-${Object.keys(
           state.requests[normalizedURL].payloadIds,
         )
           .map(

@@ -52,12 +52,12 @@ const getResourceResolver = (
   const resource = resourceSelector(state, resourceName);
 
   if (resource) {
-    return !applyDenormalizer || !denormalizer
-      ? `${applyDenormalizer && !!denormalizer}-${getResourceHash(
+    return !(applyDenormalizer && denormalizer)
+      ? `${!!(applyDenormalizer && denormalizer)}-${getResourceHash(
           state,
           resourceName,
         )}`
-      : `${applyDenormalizer && !!denormalizer}-${getResourcesHash(state)}`;
+      : `${!!(applyDenormalizer && denormalizer)}-${getResourcesHash(state)}`;
   }
 
   return getEmptyResourceHash();
