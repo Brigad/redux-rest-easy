@@ -5,29 +5,28 @@ import generateResourceSelectors from '../../../src/internals/selectors/generate
 const {
   resource: { getResource, getResourceById },
 } = generateResourceSelectors('fruits');
+
+const denormalizer = (resourceIds, { fruits, colors } = {}) =>
+  fruits
+    ? {
+        fruits: Object.entries(fruits).reduce(
+          (prev, [id, fruit]) => ({
+            ...prev,
+            [id]: {
+              ...fruit,
+              color: colors[fruit.color],
+            },
+          }),
+          {},
+        ),
+      }
+    : {};
 const {
   resource: {
     getResource: getResourceWithDenormalizer,
     getResourceById: getResourceByIdWithDenormalizer,
   },
-} = generateResourceSelectors(
-  'fruits',
-  (resourceIds, { fruits, colors } = {}) =>
-    console.log('fruits', Object.entries(colors)) || fruits
-      ? {
-          fruits: Object.entries(fruits).reduce(
-            (prev, [id, fruit]) => ({
-              ...prev,
-              [id]: {
-                ...fruit,
-                color: colors[fruit.color],
-              },
-            }),
-            {},
-          ),
-        }
-      : {},
-);
+} = generateResourceSelectors('fruits', denormalizer);
 
 const STARTED_AT = moment();
 const ENDED_AT = moment().add(1, 'seconds');
@@ -295,8 +294,9 @@ describe('generateResourceSelectors', () => {
     const fullCase = state => () => {
       const result = getResourceWithDenormalizer(state);
 
-      console.log(state);
-      console.log(result);
+      console.log('state', state);
+      console.log('result', result);
+      console.log('denormalizer', denormalizer(null, state.restEasy.resources));
 
       expect(result.length).toBe(3);
       expect(result[0]).toBe(state.restEasy.resources.fruits['1']);
