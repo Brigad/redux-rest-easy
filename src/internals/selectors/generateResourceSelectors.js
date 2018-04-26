@@ -18,8 +18,6 @@ const resourceSelector = (state, resourceName) =>
     ? state.resources[resourceName]
     : null;
 
-const resolversHashesSelector = state => state.resolversHashes;
-
 const applyDenormalizerSelector = (state, resourceName, applyDenormalizer) =>
   applyDenormalizer;
 
@@ -52,12 +50,14 @@ const getResourceResolver = (
   denormalizer,
 ) => {
   const resource = resourceSelector(state, resourceName);
-  const resolversHashes = resolversHashesSelector(state);
 
   if (resource) {
-    return !applyDenormalizer || !denormalizer
-      ? `${applyDenormalizer}-${getResourceHash(resolversHashes, resourceName)}`
-      : `${applyDenormalizer}-${getResourcesHash(resolversHashes)}`;
+    return !(applyDenormalizer && denormalizer)
+      ? `${!!(applyDenormalizer && denormalizer)}-${getResourceHash(
+          state,
+          resourceName,
+        )}`
+      : `${!!(applyDenormalizer && denormalizer)}-${getResourcesHash(state)}`;
   }
 
   return getEmptyResourceHash();
@@ -78,15 +78,31 @@ const getResourceById = (
   applyDenormalizer,
   denormalizer,
 ) => {
-  if (!applyDenormalizer || !denormalizer) {
-    return state.resources
-      && state.resources[resourceName]
-      && state.resources[resourceName][resourceId]
+  const resource
+    = state.resources
+    && state.resources[resourceName]
+    && state.resources[resourceName][resourceId]
       ? state.resources[resourceName][resourceId]
       : EMPTY_RESOURCE_ID;
+
+  if (!applyDenormalizer || !denormalizer || !resource) {
+    return resource;
   }
 
-  return denormalizer([resourceId], state.resources)[0] || EMPTY_RESOURCE_ID;
+  const resources = Object.entries(state.resources).reduce(
+    (prev, [name, value]) => ({
+      ...prev,
+      [name]:
+        name === resourceName
+          ? {
+              [resourceId]: resource,
+            }
+          : value,
+    }),
+    {},
+  );
+
+  return denormalizer([resourceId], resources)[0] || EMPTY_RESOURCE_ID;
 };
 
 const generateResourceSelectors = (resourceName, denormalizer) => ({

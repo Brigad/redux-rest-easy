@@ -58,18 +58,26 @@ const FILLED_STATE_COMPUTED_HASHES = {
     PRINCIPAL_RESOURCE_IDS,
   ),
 };
+const EMPTY_STATE_RESET_HASHES = {
+  ...EMPTY_STATE,
+  resolversHashes: resetResourceResolversHashes(
+    EMPTY_STATE_COMPUTED_HASHES,
+    RESOURCE_NAME,
+  ),
+};
 const FILLED_STATE_RESET_HASHES = {
   ...FILLED_STATE,
-  resolversHashes: resetResourceResolversHashes(FILLED_STATE, RESOURCE_NAME),
+  resolversHashes: resetResourceResolversHashes(
+    FILLED_STATE_COMPUTED_HASHES,
+    RESOURCE_NAME,
+  ),
 };
 
 describe('computeNewResolversHashes', () => {
   test('empty state', () => {
     const hashBeforeComputing = getResourcesHash(EMPTY_STATE);
 
-    const hashAfterComputing = getResourcesHash(
-      EMPTY_STATE_COMPUTED_HASHES.resolversHashes,
-    );
+    const hashAfterComputing = getResourcesHash(EMPTY_STATE_COMPUTED_HASHES);
 
     expect(hashBeforeComputing).not.toBe(hashAfterComputing);
   });
@@ -77,28 +85,40 @@ describe('computeNewResolversHashes', () => {
   test('filled state', () => {
     const hashBeforeComputing = getResourcesHash(FILLED_STATE);
 
-    const hashAfterComputing = getResourcesHash(
-      FILLED_STATE_COMPUTED_HASHES.resolversHashes,
-    );
+    const hashAfterComputing = getResourcesHash(FILLED_STATE_COMPUTED_HASHES);
 
     expect(hashBeforeComputing).not.toBe(hashAfterComputing);
   });
 });
 
 describe('resetResourceResolversHashes', () => {
-  test('only path', () => {
-    const hashBeforeComputing = getResourceHash(
-      FILLED_STATE.resolversHashes,
-      RESOURCE_NAME,
-    );
+  test('empty state', () => {
+    const hashBeforeComputing = getResourceHash(EMPTY_STATE, RESOURCE_NAME);
 
     const hashAfterComputing = getResourceHash(
-      FILLED_STATE_COMPUTED_HASHES.resolversHashes,
+      EMPTY_STATE_COMPUTED_HASHES,
       RESOURCE_NAME,
     );
 
     const hashAfterResetting = getResourceHash(
-      FILLED_STATE_RESET_HASHES.resolversHashes,
+      EMPTY_STATE_RESET_HASHES,
+      RESOURCE_NAME,
+    );
+
+    expect(hashBeforeComputing).toBe(hashAfterComputing);
+    expect(hashBeforeComputing).toBe(hashAfterResetting);
+  });
+
+  test('filled state', () => {
+    const hashBeforeComputing = getResourceHash(FILLED_STATE, RESOURCE_NAME);
+
+    const hashAfterComputing = getResourceHash(
+      FILLED_STATE_COMPUTED_HASHES,
+      RESOURCE_NAME,
+    );
+
+    const hashAfterResetting = getResourceHash(
+      FILLED_STATE_RESET_HASHES,
       RESOURCE_NAME,
     );
 
@@ -123,34 +143,27 @@ describe('getPayloadIdsHash', () => {
   });
 
   test('no normalizedURL', () => {
-    expect(getPayloadIdsHash(EMPTY_STATE_COMPUTED_HASHES.resolversHashes)).toBe(
+    expect(getPayloadIdsHash(EMPTY_STATE_COMPUTED_HASHES)).toBe(
       getEmptyResourceHash(),
     );
   });
 
   test('no resourceName', () => {
-    expect(
-      getPayloadIdsHash(
-        EMPTY_STATE_COMPUTED_HASHES.resolversHashes,
-        NORMALIZED_URL,
-      ),
-    ).toBe(getEmptyResourceHash());
+    expect(getPayloadIdsHash(EMPTY_STATE_COMPUTED_HASHES, NORMALIZED_URL)).toBe(
+      getEmptyResourceHash(),
+    );
   });
 
   test('without computing first', () => {
-    expect(
-      getPayloadIdsHash(
-        FILLED_STATE.resolversHashes,
-        NORMALIZED_URL,
-        RESOURCE_NAME,
-      ),
-    ).toBe(getEmptyResourceHash());
+    expect(getPayloadIdsHash(FILLED_STATE, NORMALIZED_URL, RESOURCE_NAME)).toBe(
+      getEmptyResourceHash(),
+    );
   });
 
   test('after computing', () => {
     expect(
       getPayloadIdsHash(
-        FILLED_STATE_COMPUTED_HASHES.resolversHashes,
+        FILLED_STATE_COMPUTED_HASHES,
         NORMALIZED_URL,
         RESOURCE_NAME,
       ),
@@ -168,15 +181,11 @@ describe('getResourcesHash', () => {
   });
 
   test('without computing first', () => {
-    expect(getResourcesHash(FILLED_STATE.resolversHashes)).toBe(
-      getEmptyResourceHash(),
-    );
+    expect(getResourcesHash(FILLED_STATE)).toBe(getEmptyResourceHash());
   });
 
   test('after computing', () => {
-    expect(
-      getResourcesHash(FILLED_STATE_COMPUTED_HASHES.resolversHashes),
-    ).toMatchSnapshot();
+    expect(getResourcesHash(FILLED_STATE_COMPUTED_HASHES)).toMatchSnapshot();
   });
 });
 
@@ -190,23 +199,20 @@ describe('getResourceHash', () => {
   });
 
   test('no resourceName', () => {
-    expect(getResourceHash(FILLED_STATE_COMPUTED_HASHES.resolversHashes)).toBe(
+    expect(getResourceHash(FILLED_STATE_COMPUTED_HASHES)).toBe(
       getEmptyResourceHash(),
     );
   });
 
   test('without computing first', () => {
-    expect(getResourceHash(FILLED_STATE.resolversHashes, RESOURCE_NAME)).toBe(
+    expect(getResourceHash(FILLED_STATE, RESOURCE_NAME)).toBe(
       getEmptyResourceHash(),
     );
   });
 
   test('after computing', () => {
     expect(
-      getResourceHash(
-        FILLED_STATE_COMPUTED_HASHES.resolversHashes,
-        RESOURCE_NAME,
-      ),
+      getResourceHash(FILLED_STATE_COMPUTED_HASHES, RESOURCE_NAME),
     ).toMatchSnapshot();
   });
 });
