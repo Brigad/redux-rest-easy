@@ -1,56 +1,90 @@
 import getDefaultNetworkHelpers from '../../../src/internals/network/getDefaultNetworkHelpers';
 
 const NETWORK_HELPERS = getDefaultNetworkHelpers();
+const customGetTokenNetworkHelpers = {
+  ...NETWORK_HELPERS,
+  getToken: () => '',
+};
 
 describe('getDefaultNetworkHelpers', () => {
-  test('only path', () => {
+  test('all default', () => {
     expect(NETWORK_HELPERS).toMatchSnapshot();
+  });
+
+  test('custom getToken', () => {
+    expect(customGetTokenNetworkHelpers).toMatchSnapshot();
   });
 });
 
 describe('requestGET', () => {
-  test('only path', async () => {
+  test('all default', async () => {
     expect(await NETWORK_HELPERS.requestGET()).toMatchSnapshot();
+  });
+
+  test('custom getToken', async () => {
+    expect(await customGetTokenNetworkHelpers.requestGET()).toMatchSnapshot();
   });
 });
 
 describe('requestPATCH', () => {
-  test('only path', async () => {
+  test('all default', async () => {
     expect(await NETWORK_HELPERS.requestPATCH()).toMatchSnapshot();
+  });
+
+  test('custom getToken', async () => {
+    expect(await customGetTokenNetworkHelpers.requestPATCH()).toMatchSnapshot();
   });
 });
 
 describe('requestPUT', () => {
-  test('only path', async () => {
+  test('all default', async () => {
     expect(await NETWORK_HELPERS.requestPUT()).toMatchSnapshot();
+  });
+
+  test('custom getToken', async () => {
+    expect(await customGetTokenNetworkHelpers.requestPUT()).toMatchSnapshot();
   });
 });
 
 describe('requestPOST', () => {
-  test('only path', async () => {
+  test('all default', async () => {
     expect(await NETWORK_HELPERS.requestPOST()).toMatchSnapshot();
+  });
+
+  test('custom getToken', async () => {
+    expect(await customGetTokenNetworkHelpers.requestPOST()).toMatchSnapshot();
   });
 });
 
 describe('requestDELETE', () => {
-  test('only path', async () => {
+  test('all default', async () => {
     expect(await NETWORK_HELPERS.requestDELETE()).toMatchSnapshot();
+  });
+
+  test('custom getToken', async () => {
+    expect(
+      await customGetTokenNetworkHelpers.requestDELETE(),
+    ).toMatchSnapshot();
   });
 });
 
 describe('handleStatusCode', () => {
-  test('valid response', () => {
-    const response = { status: 200 };
-    const response2 = { status: 299 };
-
-    expect(NETWORK_HELPERS.handleStatusCode(response)).toBe(response);
-    expect(NETWORK_HELPERS.handleStatusCode(response2)).toBe(response2);
+  test('no response', () => {
+    expect(NETWORK_HELPERS.handleStatusCode(null)).toBeNull();
   });
 
   test('invalid response', () => {
     const response = { status: 300 };
 
     expect(() => NETWORK_HELPERS.handleStatusCode(response)).toThrow();
+  });
+
+  test('valid response', () => {
+    const response = { status: 200 };
+    const response2 = { status: 299 };
+
+    expect(NETWORK_HELPERS.handleStatusCode(response)).toBe(response);
+    expect(NETWORK_HELPERS.handleStatusCode(response2)).toBe(response2);
   });
 });
 

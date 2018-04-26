@@ -15,10 +15,12 @@ const resource = {
         isPerforming: func,
         hasSucceeded: func,
         hasFailed: func,
+        isValid: func,
         couldPerformOnId: func,
         isPerformingOnId: func,
         hasSucceededOnId: func,
         hasFailedOnId: func,
+        isValidId: func,
       },
       request: {
         getResource: func,
@@ -26,6 +28,7 @@ const resource = {
         isPerforming: func,
         hasSucceeded: func,
         hasFailed: func,
+        isValid: func,
       },
     },
     ...,
@@ -57,7 +60,9 @@ _Available to any connected component._
 
 ### `hasFailed(state)`: `bool`
 
-Will return `true` if the action could perform / is performing / has succeeded / has failed on this resource.
+### `isValid(state)`: `bool`
+
+Will return `true` if the action could perform / is performing / has succeeded / has failed on this resource, or if the resource is valid.
 
 ### `couldPerformOnId(state, id)`: `bool`
 
@@ -67,7 +72,9 @@ Will return `true` if the action could perform / is performing / has succeeded /
 
 ### `hasFailedOnId(state, id)`: `bool`
 
-Will return `true` if the action could perform / is performing / has succeeded / has failed on this resource id.
+### `isValidId(state, id)`: `bool`
+
+Will return `true` if the action could perform / is performing / has succeeded / has failed on this resource id, or if the resource id is valid.
 
 ## Action.request
 
@@ -89,4 +96,6 @@ Will return the metadata corresponding to the payload of the request (or an empt
 
 ### `hasFailed(state, ownProps)`: `bool`
 
-Will return `true` if the request (dispatched by the component) could perform / is performing / has succeeded / has failed.
+### `isValid(state, ownProps)`: `bool`
+
+Will return `true` if the request (dispatched by the component) could perform / is performing / has succeeded / has failed, or if the associated request is valid.
