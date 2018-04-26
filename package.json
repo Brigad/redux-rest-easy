@@ -93,6 +93,7 @@
     "eslint-plugin-import": "2.9.0",
     "eslint-plugin-jsx-a11y": "6.0.3",
     "eslint-plugin-react": "7.7.0",
+    "fetch-mock": "6.3.0",
     "jest-cli": "22.4.3",
     "jest-junit": "3.6.0",
     "mockdate": "2.0.2",

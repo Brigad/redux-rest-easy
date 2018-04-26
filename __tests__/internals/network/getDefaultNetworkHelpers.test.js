@@ -1,3 +1,5 @@
+import fetchMock from 'fetch-mock';
+
 import getDefaultNetworkHelpers from '../../../src/internals/network/getDefaultNetworkHelpers';
 
 const NETWORK_HELPERS = getDefaultNetworkHelpers();
@@ -106,6 +108,33 @@ describe('handleError', () => {
 
   test('wrongly formatted error', async () => {
     const error = 'oh no';
+
+    await NETWORK_HELPERS.handleError(error);
+
+    expect(consoleErrorMock).toHaveBeenCalledTimes(1);
+  });
+
+  test('wrongly formatted error 2', async () => {
+    const error = { response: 'oh no' };
+
+    await NETWORK_HELPERS.handleError(error);
+
+    expect(consoleErrorMock).toHaveBeenCalledTimes(1);
+  });
+
+  test('valid error', async () => {
+    fetchMock.mock('error', {
+      status: 400,
+      body: {
+        message: 'errorMessage',
+      },
+    });
+
+    const res1 = await fetch('error');
+    const error = new Error(res1.statusText);
+    error.response = res1;
+
+    fetchMock.restore();
 
     await NETWORK_HELPERS.handleError(error);
 
