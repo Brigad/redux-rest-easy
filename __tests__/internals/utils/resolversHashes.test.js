@@ -58,6 +58,10 @@ const FILLED_STATE_COMPUTED_HASHES = {
     PRINCIPAL_RESOURCE_IDS,
   ),
 };
+const EMPTY_STATE_RESET_HASHES = {
+  ...EMPTY_STATE,
+  resolversHashes: resetResourceResolversHashes(EMPTY_STATE, RESOURCE_NAME),
+};
 const FILLED_STATE_RESET_HASHES = {
   ...FILLED_STATE,
   resolversHashes: resetResourceResolversHashes(FILLED_STATE, RESOURCE_NAME),
@@ -86,7 +90,27 @@ describe('computeNewResolversHashes', () => {
 });
 
 describe('resetResourceResolversHashes', () => {
-  test('only path', () => {
+  test('empty state', () => {
+    const hashBeforeComputing = getResourceHash(
+      EMPTY_STATE.resolversHashes,
+      RESOURCE_NAME,
+    );
+
+    const hashAfterComputing = getResourceHash(
+      EMPTY_STATE_COMPUTED_HASHES.resolversHashes,
+      RESOURCE_NAME,
+    );
+
+    const hashAfterResetting = getResourceHash(
+      EMPTY_STATE_RESET_HASHES.resolversHashes,
+      RESOURCE_NAME,
+    );
+
+    expect(hashBeforeComputing).toBe(hashAfterComputing);
+    expect(hashBeforeComputing).toBe(hashAfterResetting);
+  });
+
+  test('filled state', () => {
     const hashBeforeComputing = getResourceHash(
       FILLED_STATE.resolversHashes,
       RESOURCE_NAME,
