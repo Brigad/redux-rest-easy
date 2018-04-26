@@ -53,8 +53,11 @@ const getResourceResolver = (
 
   if (resource) {
     return !applyDenormalizer || !denormalizer
-      ? `${applyDenormalizer}-${getResourceHash(state, resourceName)}`
-      : `${applyDenormalizer}-${getResourcesHash(state)}`;
+      ? `${applyDenormalizer && !!denormalizer}-${getResourceHash(
+          state,
+          resourceName,
+        )}`
+      : `${applyDenormalizer && !!denormalizer}-${getResourcesHash(state)}`;
   }
 
   return getEmptyResourceHash();
