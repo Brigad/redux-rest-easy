@@ -194,13 +194,6 @@ const generateActionSelectors = (resourceName, actionName, denormalizer) => ({
         !isPerformingOnResourceOrId(getState(state), resourceName, actionName),
       isPerforming: state =>
         isPerformingOnResourceOrId(getState(state), resourceName, actionName),
-      isValid: state =>
-        !checkKeyForResourceOrId(
-          getState(state),
-          resourceName,
-          actionName,
-          'didInvalidate',
-        ),
       hasSucceeded: state =>
         checkKeyForResourceOrId(
           getState(state),
@@ -214,6 +207,13 @@ const generateActionSelectors = (resourceName, actionName, denormalizer) => ({
           resourceName,
           actionName,
           'hasFailed',
+        ),
+      isValid: state =>
+        !checkKeyForResourceOrId(
+          getState(state),
+          resourceName,
+          actionName,
+          'didInvalidate',
         ),
       couldPerformOnId: (state, resourceId) =>
         !isPerformingOnResourceOrId(
@@ -278,12 +278,6 @@ const generateActionSelectors = (resourceName, actionName, denormalizer) => ({
           getState(state),
           getNormalizedURLFromOwnProps(resourceName, actionName, ownProps),
         ),
-      isValid: (state, ownProps) =>
-        !checkKeyForRequest(
-          getState(state),
-          getNormalizedURLFromOwnProps(resourceName, actionName, ownProps),
-          'didInvalidate',
-        ),
       hasSucceeded: (state, ownProps) =>
         checkKeyForRequest(
           getState(state),
@@ -295,6 +289,12 @@ const generateActionSelectors = (resourceName, actionName, denormalizer) => ({
           getState(state),
           getNormalizedURLFromOwnProps(resourceName, actionName, ownProps),
           'hasFailed',
+        ),
+      isValid: (state, ownProps) =>
+        !checkKeyForRequest(
+          getState(state),
+          getNormalizedURLFromOwnProps(resourceName, actionName, ownProps),
+          'didInvalidate',
         ),
     },
   },
