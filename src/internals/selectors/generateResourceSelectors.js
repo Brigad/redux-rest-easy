@@ -75,15 +75,31 @@ const getResourceById = (
   applyDenormalizer,
   denormalizer,
 ) => {
-  if (!applyDenormalizer || !denormalizer) {
-    return state.resources
-      && state.resources[resourceName]
-      && state.resources[resourceName][resourceId]
+  const resource
+    = state.resources
+    && state.resources[resourceName]
+    && state.resources[resourceName][resourceId]
       ? state.resources[resourceName][resourceId]
       : EMPTY_RESOURCE_ID;
+
+  if (!applyDenormalizer || !denormalizer || !resource) {
+    return resource;
   }
 
-  return denormalizer([resourceId], state.resources)[0] || EMPTY_RESOURCE_ID;
+  const resources = Object.entries(state.resources).reduce(
+    (prev, [name, value]) => ({
+      ...prev,
+      [name]:
+        name === resourceName
+          ? {
+              [resourceId]: resource,
+            }
+          : value,
+    }),
+    {},
+  );
+
+  return denormalizer([resourceId], resources)[0] || EMPTY_RESOURCE_ID;
 };
 
 const generateResourceSelectors = (resourceName, denormalizer) => ({
