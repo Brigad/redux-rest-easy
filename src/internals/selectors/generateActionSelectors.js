@@ -4,6 +4,7 @@ import getActionNameFromNormalizedURL from '../utils/getActionNameFromNormalized
 import getNormalizedURLFromOwnProps from '../utils/getNormalizedURLFromOwnProps';
 import getReReselectOptions from '../utils/getReReselectOptions';
 import getState from '../utils/getState';
+import { areIdsEqual, payloadIdsInclude } from '../utils/safeIds';
 import {
   getEmptyResourceHash,
   getPayloadIdsHash,
@@ -13,12 +14,6 @@ import {
 /* eslint-disable no-underscore-dangle */
 
 const EMPTY_RESOURCE = [];
-
-const sanitizeId = id => (typeof id === 'number' ? id.toString() : id);
-
-const areIdsEqual = (id1, id2) => sanitizeId(id1) === sanitizeId(id2);
-
-const payloadIdsInclude = (payloadIds, id) => payloadIds.map(sanitizeId).includes(sanitizeId(id));
 
 const isPerformingOnResourceOrId = (
   state,

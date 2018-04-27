@@ -4,6 +4,7 @@ import {
   computeNewResolversHashes,
   resetResourceResolversHashes,
 } from '../../utils/resolversHashes';
+import { areIdsEqual, payloadIdsInclude } from '../../utils/safeIds';
 import shallowMergeResources from '../../utils/shallowMergeResources';
 
 const REDUCER_CASES = {
@@ -195,12 +196,13 @@ const REDUCER_CASES = {
           [key]:
             !request.didInvalidate
             && ((request.resourceName === resourceName
-              && request.resourceId === resourceId)
+              && areIdsEqual(request.resourceId, resourceId))
               || (request.payloadIds
                 && request.payloadIds[resourceName]
-                && request.payloadIds[resourceName]
-                  .map(item => item.toString())
-                  .includes(resourceId.toString())))
+                && payloadIdsInclude(
+                  request.payloadIds[resourceName],
+                  resourceId,
+                )))
               ? {
                   ...request,
                   didInvalidate: true,

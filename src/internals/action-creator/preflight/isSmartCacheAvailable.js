@@ -1,4 +1,5 @@
 import hasCacheExpired from '../../utils/hasCacheExpired';
+import { areIdsEqual, payloadIdsInclude } from '../../utils/safeIds';
 
 const isSmartCacheAvailable = (state, method, resourceName, resourceId) => {
   if (
@@ -22,10 +23,10 @@ const isSmartCacheAvailable = (state, method, resourceName, resourceId) => {
     }) =>
       hasSucceeded
       && !didInvalidate
-      && ((resourceName === name && resourceId === id)
+      && ((resourceName === name && areIdsEqual(resourceId, id))
         || (payloadIds
           && payloadIds[resourceName]
-          && payloadIds[resourceName].includes(resourceId)))
+          && payloadIdsInclude(payloadIds[resourceName], resourceId)))
       && !hasCacheExpired(expireAt),
   );
 };
