@@ -22,19 +22,19 @@ const REDUCER_CASES = {
         expireAt: null,
         hasSucceeded:
           state.requests && state.requests[normalizedURL]
-            ? state.requests[normalizedURL].hasSucceeded
+            ? !!state.requests[normalizedURL].hasSucceeded
             : false,
         hasFailed:
           state.requests && state.requests[normalizedURL]
-            ? state.requests[normalizedURL].hasFailed
+            ? !!state.requests[normalizedURL].hasFailed
             : false,
         didInvalidate:
           state.requests && state.requests[normalizedURL]
-            ? state.requests[normalizedURL].didInvalidate
+            ? !!state.requests[normalizedURL].didInvalidate
             : false,
         fromCache:
           state.requests && state.requests[normalizedURL]
-            ? state.requests[normalizedURL].fromCache
+            ? !!state.requests[normalizedURL].fromCache
             : false,
       },
     },
@@ -151,7 +151,6 @@ const REDUCER_CASES = {
           metadata,
         },
       },
-      resources: shallowMergeResources(state, normalizedPayload),
     };
 
     const newState = {
