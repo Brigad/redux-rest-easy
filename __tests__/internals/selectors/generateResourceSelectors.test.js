@@ -20,6 +20,14 @@ const {
   },
 } = generateResourceSelectors('fruits', denormalizer);
 
+const emptyDenormalizer = () => [];
+const {
+  resource: {
+    getResource: getResourceWithEmptyDenormalizer,
+    getResourceById: getResourceByIdWithEmptyDenormalizer,
+  },
+} = generateResourceSelectors('fruits', emptyDenormalizer);
+
 const STARTED_AT = moment();
 const ENDED_AT = moment().add(1, 'seconds');
 
@@ -359,6 +367,42 @@ describe('generateResourceSelectors', () => {
           state.restEasy.resources.fruits[id].color
         ],
       );
+    };
+
+    test('empty state', emptyCase(EMPTY_STATE, 2));
+    test('requested resource state', emptyCase(REQUESTED_RESOURCE_STATE, 2));
+    test(
+      'received empty resource state',
+      emptyCase(RECEIVED_EMPTY_RESOURCE_STATE, 2),
+    );
+    test(
+      'received full resource state',
+      fullCase(RECEIVED_FULL_RESOURCE_TO_DENORMALIZE_STATE, 2),
+    );
+    test('failed resource state', emptyCase(FAILED_RESOURCE_STATE, 2));
+
+    test(
+      'requested resource id state',
+      emptyCase(REQUESTED_RESOURCE_ID_STATE, 2),
+    );
+    test(
+      'received empty resource id state',
+      emptyCase(RECEIVED_EMPTY_RESOURCE_ID_STATE, 2),
+    );
+    test(
+      'received full resource id state',
+      fullCase(RECEIVED_FULL_RESOURCE_ID_TO_DENORMALIZE_STATE, 2),
+    );
+    test('failed resource id state', emptyCase(FAILED_RESOURCE_ID_STATE, 2));
+  });
+
+  describe('getResourceById with empty denormalizer', () => {
+    const emptyCase = (state, id) => () => {
+      expect(getResourceByIdWithEmptyDenormalizer(state, id)).toBeNull();
+    };
+
+    const fullCase = (state, id) => () => {
+      expect(getResourceByIdWithEmptyDenormalizer(state, id)).toBeNull();
     };
 
     test('empty state', emptyCase(EMPTY_STATE, 2));
