@@ -713,6 +713,15 @@ describe('generateResourceSelectors', () => {
         'failed other action resource id state',
         boolCheck(FAILED_OTHER_ACTION_RESOURCE_ID_STATE, 2, true),
       );
+
+      test(
+        'requested resource id state string id',
+        boolCheck(REQUESTED_RESOURCE_ID_STATE, '2', false),
+      );
+      test(
+        'received empty resource id state string id',
+        boolCheck(RECEIVED_EMPTY_RESOURCE_ID_STATE, '2', true),
+      );
     });
 
     describe('isPerformingOnId', () => {
@@ -763,6 +772,15 @@ describe('generateResourceSelectors', () => {
       test(
         'failed other action resource id state',
         boolCheck(FAILED_OTHER_ACTION_RESOURCE_ID_STATE, 2, false),
+      );
+
+      test(
+        'requested resource id state string id',
+        boolCheck(REQUESTED_RESOURCE_ID_STATE, '2', true),
+      );
+      test(
+        'received empty resource id state string id',
+        boolCheck(RECEIVED_EMPTY_RESOURCE_ID_STATE, '2', false),
       );
     });
 
@@ -833,6 +851,15 @@ describe('generateResourceSelectors', () => {
         'failed other action resource id state',
         boolCheck(FAILED_OTHER_ACTION_RESOURCE_ID_STATE, 2, false),
       );
+
+      test(
+        'requested resource id state string id',
+        boolCheck(REQUESTED_RESOURCE_ID_STATE, '2', false),
+      );
+      test(
+        'received empty resource id state string id',
+        boolCheck(RECEIVED_EMPTY_RESOURCE_ID_STATE, '2', true),
+      );
     });
 
     describe('hasFailedOnId', () => {
@@ -901,6 +928,15 @@ describe('generateResourceSelectors', () => {
       test(
         'failed other action resource id state',
         boolCheck(FAILED_OTHER_ACTION_RESOURCE_ID_STATE, 2, false),
+      );
+
+      test(
+        'failed then retrieved resource id state string id',
+        boolCheck(FAILED_THEN_RETRIEVED_RESOURCE_ID_STATE, '2', false),
+      );
+      test(
+        'retrieved then failed resource id state string id',
+        boolCheck(RETRIEVED_THEN_FAILED_RESOURCE_ID_STATE, '2', true),
       );
     });
 
@@ -974,6 +1010,15 @@ describe('generateResourceSelectors', () => {
       test(
         'failed other action resource id state',
         boolCheck(FAILED_OTHER_ACTION_RESOURCE_ID_STATE, 2, true),
+      );
+
+      test(
+        'invalidated resource state string id',
+        boolCheck(INVALIDATED_RESOURCE_STATE, '2', false),
+      );
+      test(
+        'failed resource state string id',
+        boolCheck(FAILED_RESOURCE_STATE, '2', true),
       );
     });
   });

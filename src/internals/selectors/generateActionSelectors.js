@@ -14,12 +14,11 @@ import {
 
 const EMPTY_RESOURCE = [];
 
-const areIdsEqual = (id1, id2) => {
-  const safeId1 = typeof id1 === 'number' ? id1.toString() : id1;
-  const safeId2 = typeof id2 === 'number' ? id2.toString() : id2;
+const sanitizeId = id => (typeof id === 'number' ? id.toString() : id);
 
-  return safeId1 === safeId2;
-};
+const areIdsEqual = (id1, id2) => sanitizeId(id1) === sanitizeId(id2);
+
+const payloadIdsInclude = (payloadIds, id) => payloadIds.map(sanitizeId).includes(sanitizeId(id));
 
 const isPerformingOnResourceOrId = (
   state,
@@ -58,7 +57,7 @@ const checkKeyForResourceOrId = (
             || (!!endedAt
               && payloadIds
               && payloadIds[resourceName]
-              && payloadIds[resourceName].includes(resourceId))),
+              && payloadIdsInclude(payloadIds[resourceName], resourceId))),
       )
       .map(([, request]) => request);
 
