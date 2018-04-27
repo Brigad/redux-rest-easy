@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`getDefaultNetworkHelpers only path 1`] = `
+exports[`getDefaultNetworkHelpers all default 1`] = `
 Object {
   "getToken": [Function],
   "handleError": [Function],
@@ -13,7 +13,20 @@ Object {
 }
 `;
 
-exports[`requestDELETE only path 1`] = `
+exports[`getDefaultNetworkHelpers custom getToken 1`] = `
+Object {
+  "getToken": [Function],
+  "handleError": [Function],
+  "handleStatusCode": [Function],
+  "requestDELETE": [Function],
+  "requestGET": [Function],
+  "requestPATCH": [Function],
+  "requestPOST": [Function],
+  "requestPUT": [Function],
+}
+`;
+
+exports[`requestDELETE all default 1`] = `
 Object {
   "headers": Object {
     "Accept": "application/json",
@@ -23,7 +36,16 @@ Object {
 }
 `;
 
-exports[`requestGET only path 1`] = `
+exports[`requestDELETE custom getToken 1`] = `
+Object {
+  "headers": Object {
+    "Accept": "application/json",
+  },
+  "method": "DELETE",
+}
+`;
+
+exports[`requestGET all default 1`] = `
 Object {
   "headers": Object {
     "Accept": "application/json",
@@ -33,7 +55,16 @@ Object {
 }
 `;
 
-exports[`requestPATCH only path 1`] = `
+exports[`requestGET custom getToken 1`] = `
+Object {
+  "headers": Object {
+    "Accept": "application/json",
+  },
+  "method": "GET",
+}
+`;
+
+exports[`requestPATCH all default 1`] = `
 Object {
   "body": undefined,
   "headers": Object {
@@ -45,7 +76,18 @@ Object {
 }
 `;
 
-exports[`requestPOST only path 1`] = `
+exports[`requestPATCH custom getToken 1`] = `
+Object {
+  "body": undefined,
+  "headers": Object {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+  },
+  "method": "PATCH",
+}
+`;
+
+exports[`requestPOST all default 1`] = `
 Object {
   "body": undefined,
   "headers": Object {
@@ -57,12 +99,34 @@ Object {
 }
 `;
 
-exports[`requestPUT only path 1`] = `
+exports[`requestPOST custom getToken 1`] = `
+Object {
+  "body": undefined,
+  "headers": Object {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+  },
+  "method": "POST",
+}
+`;
+
+exports[`requestPUT all default 1`] = `
 Object {
   "body": undefined,
   "headers": Object {
     "Accept": "application/json",
     "Authorization": "Bearer token",
+    "Content-Type": "application/json",
+  },
+  "method": "PUT",
+}
+`;
+
+exports[`requestPUT custom getToken 1`] = `
+Object {
+  "body": undefined,
+  "headers": Object {
+    "Accept": "application/json",
     "Content-Type": "application/json",
   },
   "method": "PUT",

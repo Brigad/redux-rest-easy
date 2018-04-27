@@ -4,6 +4,7 @@ import getActionNameFromNormalizedURL from '../utils/getActionNameFromNormalized
 import getNormalizedURLFromOwnProps from '../utils/getNormalizedURLFromOwnProps';
 import getReReselectOptions from '../utils/getReReselectOptions';
 import getState from '../utils/getState';
+import { areIdsEqual, payloadIdsInclude } from '../utils/safeIds';
 import {
   getEmptyResourceHash,
   getPayloadIdsHash,
@@ -13,13 +14,6 @@ import {
 /* eslint-disable no-underscore-dangle */
 
 const EMPTY_RESOURCE = [];
-
-const areIdsEqual = (id1, id2) => {
-  const safeId1 = typeof id1 === 'number' ? id1.toString() : id1;
-  const safeId2 = typeof id2 === 'number' ? id2.toString() : id2;
-
-  return safeId1 === safeId2;
-};
 
 const isPerformingOnResourceOrId = (
   state,
@@ -58,7 +52,7 @@ const checkKeyForResourceOrId = (
             || (!!endedAt
               && payloadIds
               && payloadIds[resourceName]
-              && payloadIds[resourceName].includes(resourceId))),
+              && payloadIdsInclude(payloadIds[resourceName], resourceId))),
       )
       .map(([, request]) => request);
 
@@ -194,13 +188,6 @@ const generateActionSelectors = (resourceName, actionName, denormalizer) => ({
         !isPerformingOnResourceOrId(getState(state), resourceName, actionName),
       isPerforming: state =>
         isPerformingOnResourceOrId(getState(state), resourceName, actionName),
-      isValid: state =>
-        !checkKeyForResourceOrId(
-          getState(state),
-          resourceName,
-          actionName,
-          'didInvalidate',
-        ),
       hasSucceeded: state =>
         checkKeyForResourceOrId(
           getState(state),
@@ -214,6 +201,13 @@ const generateActionSelectors = (resourceName, actionName, denormalizer) => ({
           resourceName,
           actionName,
           'hasFailed',
+        ),
+      isValid: state =>
+        !checkKeyForResourceOrId(
+          getState(state),
+          resourceName,
+          actionName,
+          'didInvalidate',
         ),
       couldPerformOnId: (state, resourceId) =>
         !isPerformingOnResourceOrId(
@@ -278,12 +272,6 @@ const generateActionSelectors = (resourceName, actionName, denormalizer) => ({
           getState(state),
           getNormalizedURLFromOwnProps(resourceName, actionName, ownProps),
         ),
-      isValid: (state, ownProps) =>
-        !checkKeyForRequest(
-          getState(state),
-          getNormalizedURLFromOwnProps(resourceName, actionName, ownProps),
-          'didInvalidate',
-        ),
       hasSucceeded: (state, ownProps) =>
         checkKeyForRequest(
           getState(state),
@@ -295,6 +283,12 @@ const generateActionSelectors = (resourceName, actionName, denormalizer) => ({
           getState(state),
           getNormalizedURLFromOwnProps(resourceName, actionName, ownProps),
           'hasFailed',
+        ),
+      isValid: (state, ownProps) =>
+        !checkKeyForRequest(
+          getState(state),
+          getNormalizedURLFromOwnProps(resourceName, actionName, ownProps),
+          'didInvalidate',
         ),
     },
   },

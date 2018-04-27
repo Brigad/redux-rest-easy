@@ -18,23 +18,25 @@ const getPrunedForPersistenceState = (
   const newRequests = Object.entries(state.requests || {}).reduce(
     (allRequests, [key, request]) => ({
       ...allRequests,
-      ...(request.endedAt
+      ...(request
+      && request.endedAt
       && alwaysPersistResources
       && request.payloadIds
       && Object.keys(request.payloadIds).some(resourceName =>
         alwaysPersistResources.includes(resourceName),
       )
         ? { [key]: request }
-        : !(
+        : request
+          && request.endedAt
+          && !request.didInvalidate
+          && !hasCacheExpired(request.expireAt)
+          && !(
             neverPersistResources
             && request.payloadIds
             && Object.keys(request.payloadIds).some(resourceName =>
               neverPersistResources.includes(resourceName),
             )
           )
-          && request.endedAt
-          && !request.didInvalidate
-          && !hasCacheExpired(request.expireAt)
           ? {
               [key]:
                 request.expireAt === 'never'
@@ -46,7 +48,7 @@ const getPrunedForPersistenceState = (
     {},
   );
 
-  const referencedResources = Object.values(newRequests || {}).reduce(
+  const referencedResources = Object.values(newRequests).reduce(
     (allResources, request) => ({
       ...allResources,
       ...Object.entries(request.payloadIds || {}).reduce(
@@ -80,7 +82,7 @@ const getPrunedForPersistenceState = (
     {},
   );
 
-  const newResourcesCleaned = Object.entries(newResources || {}).reduce(
+  const newResourcesCleaned = Object.entries(newResources).reduce(
     (allResources, [resourceName, resourceMap]) => ({
       ...allResources,
       ...(Object.keys(resourceMap).length
@@ -111,9 +113,8 @@ const getPrunedForPersistenceState = (
       (resourcesHashes, [key, hash]) => ({
         ...resourcesHashes,
         ...(newResourcesCleaned[key]
-        && Object.keys(
-          state.resources && state.resources[key] ? state.resources[key] : {},
-        ).length === Object.keys(newResourcesCleaned[key] || {}).length
+        && Object.keys(state.resources[key]).length
+          === Object.keys(newResourcesCleaned[key]).length
           ? { [key]: hash }
           : {}),
       }),

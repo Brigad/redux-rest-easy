@@ -75,143 +75,333 @@ describe('getReducerCases', () => {
     expect(REDUCER_CASES).toMatchSnapshot();
   });
 
-  test('REQUEST', () => {
-    mockdate.set(MOCK_DATE);
+  describe('REQUEST', () => {
+    test('empty state', () => {
+      mockdate.set(MOCK_DATE);
 
-    const action = {
-      type: `@@rest-easy/${RESOURCE_NAME}/${ACTION_NAME}/REQUEST`,
-      url: NORMALIZED_URL,
-      resourceId: 2,
-    };
+      const action = {
+        type: `@@rest-easy/${RESOURCE_NAME}/${ACTION_NAME}/REQUEST`,
+        url: NORMALIZED_URL,
+        resourceId: 2,
+      };
 
-    expect(
-      REDUCER_CASES.REQUEST(INITIAL_STATE_EMPTY, action),
-    ).toMatchSnapshot();
+      expect(
+        REDUCER_CASES.REQUEST(INITIAL_STATE_EMPTY, action),
+      ).toMatchSnapshot();
+    });
+
+    test('full state', () => {
+      mockdate.set(MOCK_DATE);
+
+      const action = {
+        type: `@@rest-easy/${RESOURCE_NAME}/${ACTION_NAME}/REQUEST`,
+        url: NORMALIZED_URL,
+        resourceId: 2,
+      };
+
+      expect(
+        REDUCER_CASES.REQUEST(INITIAL_STATE_FULL, action),
+      ).toMatchSnapshot();
+    });
   });
 
-  test('RECEIVE', () => {
-    mockdate.set(MOCK_DATE);
+  describe('RECEIVE', () => {
+    test('empty state', () => {
+      mockdate.set(MOCK_DATE);
 
-    const action = {
-      type: `@@rest-easy/${RESOURCE_NAME}/${ACTION_NAME}/RECEIVE`,
-      url: NORMALIZED_URL,
-      payload: {
-        fruits: {
-          1: 'banana',
-          2: 'cherry',
-          3: 'apple',
+      const action = {
+        type: `@@rest-easy/${RESOURCE_NAME}/${ACTION_NAME}/RECEIVE`,
+        url: NORMALIZED_URL,
+        payload: {
+          fruits: {
+            1: 'banana',
+            2: 'cherry',
+            3: 'apple',
+          },
+          animals: {
+            1: 'worm',
+          },
         },
-        animals: {
-          1: 'worm',
+        principalResourceIds: ['2', '1', '3'],
+      };
+
+      expect(
+        REDUCER_CASES.RECEIVE(INITIAL_STATE_EMPTY, action),
+      ).toMatchSnapshot();
+    });
+
+    test('full state', () => {
+      mockdate.set(MOCK_DATE);
+
+      const action = {
+        type: `@@rest-easy/${RESOURCE_NAME}/${ACTION_NAME}/RECEIVE`,
+        url: NORMALIZED_URL,
+        payload: {
+          fruits: {
+            1: 'banana',
+            2: 'cherry',
+            3: 'apple',
+          },
+          animals: {
+            1: 'worm',
+          },
         },
-      },
-      principalResourceIds: ['2', '1', '3'],
-      cacheLifetime: CACHE_LIFETIME,
-    };
+        principalResourceIds: ['2', '1', '3'],
+        cacheLifetime: CACHE_LIFETIME,
+      };
 
-    expect(
-      REDUCER_CASES.RECEIVE(INITIAL_STATE_EMPTY, action),
-    ).toMatchSnapshot();
-  });
+      expect(
+        REDUCER_CASES.RECEIVE(INITIAL_STATE_FULL, action),
+      ).toMatchSnapshot();
+    });
 
-  test('FAIL', () => {
-    mockdate.set(MOCK_DATE);
+    test('full state cacheLifetime = Infinity', () => {
+      mockdate.set(MOCK_DATE);
 
-    const action = {
-      url: NORMALIZED_URL,
-    };
-
-    expect(REDUCER_CASES.FAIL(INITIAL_STATE_EMPTY, action)).toMatchSnapshot();
-  });
-
-  test('RECEIVE_FROM_CACHE', () => {
-    mockdate.set(MOCK_DATE);
-
-    const action = {
-      type: `@@rest-easy/${RESOURCE_NAME}/${ACTION_NAME}/RECEIVE_FROM_CACHE`,
-      url: NORMALIZED_URL,
-      resourceId: 2,
-      payload: {
-        fruits: {
-          1: null,
+      const action = {
+        type: `@@rest-easy/${RESOURCE_NAME}/${ACTION_NAME}/RECEIVE`,
+        url: NORMALIZED_URL,
+        payload: {
+          fruits: {
+            1: 'banana',
+            2: 'cherry',
+            3: 'apple',
+          },
+          animals: {
+            1: 'worm',
+          },
         },
-      },
-      principalResourceIds: ['1'],
-      cacheLifetime: CACHE_LIFETIME,
-    };
+        principalResourceIds: ['2', '1', '3'],
+        cacheLifetime: Infinity,
+      };
 
-    expect(
-      REDUCER_CASES.RECEIVE_FROM_CACHE(INITIAL_STATE_EMPTY, action),
-    ).toMatchSnapshot();
+      expect(
+        REDUCER_CASES.RECEIVE(INITIAL_STATE_FULL, action),
+      ).toMatchSnapshot();
+    });
   });
 
-  test('INVALIDATE_RESOURCE', () => {
-    const action = {
-      resourceName: RESOURCE_NAME,
-    };
+  describe('FAIL', () => {
+    test('empty state', () => {
+      mockdate.set(MOCK_DATE);
 
-    const result = REDUCER_CASES.INVALIDATE_RESOURCE(
-      INITIAL_STATE_FULL,
-      action,
-    );
+      const action = {
+        url: NORMALIZED_URL,
+      };
 
-    expect(result).toMatchSnapshot();
-    expect(result.requests.anotherURL).not.toBe(
-      INITIAL_STATE_FULL.requests.anotherURL,
-    );
-    expect(result.requests.yetAnotherURL).toBe(
-      INITIAL_STATE_FULL.requests.yetAnotherURL,
-    );
+      expect(REDUCER_CASES.FAIL(INITIAL_STATE_EMPTY, action)).toMatchSnapshot();
+    });
+
+    test('full state', () => {
+      mockdate.set(MOCK_DATE);
+
+      const action = {
+        url: NORMALIZED_URL,
+      };
+
+      expect(REDUCER_CASES.FAIL(INITIAL_STATE_FULL, action)).toMatchSnapshot();
+    });
   });
 
-  test('INVALIDATE_ID', () => {
-    const action = {
-      resourceName: 'vegetables',
-      resourceId: RESOURCE_ID,
-    };
+  describe('RECEIVE_FROM_CACHE', () => {
+    test('empty state', () => {
+      mockdate.set(MOCK_DATE);
 
-    const result = REDUCER_CASES.INVALIDATE_ID(INITIAL_STATE_FULL, action);
+      const action = {
+        type: `@@rest-easy/${RESOURCE_NAME}/${ACTION_NAME}/RECEIVE_FROM_CACHE`,
+        url: NORMALIZED_URL,
+        resourceId: 2,
+        payload: {
+          fruits: {
+            2: null,
+          },
+        },
+        principalResourceIds: ['2'],
+      };
 
-    expect(result).toMatchSnapshot();
-    expect(result.requests.anotherURL).not.toBe(
-      INITIAL_STATE_FULL.requests.anotherURL,
-    );
-    expect(result.requests.yetAnotherURL).toBe(
-      INITIAL_STATE_FULL.requests.yetAnotherURL,
-    );
+      expect(
+        REDUCER_CASES.RECEIVE_FROM_CACHE(INITIAL_STATE_EMPTY, action),
+      ).toMatchSnapshot();
+    });
+
+    test('full state', () => {
+      mockdate.set(MOCK_DATE);
+
+      const action = {
+        type: `@@rest-easy/${RESOURCE_NAME}/${ACTION_NAME}/RECEIVE_FROM_CACHE`,
+        url: NORMALIZED_URL,
+        resourceId: 2,
+        payload: {
+          fruits: {
+            2: null,
+          },
+        },
+        principalResourceIds: ['2'],
+        cacheLifetime: CACHE_LIFETIME,
+      };
+
+      expect(
+        REDUCER_CASES.RECEIVE_FROM_CACHE(INITIAL_STATE_FULL, action),
+      ).toMatchSnapshot();
+    });
+
+    test('full state cacheLifetime = Infinity', () => {
+      mockdate.set(MOCK_DATE);
+
+      const action = {
+        type: `@@rest-easy/${RESOURCE_NAME}/${ACTION_NAME}/RECEIVE_FROM_CACHE`,
+        url: NORMALIZED_URL,
+        resourceId: 2,
+        payload: {
+          fruits: {
+            2: null,
+          },
+        },
+        principalResourceIds: ['2'],
+        cacheLifetime: Infinity,
+      };
+
+      expect(
+        REDUCER_CASES.RECEIVE_FROM_CACHE(INITIAL_STATE_FULL, action),
+      ).toMatchSnapshot();
+    });
   });
 
-  test('INVALIDATE_REQUEST', () => {
-    const action = {
-      url: NORMALIZED_URL,
-    };
+  describe('INVALIDATE_RESOURCE', () => {
+    test('empty state', () => {
+      const action = {
+        resourceName: RESOURCE_NAME,
+      };
 
-    const result = REDUCER_CASES.INVALIDATE_REQUEST(INITIAL_STATE_FULL, action);
+      const result = REDUCER_CASES.INVALIDATE_RESOURCE(
+        INITIAL_STATE_EMPTY,
+        action,
+      );
 
-    expect(result).toMatchSnapshot();
-    expect(result.requests[NORMALIZED_URL]).not.toBe(
-      INITIAL_STATE_FULL.requests[NORMALIZED_URL],
-    );
-    expect(result.requests.anotherURL).toBe(
-      INITIAL_STATE_FULL.requests.anotherURL,
-    );
+      expect(result).toMatchSnapshot();
+    });
+
+    test('full state', () => {
+      const action = {
+        resourceName: RESOURCE_NAME,
+      };
+
+      const result = REDUCER_CASES.INVALIDATE_RESOURCE(
+        INITIAL_STATE_FULL,
+        action,
+      );
+
+      expect(result).toMatchSnapshot();
+      expect(result.requests.anotherURL).not.toBe(
+        INITIAL_STATE_FULL.requests.anotherURL,
+      );
+      expect(result.requests.yetAnotherURL).toBe(
+        INITIAL_STATE_FULL.requests.yetAnotherURL,
+      );
+    });
   });
 
-  test('RESET_RESOURCE', () => {
-    const action = {
-      resourceName: RESOURCE_NAME,
-    };
+  describe('INVALIDATE_ID', () => {
+    test('empty state', () => {
+      const action = {
+        resourceName: RESOURCE_NAME,
+        resourceId: RESOURCE_ID,
+      };
 
-    expect(
-      REDUCER_CASES.RESET_RESOURCE(INITIAL_STATE_FULL, action),
-    ).toMatchSnapshot();
+      const result = REDUCER_CASES.INVALIDATE_ID(INITIAL_STATE_EMPTY, action);
+
+      expect(result).toMatchSnapshot();
+    });
+
+    test('full state', () => {
+      const action = {
+        resourceName: RESOURCE_NAME,
+        resourceId: 3,
+      };
+
+      const result = REDUCER_CASES.INVALIDATE_ID(INITIAL_STATE_FULL, action);
+
+      expect(result).toMatchSnapshot();
+      expect(result.requests.anotherURL).not.toBe(
+        INITIAL_STATE_FULL.requests.anotherURL,
+      );
+      expect(result.requests.yetAnotherURL).toBe(
+        INITIAL_STATE_FULL.requests.yetAnotherURL,
+      );
+    });
   });
 
-  test('RESET_ALL', () => {
-    const action = {};
+  describe('INVALIDATE_REQUEST', () => {
+    test('empty state', () => {
+      const action = {
+        url: NORMALIZED_URL,
+      };
 
-    expect(
-      REDUCER_CASES.RESET_ALL(INITIAL_STATE_FULL, action),
-    ).toMatchSnapshot();
+      const result = REDUCER_CASES.INVALIDATE_REQUEST(
+        INITIAL_STATE_EMPTY,
+        action,
+      );
+
+      expect(result).toMatchSnapshot();
+    });
+
+    test('full state', () => {
+      const action = {
+        url: NORMALIZED_URL,
+      };
+
+      const result = REDUCER_CASES.INVALIDATE_REQUEST(
+        INITIAL_STATE_FULL,
+        action,
+      );
+
+      expect(result).toMatchSnapshot();
+      expect(result.requests[NORMALIZED_URL]).not.toBe(
+        INITIAL_STATE_FULL.requests[NORMALIZED_URL],
+      );
+      expect(result.requests.anotherURL).toBe(
+        INITIAL_STATE_FULL.requests.anotherURL,
+      );
+    });
+  });
+
+  describe('RESET_RESOURCE', () => {
+    test('empty state', () => {
+      const action = {
+        resourceName: RESOURCE_NAME,
+      };
+
+      expect(
+        REDUCER_CASES.RESET_RESOURCE(INITIAL_STATE_EMPTY, action),
+      ).toMatchSnapshot();
+    });
+
+    test('full state', () => {
+      const action = {
+        resourceName: RESOURCE_NAME,
+      };
+
+      expect(
+        REDUCER_CASES.RESET_RESOURCE(INITIAL_STATE_FULL, action),
+      ).toMatchSnapshot();
+    });
+  });
+
+  describe('RESET_ALL', () => {
+    test('empty state', () => {
+      const action = {};
+
+      expect(
+        REDUCER_CASES.RESET_ALL(INITIAL_STATE_EMPTY, action),
+      ).toMatchSnapshot();
+    });
+
+    test('full state', () => {
+      const action = {};
+
+      expect(
+        REDUCER_CASES.RESET_ALL(INITIAL_STATE_FULL, action),
+      ).toMatchSnapshot();
+    });
   });
 });
