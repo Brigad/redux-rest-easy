@@ -391,6 +391,24 @@ describe('getPrunedForPersistenceState', () => {
     expect(Object.keys(prunedState3.resolversHashes.resources).length).toBe(0);
   });
 
+  test('half empty state deep 3', () => {
+    const prunedState = getPrunedForPersistenceState({
+      ...STATE_RESOLVERS_HASHES,
+      resolversHashes: {
+        requests: { URL_NEVER_SEEN_BEFORE: 'URL_NEVER_SEEN_BEFORE_HASH' },
+        resources: {
+          RESOURCE_NAME_NEVER_SEEN_BEFORE:
+            'RESOURCE_NAME_NEVER_SEEN_BEFORE_HASH',
+        },
+      },
+    });
+    expect(Object.keys(prunedState).length).toBe(3);
+    expect(Object.keys(prunedState.requests).length).toBe(1);
+    expect(Object.keys(prunedState.resources).length).toBe(2);
+    expect(Object.keys(prunedState.resolversHashes.requests).length).toBe(0);
+    expect(Object.keys(prunedState.resolversHashes.resources).length).toBe(0);
+  });
+
   test('requests: no endedAt', () => {
     expect(
       getPrunedForPersistenceState(STATE_REQUESTS).requests[URL_PENDING],
