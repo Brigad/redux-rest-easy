@@ -123,7 +123,6 @@ describe('getReducerCases', () => {
           },
         },
         principalResourceIds: ['2', '1', '3'],
-        cacheLifetime: CACHE_LIFETIME,
       };
 
       expect(
@@ -149,6 +148,31 @@ describe('getReducerCases', () => {
         },
         principalResourceIds: ['2', '1', '3'],
         cacheLifetime: CACHE_LIFETIME,
+      };
+
+      expect(
+        REDUCER_CASES.RECEIVE(INITIAL_STATE_FULL, action),
+      ).toMatchSnapshot();
+    });
+
+    test('full state cacheLifetime = Infinity', () => {
+      mockdate.set(MOCK_DATE);
+
+      const action = {
+        type: `@@rest-easy/${RESOURCE_NAME}/${ACTION_NAME}/RECEIVE`,
+        url: NORMALIZED_URL,
+        payload: {
+          fruits: {
+            1: 'banana',
+            2: 'cherry',
+            3: 'apple',
+          },
+          animals: {
+            1: 'worm',
+          },
+        },
+        principalResourceIds: ['2', '1', '3'],
+        cacheLifetime: Infinity,
       };
 
       expect(
@@ -193,7 +217,6 @@ describe('getReducerCases', () => {
           },
         },
         principalResourceIds: ['2'],
-        cacheLifetime: CACHE_LIFETIME,
       };
 
       expect(
@@ -215,6 +238,27 @@ describe('getReducerCases', () => {
         },
         principalResourceIds: ['2'],
         cacheLifetime: CACHE_LIFETIME,
+      };
+
+      expect(
+        REDUCER_CASES.RECEIVE_FROM_CACHE(INITIAL_STATE_FULL, action),
+      ).toMatchSnapshot();
+    });
+
+    test('full state cacheLifetime = Infinity', () => {
+      mockdate.set(MOCK_DATE);
+
+      const action = {
+        type: `@@rest-easy/${RESOURCE_NAME}/${ACTION_NAME}/RECEIVE_FROM_CACHE`,
+        url: NORMALIZED_URL,
+        resourceId: 2,
+        payload: {
+          fruits: {
+            2: null,
+          },
+        },
+        principalResourceIds: ['2'],
+        cacheLifetime: Infinity,
       };
 
       expect(
@@ -260,7 +304,7 @@ describe('getReducerCases', () => {
   describe('INVALIDATE_ID', () => {
     test('empty state', () => {
       const action = {
-        resourceName: 'vegetables',
+        resourceName: RESOURCE_NAME,
         resourceId: RESOURCE_ID,
       };
 
@@ -271,18 +315,18 @@ describe('getReducerCases', () => {
 
     test('full state', () => {
       const action = {
-        resourceName: 'vegetables',
-        resourceId: 1,
+        resourceName: RESOURCE_NAME,
+        resourceId: 3,
       };
 
       const result = REDUCER_CASES.INVALIDATE_ID(INITIAL_STATE_FULL, action);
 
       expect(result).toMatchSnapshot();
-      expect(result.requests.yetAnotherURL).not.toBe(
-        INITIAL_STATE_FULL.requests.yetAnotherURL,
-      );
-      expect(result.requests.anotherURL).toBe(
+      expect(result.requests.anotherURL).not.toBe(
         INITIAL_STATE_FULL.requests.anotherURL,
+      );
+      expect(result.requests.yetAnotherURL).toBe(
+        INITIAL_STATE_FULL.requests.yetAnotherURL,
       );
     });
   });
