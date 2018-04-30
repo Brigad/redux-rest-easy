@@ -4,7 +4,6 @@
   "description": "Redux/React/React Native framework generating actions, reducers and selectors to perform network requests",
   "main": "lib/index.js",
   "module": "es/index.js",
-  "jsnext:main": "es/index.js",
   "files": [
     "dist",
     "lib",
