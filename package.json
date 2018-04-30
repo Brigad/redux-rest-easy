@@ -2,12 +2,11 @@
   "name": "@brigad/redux-rest-easy",
   "version": "2.7.0",
   "description": "Redux/React/React Native framework generating actions, reducers and selectors to perform network requests",
-  "main": "lib/index.js",
-  "module": "es/index.js",
+  "main": "dist/redux-rest-easy.cjs.js",
+  "jsnext:main": "dist/redux-rest-easy.es.js",
+  "module": "dist/redux-rest-easy.es.js",
   "files": [
     "dist",
-    "lib",
-    "es",
     "src"
   ],
   "repository": {
@@ -31,6 +30,7 @@
   "bugs": {
     "url": "https://github.com/Brigad/redux-rest-easy/issues"
   },
+  "homepage": "https://github.com/Brigad/redux-rest-easy#readme",
   "npmName": "@brigad/redux-rest-easy",
   "npmFileMap": [
     {
@@ -44,11 +44,11 @@
     "prepare": "yarn build:clean && yarn build",
     "modules:clean": "rimraf node_modules",
     "build": "yarn build:commonjs && yarn build:es && yarn build:umd && yarn build:umd:min",
-    "build:commonjs": "cross-env NODE_ENV=cjs rollup -c -o lib/index.js",
-    "build:es": "cross-env BABEL_ENV=es NODE_ENV=es rollup -c -o es/index.js",
-    "build:umd": "cross-env BABEL_ENV=es NODE_ENV=development rollup -c -o dist/index.js",
-    "build:umd:min": "cross-env BABEL_ENV=es NODE_ENV=production rollup -c -o dist/index.min.js",
-    "build:clean": "rimraf lib dist es coverage",
+    "build:commonjs": "cross-env FORMAT=cjs rollup -c",
+    "build:es": "cross-env FORMAT=es rollup -c",
+    "build:umd": "cross-env FORMAT=umd rollup -c",
+    "build:umd:min": "cross-env FORMAT=umd MINIFY=true rollup -c",
+    "build:clean": "rimraf dist",
     "lint": "eslint src",
     "test": "jest",
     "test:clean": "yarn test --no-cache",

@@ -5,30 +5,31 @@ import replace from 'rollup-plugin-replace';
 import uglify from 'rollup-plugin-uglify';
 import pkg from './package.json';
 
-const env = process.env.NODE_ENV;
-const isUMD = env !== 'es' && env !== 'cjs';
+const minify = process.env.MINIFY;
+const format = process.env.FORMAT;
+
+const umd = format === 'umd';
 
 const config = {
   input: 'src/index.js',
-  output: !isUMD
-    ? {
-        format: env,
-      }
-    : {
-        format: 'umd',
-        name: 'ReduxRestEasy',
-        indent: false,
-        globals: {
-          react: 'React',
-          'react-redux': 'ReactRedux',
-        },
-      },
-  external: !isUMD
-    ? [
-        ...Object.keys(pkg.dependencies || {}),
-        ...Object.keys(pkg.peerDependencies || {}),
-      ]
-    : Object.keys(pkg.peerDependencies || {}),
+  output: {
+    file: `dist/redux-rest-easy.${format}${minify ? '.min' : ''}.js`,
+    format,
+    ...(umd
+      ? {
+          name: 'ReduxRestEasy',
+          indent: false,
+          globals: {
+            react: 'React',
+            'react-redux': 'ReactRedux',
+          },
+        }
+      : {}),
+  },
+  external: [
+    ...(!umd ? Object.keys(pkg.dependencies || {}) : []),
+    ...Object.keys(pkg.peerDependencies || {}),
+  ],
   context: 'window',
   plugins: [
     resolve({
@@ -42,12 +43,14 @@ const config = {
       exclude: 'node_modules/**',
       plugins: ['external-helpers'],
     }),
-    isUMD
+    umd
       ? replace({
-          'process.env.NODE_ENV': JSON.stringify(env),
+          'process.env.NODE_ENV': JSON.stringify(
+            minify ? 'production' : 'development',
+          ),
         })
       : null,
-    env === 'production'
+    minify
       ? uglify({
           compress: {
             pure_getters: true,
