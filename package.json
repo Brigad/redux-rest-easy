@@ -64,8 +64,8 @@
     "contributors:generate": "all-contributors generate"
   },
   "dependencies": {
+    "fast-stable-stringify": "1.0.0",
     "hoist-non-react-statics": "2.5.0",
-    "json-stable-stringify": "1.0.1",
     "lodash.isplainobject": "4.0.6",
     "lodash.mergewith": "4.6.1",
     "murmur-hash": "1.0.0",

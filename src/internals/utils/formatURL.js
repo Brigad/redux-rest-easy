@@ -1,4 +1,4 @@
-import jsonStableStringify from 'json-stable-stringify';
+import jsonStableStringify from 'fast-stable-stringify';
 
 import stringifyQueryParameters from './stringifyQueryParameters';
 
