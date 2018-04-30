@@ -1,4 +1,4 @@
-import isObject from 'lodash.isplainobject';
+import isPlainObject from 'lodash.isplainobject';
 import mergeWith from 'lodash.mergewith';
 
 const mergeResources = (state, normalizedPayload) =>
@@ -6,7 +6,7 @@ const mergeResources = (state, normalizedPayload) =>
     state.resources || {},
     normalizedPayload,
     (resources, newResources) =>
-      isObject(resources) ? { ...resources, ...newResources } : undefined,
+      isPlainObject(resources) ? { ...resources, ...newResources } : undefined,
   );
 
 export default mergeResources;
