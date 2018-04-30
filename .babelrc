@@ -9,27 +9,19 @@
           ]
         },
         "modules": false,
-        "loose": true,
-        "useBuiltIns": "usage"
+        "loose": true
       }
     ],
     "react",
     "stage-2"
   ],
   "env": {
-    "rollup": {
-      "plugins": [
-        "external-helpers"
-      ]
-    },
     "test": {
       "presets": [
         [
           "env",
           {
-            "targets": {
-              "node": "8.9.3"
-            }
+            "loose": true
           }
         ],
         "react",

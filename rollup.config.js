@@ -1,50 +1,66 @@
-import nodeResolve from 'rollup-plugin-node-resolve';
-import builtins from 'rollup-plugin-node-builtins';
 import babel from 'rollup-plugin-babel';
-import replace from 'rollup-plugin-replace';
 import commonjs from 'rollup-plugin-commonjs';
+import resolve from 'rollup-plugin-node-resolve';
+import replace from 'rollup-plugin-replace';
 import uglify from 'rollup-plugin-uglify';
+import pkg from './package.json';
 
-const env = process.env.NODE_ENV;
+const minify = process.env.MINIFY;
+const format = process.env.FORMAT;
+
+const umd = format === 'umd';
 
 const config = {
   input: 'src/index.js',
-  external: ['react', 'react-redux'],
   output: {
-    name: 'ReduxRestEasy',
-    format: 'umd',
-    globals: {
-      react: 'React',
-      'react-redux': 'ReactRedux',
-    },
+    file: `dist/redux-rest-easy.${format}${minify ? '.min' : ''}.js`,
+    format,
+    ...(umd
+      ? {
+          name: 'ReduxRestEasy',
+          indent: false,
+          globals: {
+            react: 'React',
+            'react-redux': 'ReactRedux',
+          },
+        }
+      : {}),
   },
+  external: [
+    ...(!umd ? Object.keys(pkg.dependencies || {}) : []),
+    ...Object.keys(pkg.peerDependencies || {}),
+  ],
   context: 'window',
   plugins: [
-    nodeResolve({
-      preferBuiltins: true,
+    resolve({
+      jsnext: true,
+      main: true,
     }),
-    builtins(),
+    commonjs({
+      include: 'node_modules/**',
+    }),
     babel({
-      exclude: '**/node_modules/**',
+      exclude: 'node_modules/**',
+      plugins: ['external-helpers'],
     }),
-    replace({
-      'process.env.NODE_ENV': JSON.stringify(env),
-    }),
-    commonjs(),
-  ],
+    umd
+      ? replace({
+          'process.env.NODE_ENV': JSON.stringify(
+            minify ? 'production' : 'development',
+          ),
+        })
+      : null,
+    minify
+      ? uglify({
+          compress: {
+            pure_getters: true,
+            unsafe: true,
+            unsafe_comps: true,
+            warnings: false,
+          },
+        })
+      : null,
+  ].filter(Boolean),
 };
-
-if (env === 'production') {
-  config.plugins.push(
-    uglify({
-      compress: {
-        pure_getters: true,
-        unsafe: true,
-        unsafe_comps: true,
-        warnings: false,
-      },
-    }),
-  );
-}
 
 export default config;
