@@ -98,7 +98,9 @@ const {
   actions: { retrieve: retrieveUsers },
   selectors: {
     resource: { getResource: getUsers },
-    retrieve: { request: { isPerforming: isRetrievingUsers } },
+    retrieve: {
+      request: { isPerforming: isRetrievingUsers },
+    },
   },
 } = users;
 
@@ -175,7 +177,33 @@ export default connect(mapStateToProps, mapDispatchToProps)(ConnectedComponent);
 
 Redux-rest-easy assumes you are using [react][react] (or [react-native][react-native]) and [react-redux][react-redux].
 
-Redux-rest-easy also uses [redux-thunk][redux-thunk] to handle async actions, and therefore requires you to use redux-thunk's middleware in your store. If you are already using redux-thunk, then you have nothing more to do. Else, follow [redux-thunk's docs][redux-thunk-installation] for a quick setup.
+Redux-rest-easy also uses [redux-thunk][redux-thunk] under the hood, to handle async actions, and therefore requires you to use redux-thunk's middleware in your store. If you are already using redux-thunk, then you have nothing more to do. Else, follow [redux-thunk's docs][redux-thunk-installation] for a quick setup.
+
+## Examples
+
+### [Simple Example](https://codesandbox.io/s/ko7xm5wxy7)
+
+Displays a list of users and allows to create new ones.
+
+### Pagination (TODO, coming soon)
+
+Displays a paginated list, with seamless query-based selectors and cache.
+
+### Data invalidation (TODO, coming soon)
+
+Invalidates store data after a successful POST request
+
+### Multiple requests (e.g. S3 signed upload) (TODO, coming soon)
+
+Performs multiple requests in beforeHook before the final one, to upload a signed file to S3.
+
+### Cache hints (TODO, coming soon)
+
+Makes use of cache hints to customize the built-in cache.
+
+### Store persistence (TODO, coming soon)
+
+Introduces store persistence in the "Pagination" example, so that data persists after the page is refreshed.
 
 ## Contributors
 
