@@ -1,53 +1,75 @@
 import mergeResources from '../../../src/internals/utils/mergeResources';
 
-const EMPTY_STATE = {};
-const FILLED_STATE = {
+const PREVIOUS_STATE = {
   resources: {
-    fruits: {
-      apple: {
-        juicy: true,
-        red: true,
+    eggs: {
+      1: {
+        a: 1,
       },
-      cherry: {
-        juicy: false,
+    },
+    fruits: {
+      1: {
+        a: 1,
+        b: 2,
+      },
+      2: {
+        a: 1,
+        b: 2,
       },
     },
     vegetables: {
-      carrot: {
-        orange: true,
+      1: {
+        a: 1,
+        b: 2,
+        c: 3,
+      },
+      2: {
+        a: 1,
+        b: 2,
+        c: 3,
+      },
+      3: {
+        a: 1,
+        b: 2,
+        c: 3,
       },
     },
   },
 };
-const FILLED_STATE2 = {
-  resources: {
-    fruits: {
-      apple: {
-        juicy: false,
-      },
-      banana: {
-        yellow: true,
-      },
+
+const NORMALIZED_PAYLOAD = {
+  eggs: {
+    1: {
+      a: 2,
+    },
+  },
+  fruits: {
+    1: {
+      a: 1,
+    },
+    2: {
+      c: 3,
+    },
+  },
+  vegetables: {
+    4: {
+      a: 1,
     },
   },
 };
 
 describe('mergeResources', () => {
-  test('merge filled in empty', () => {
-    expect(
-      mergeResources(EMPTY_STATE, FILLED_STATE.resources),
-    ).toMatchSnapshot();
+  test('bad arguments', () => {
+    expect(Object.keys(mergeResources()).length).toBe(0);
+    expect(mergeResources(PREVIOUS_STATE)).toBe(PREVIOUS_STATE.resources);
+    expect(mergeResources(PREVIOUS_STATE, null)).toBe(PREVIOUS_STATE.resources);
+    expect(mergeResources(PREVIOUS_STATE, 1)).toBe(PREVIOUS_STATE.resources);
+    expect(mergeResources(PREVIOUS_STATE, {})).toBe(PREVIOUS_STATE.resources);
   });
 
-  test('merge empty in filled', () => {
+  test('happy path', () => {
     expect(
-      mergeResources(FILLED_STATE, EMPTY_STATE.resources),
-    ).toMatchSnapshot();
-  });
-
-  test('merge filled2 in filled', () => {
-    expect(
-      mergeResources(FILLED_STATE, FILLED_STATE2.resources),
+      mergeResources(PREVIOUS_STATE, NORMALIZED_PAYLOAD),
     ).toMatchSnapshot();
   });
 });

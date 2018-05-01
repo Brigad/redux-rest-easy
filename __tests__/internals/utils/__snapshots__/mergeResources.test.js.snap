@@ -1,59 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`mergeResources merge empty in filled 1`] = `
+exports[`mergeResources happy path 1`] = `
 Object {
-  "fruits": Object {
-    "apple": Object {
-      "juicy": true,
-      "red": true,
+  "eggs": Object {
+    "1": Object {
+      "a": 2,
     },
-    "cherry": Object {
-      "juicy": false,
+  },
+  "fruits": Object {
+    "1": Object {
+      "a": 1,
+    },
+    "2": Object {
+      "c": 3,
     },
   },
   "vegetables": Object {
-    "carrot": Object {
-      "orange": true,
+    "1": Object {
+      "a": 1,
+      "b": 2,
+      "c": 3,
     },
-  },
-}
-`;
-
-exports[`mergeResources merge filled in empty 1`] = `
-Object {
-  "fruits": Object {
-    "apple": Object {
-      "juicy": true,
-      "red": true,
+    "2": Object {
+      "a": 1,
+      "b": 2,
+      "c": 3,
     },
-    "cherry": Object {
-      "juicy": false,
+    "3": Object {
+      "a": 1,
+      "b": 2,
+      "c": 3,
     },
-  },
-  "vegetables": Object {
-    "carrot": Object {
-      "orange": true,
-    },
-  },
-}
-`;
-
-exports[`mergeResources merge filled2 in filled 1`] = `
-Object {
-  "fruits": Object {
-    "apple": Object {
-      "juicy": false,
-    },
-    "banana": Object {
-      "yellow": true,
-    },
-    "cherry": Object {
-      "juicy": false,
-    },
-  },
-  "vegetables": Object {
-    "carrot": Object {
-      "orange": true,
+    "4": Object {
+      "a": 1,
     },
   },
 }

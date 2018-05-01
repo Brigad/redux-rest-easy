@@ -66,8 +66,7 @@
   "dependencies": {
     "fast-stable-stringify": "1.0.0",
     "hoist-non-react-statics": "2.5.0",
-    "lodash.isplainobject": "4.0.6",
-    "lodash.mergewith": "4.6.1",
+    "is-object": "1.0.1",
     "murmur-hash": "1.0.0",
     "qs": "6.5.1",
     "re-reselect": "2.0.0",
