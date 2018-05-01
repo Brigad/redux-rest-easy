@@ -1,4 +1,4 @@
-import isPlainObject from 'lodash.isplainobject';
+import isPlainObject from '../utils/isPlainObject';
 
 const GLOBAL_PREFIX = 'redux-rest-easy:';
 

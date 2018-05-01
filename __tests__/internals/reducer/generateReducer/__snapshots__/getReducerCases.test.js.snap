@@ -61,9 +61,6 @@ Object {
     },
   },
   "resources": Object {
-    "animals": Object {
-      "1": "worm",
-    },
     "fruits": Object {
       "1": "banana",
       "2": "cherry",
@@ -132,9 +129,6 @@ Object {
     },
   },
   "resources": Object {
-    "animals": Object {
-      "1": "worm",
-    },
     "fruits": Object {
       "1": "banana",
       "2": "cherry",
@@ -207,9 +201,6 @@ Object {
     },
   },
   "resources": Object {
-    "animals": Object {
-      "1": "worm",
-    },
     "fruits": Object {
       "1": "banana",
       "2": "cherry",
@@ -278,9 +269,6 @@ Object {
     },
   },
   "resources": Object {
-    "animals": Object {
-      "1": "worm",
-    },
     "fruits": Object {
       "1": "banana",
       "2": "cherry",
@@ -636,9 +624,6 @@ Object {
     },
   },
   "resources": Object {
-    "animals": Object {
-      "1": "worm",
-    },
     "fruits": Object {
       "1": "banana",
       "2": "cherry",
@@ -725,9 +710,6 @@ Object {
     },
   },
   "resources": Object {
-    "animals": Object {
-      "1": "worm",
-    },
     "fruits": Object {
       "1": "banana",
       "2": "cherry",
@@ -872,9 +854,6 @@ Object {
     },
   },
   "resources": Object {
-    "animals": Object {
-      "1": "worm",
-    },
     "fruits": undefined,
     "seeds": Object {
       "2": "pumpkin",

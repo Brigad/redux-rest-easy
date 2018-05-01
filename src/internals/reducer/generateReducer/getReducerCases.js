@@ -5,7 +5,7 @@ import {
   resetResourceResolversHashes,
 } from '../../utils/resolversHashes';
 import { areIdsEqual, payloadIdsInclude } from '../../utils/safeIds';
-import shallowMergeResources from '../../utils/shallowMergeResources';
+import mergeResources from '../../utils/mergeResources';
 
 const REDUCER_CASES = {
   REQUEST: (state, { type, url: normalizedURL, resourceId }) => ({
@@ -79,7 +79,7 @@ const REDUCER_CASES = {
           metadata,
         },
       },
-      resources: shallowMergeResources(state, normalizedPayload),
+      resources: mergeResources(state, normalizedPayload),
     };
 
     const newState = {

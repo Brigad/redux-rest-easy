@@ -83,13 +83,13 @@ export default (...args) => (WrappedComponent) => {
       const passedProps = {
         ...this.props,
         ...this.state,
+        ref: (ref) => {
+          this.innerRef = ref;
+        },
       };
 
       return (
         <ConnectedComponent
-          ref={(ref) => {
-            this.innerRef = ref;
-          }}
           {...passedProps}
         />
       );
