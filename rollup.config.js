@@ -30,7 +30,7 @@ const config = {
     ...(!umd ? Object.keys(pkg.dependencies || {}) : []),
     ...Object.keys(pkg.peerDependencies || {}),
   ],
-  context: 'window',
+  context: "typeof window !== 'undefined' ? window : global",
   plugins: [
     resolve({
       jsnext: true,
