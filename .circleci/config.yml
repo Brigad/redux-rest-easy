@@ -1,7 +1,7 @@
 defaults: &defaults
   working_directory: ~/code
   docker:
-    - image: circleci/node:9.10.0
+    - image: circleci/node:10.6.0-browsers
 
 version: 2
 jobs:
@@ -51,9 +51,6 @@ jobs:
           keys:
               - node_modules-{{ arch }}-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
 
-      - run:
-          name: Install Java
-          command: echo "deb http://http.debian.net/debian jessie-backports main" | sudo tee --append /etc/apt/sources.list && sudo apt-get update && sudo apt-get install -t jessie-backports openjdk-8-jdk
       - run:
           name: Publish to NPM
           command: yarn ci:publish
