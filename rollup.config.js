@@ -1,8 +1,8 @@
+import compiler from '@ampproject/rollup-plugin-closure-compiler';
 import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
 import resolve from 'rollup-plugin-node-resolve';
 import replace from 'rollup-plugin-replace';
-import uglify from 'rollup-plugin-uglify';
 import pkg from './package.json';
 
 const minify = process.env.MINIFY;
@@ -41,7 +41,6 @@ const config = {
     }),
     babel({
       exclude: 'node_modules/**',
-      plugins: ['external-helpers'],
     }),
     umd
       ? replace({
@@ -51,14 +50,7 @@ const config = {
         })
       : null,
     minify
-      ? uglify({
-          compress: {
-            pure_getters: true,
-            unsafe: true,
-            unsafe_comps: true,
-            warnings: false,
-          },
-        })
+      ? compiler()
       : null,
   ].filter(Boolean),
 };
