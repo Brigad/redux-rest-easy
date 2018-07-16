@@ -1,4 +1,7 @@
-node_modules
-lib
-dist
-es
+!.*
+
+coverage/
+junit/
+
+**/node_modules/*
+dist/

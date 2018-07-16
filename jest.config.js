@@ -8,7 +8,7 @@ const configBase = {
       statements: 82,
       branches: 89,
       functions: 88,
-      lines: 82,
+      lines: 81,
     },
   },
   moduleDirectories: ['node_modules'],

@@ -1,5 +1,5 @@
-import getResourceIdsByResourceNameFromNormalizedPayload from '../utils/getResourceIdsByResourceNameFromNormalizedPayload';
-import hash from '../utils/hash';
+import getResourceIdsByResourceNameFromNormalizedPayload from './getResourceIdsByResourceNameFromNormalizedPayload';
+import hash from './hash';
 
 const EMPTY_RESOURCE = [];
 const EMPTY_HASH = hash(EMPTY_RESOURCE);

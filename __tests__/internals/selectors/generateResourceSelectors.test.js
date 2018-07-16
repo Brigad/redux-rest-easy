@@ -23,7 +23,6 @@ const {
 const emptyDenormalizer = () => [];
 const {
   resource: {
-    getResource: getResourceWithEmptyDenormalizer,
     getResourceById: getResourceByIdWithEmptyDenormalizer,
   },
 } = generateResourceSelectors('fruits', emptyDenormalizer);
