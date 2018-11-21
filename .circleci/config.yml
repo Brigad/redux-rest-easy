@@ -12,7 +12,7 @@ jobs:
       - restore_cache:
           name: Restore node modules
           keys:
-              - node_modules-{{ arch }}-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
+            - node_modules-{{ arch }}-{{ checksum "yarn.lock" }}
 
       - run:
           name: Install dependencies
@@ -20,9 +20,9 @@ jobs:
 
       - save_cache:
           name: Save node modules
-          key: node_modules-{{ arch }}-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
+          key: node_modules-{{ arch }}-{{ checksum "yarn.lock" }}
           paths:
-              - node_modules
+            - node_modules
 
   tests:
     <<: *defaults
@@ -31,11 +31,11 @@ jobs:
       - restore_cache:
           name: Restore node modules
           keys:
-              - node_modules-{{ arch }}-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
+            - node_modules-{{ arch }}-{{ checksum "yarn.lock" }}
 
       - run:
           name: Run Eslint, Jest & Codecov
-          command: yarn ci:test
+          command: yarn ci
       - store_artifacts:
           path: ~/code/coverage/lcov-report
           destination: Coverage
@@ -49,7 +49,7 @@ jobs:
       - restore_cache:
           name: Restore node modules
           keys:
-              - node_modules-{{ arch }}-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
+            - node_modules-{{ arch }}-{{ checksum "yarn.lock" }}
 
       - run:
           name: Publish to NPM
@@ -59,13 +59,13 @@ workflows:
   version: 2
   ci:
     jobs:
-    - setup
-    - tests:
-        requires:
-          - setup
-    - publish:
-        requires:
-          - tests
-        filters:
-          branches:
-            only: master
+      - setup
+      - tests:
+          requires:
+            - setup
+      - publish:
+          requires:
+            - tests
+          filters:
+            branches:
+              only: master
