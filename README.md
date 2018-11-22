@@ -225,7 +225,7 @@ This project follows the [all-contributors][all-contributors] specification.
 Contributions of any kind welcome!
 
 [release-article]: https://engineering.brigad.co/introducing-redux-rest-easy-6e9a91af4f59
-[circle-ci-badge]: https://img.shields.io/circleci/token/75524c993d9de495223af8fa371cf086aa69793d/project/github/Brigad/redux-rest-easy/master.svg?style=flat-square&label=build
+[circle-ci-badge]: https://img.shields.io/circleci/project/github/Brigad/redux-rest-easy/master.svg?style=flat-square&label=build
 [circle-ci]: https://circleci.com/gh/Brigad/redux-rest-easy
 [codecov-badge]: https://img.shields.io/codecov/c/github/Brigad/redux-rest-easy.svg
 [codecov]: https://codecov.io/gh/Brigad/redux-rest-easy
