@@ -2,8 +2,6 @@
 
 Redux/React/React Native framework handling network requests, state management, selectors, caching and much more
 
-[Release article][release-article]
-
 [![CircleCI][circle-ci-badge]][circle-ci]
 [![Codecov][codecov-badge]][codecov]
 [![version][version-badge]][package]
@@ -15,6 +13,8 @@ Redux/React/React Native framework handling network requests, state management, 
 [![code style: prettier][prettier-badge]][prettier]
 [![semantic-release][semantic-release-badge]][semantic-release]
 [![Star on GitHub][github-star-badge]][github-star]
+
+## [Release article][release-article]
 
 ## Installation
 
