@@ -1,6 +1,6 @@
 const path = require('path');
 
-const configBase = {
+module.exports = {
   collectCoverageFrom: ['src/**/*.js'],
   coverageDirectory: path.join(__dirname, 'coverage'),
   coverageThreshold: {
@@ -16,11 +16,3 @@ const configBase = {
   roots: [__dirname],
   testRegex: '\\.test\\.js$',
 };
-
-const configJUnit = process.env.JEST_JUNIT_OUTPUT
-  ? {
-      testResultsProcessor: 'jest-junit',
-    }
-  : {};
-
-module.exports = Object.assign({}, configBase, configJUnit);
