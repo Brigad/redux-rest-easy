@@ -70,7 +70,7 @@
     "murmur-hash": "1.0.0",
     "qs": "6.6.0",
     "re-reselect": "2.3.0",
-    "regenerator-runtime": "0.13.1",
+    "regenerator-runtime": "0.12.1",
     "reselect": "4.0.0"
   },
   "devDependencies": {
