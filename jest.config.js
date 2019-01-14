@@ -5,7 +5,7 @@ module.exports = {
   coverageDirectory: path.join(__dirname, 'coverage'),
   coverageThreshold: {
     global: {
-      statements: 82,
+      statements: 81,
       branches: 89,
       functions: 88,
       lines: 81,
