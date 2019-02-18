@@ -55,6 +55,7 @@ const getPrunedForPersistenceState = (
         (requestResources, [resourceName, resourceIds]) => ({
           ...requestResources,
           [resourceName]: [
+            ...(allResources[resourceName] || []),
             ...(requestResources[resourceName] || []),
             ...resourceIds.map(id => id.toString()),
           ],
