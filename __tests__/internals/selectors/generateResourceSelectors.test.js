@@ -22,9 +22,7 @@ const {
 
 const emptyDenormalizer = () => [];
 const {
-  resource: {
-    getResourceById: getResourceByIdWithEmptyDenormalizer,
-  },
+  resource: { getResourceById: getResourceByIdWithEmptyDenormalizer },
 } = generateResourceSelectors('fruits', emptyDenormalizer);
 
 const STARTED_AT = moment();
@@ -152,10 +150,22 @@ const RECEIVED_FULL_RESOURCE_ID_STATE = {
           fruits: [2],
         },
       },
+      'eat:https://api.co/fruits/3': {
+        resourceName: 'fruits',
+        resourceId: 3,
+        startedAt: STARTED_AT,
+        endedAt: ENDED_AT,
+        hasSucceeded: true,
+        hasFailed: false,
+        payloadIds: {
+          fruits: [3],
+        },
+      },
     },
     resources: {
       fruits: {
         2: 'cherry',
+        3: false,
       },
     },
   },
@@ -309,6 +319,10 @@ describe('generateResourceSelectors', () => {
     test(
       'received empty resource id state',
       emptyCase(RECEIVED_EMPTY_RESOURCE_ID_STATE, 2),
+    );
+    test(
+      'received full resource id state, falsy',
+      fullCase(RECEIVED_FULL_RESOURCE_ID_STATE, 3),
     );
     test(
       'received full resource id state',
