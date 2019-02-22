@@ -81,7 +81,7 @@ const getResourceById = (
   const resource
     = state.resources
     && state.resources[resourceName]
-    && state.resources[resourceName][resourceId]
+    && state.resources[resourceName][resourceId] !== undefined
       ? state.resources[resourceName][resourceId]
       : EMPTY_RESOURCE_ID;
 
