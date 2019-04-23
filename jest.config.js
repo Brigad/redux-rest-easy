@@ -5,10 +5,10 @@ module.exports = {
   coverageDirectory: path.join(__dirname, 'coverage'),
   coverageThreshold: {
     global: {
-      statements: 81,
-      branches: 89,
+      statements: 84,
+      branches: 90,
       functions: 88,
-      lines: 81,
+      lines: 83,
     },
   },
   moduleDirectories: ['node_modules'],
