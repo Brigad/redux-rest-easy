@@ -33,8 +33,7 @@ const config = {
   context: "typeof window !== 'undefined' ? window : global",
   plugins: [
     resolve({
-      jsnext: true,
-      main: true,
+      mainFields: ['jsnext', 'main'],
     }),
     commonjs({
       include: 'node_modules/**',
@@ -49,9 +48,7 @@ const config = {
           ),
         })
       : null,
-    minify
-      ? compiler()
-      : null,
+    minify ? compiler() : null,
   ].filter(Boolean),
 };
 

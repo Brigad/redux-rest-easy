@@ -1,7 +1,5 @@
 module.exports = (api) => {
-  api.cache(true);
-
-  const env = process.env.NODE_ENV;
+  const env = api.env();
 
   const presets = [
     [
@@ -9,6 +7,8 @@ module.exports = (api) => {
       {
         modules: env === 'test' ? 'commonjs' : false,
         loose: true,
+        corejs: 3,
+        useBuiltIns: env !== 'test' ? 'entry' : 'usage',
         ...(env !== 'test' ? { targets: { browsers: 'ie >= 11' } } : {}),
       },
     ],
