@@ -56,7 +56,7 @@
     "test:cov": "yarn test --coverage",
     "ci": "yarn ci:lint && yarn ci:test && yarn ci:coverage",
     "ci:lint": "yarn lint",
-    "ci:test": "cross-env CI=true JEST_JUNIT_OUTPUT='junit/jest.xml' yarn test --ci --coverage --expand --forceExit",
+    "ci:test": "cross-env CI=true yarn test --ci --coverage --expand --forceExit --detectOpenHandles -w 1",
     "ci:coverage": "codecov -f coverage/coverage-final.json",
     "ci:publish": "yarn semantic-release",
     "prettify": "prettier-eslint --write \"./src/**/*.js\"",
