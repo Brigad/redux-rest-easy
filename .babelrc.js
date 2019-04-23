@@ -8,6 +8,7 @@ module.exports = (api) => {
       '@babel/env',
       {
         modules: env === 'test' ? 'commonjs' : false,
+        corejs: 2,
         loose: true,
         ...(env !== 'test' ? { targets: { browsers: 'ie >= 11' } } : {}),
       },
