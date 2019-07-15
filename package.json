@@ -1,6 +1,6 @@
 {
   "name": "@brigad/redux-rest-easy",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Redux/React/React Native framework generating actions, reducers and selectors to perform network requests",
   "main": "dist/redux-rest-easy.cjs.js",
   "jsnext:main": "dist/redux-rest-easy.es.js",
