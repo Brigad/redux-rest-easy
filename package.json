@@ -97,7 +97,7 @@
     "fetch-mock": "7.3.6",
     "jest-cli": "24.8.0",
     "mockdate": "2.0.3",
-    "moment": "2.24.0",
+    "moment": "2.29.2",
     "prettier-eslint-cli": "5.0.0",
     "react": "16.8.6",
     "react-dom": "16.8.6",
