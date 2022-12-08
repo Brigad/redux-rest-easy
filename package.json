@@ -68,7 +68,7 @@
     "hoist-non-react-statics": "3.3.0",
     "is-object": "1.0.1",
     "murmur-hash": "1.0.0",
-    "qs": "6.7.0",
+    "qs": "6.7.3",
     "re-reselect": "3.3.0",
     "regenerator-runtime": "0.13.2",
     "reselect": "4.0.0"
